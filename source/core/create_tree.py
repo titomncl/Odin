@@ -1,8 +1,6 @@
 import os
-import trees_path
-import yaml
 
-from Odin.source.common import concat, make_dirs
+from Odin.source.common import concat
 
 
 class Tree(object):
@@ -102,6 +100,8 @@ class Tree(object):
             Tree:
 
         """
+        import yaml
+
         root = Tree(None, root_)
 
         template_file = yaml.load(open(template_path), Loader=yaml.Loader)
