@@ -1,6 +1,6 @@
 import os
 
-import trees
+from Odin import trees
 
 def asset_tree():
     return os.path.join(os.path.dirname(trees.__file__), trees.ASSET_TREE)
