@@ -1,0 +1,24 @@
+HOUDINI:
+  CACHEFILES:
+    OLD:
+  SCENES:
+    OLD:
+GUERILLA:
+  BUILD:
+    OLD:
+  SCENES:
+    OLD:
+MAYA:
+  CACHEFILES:
+    OLD:
+  SCENES:
+    OLD:
+NUKE:
+  SCRIPTS:
+    OLD:
+  LUT:
+SCRIPTS:
+  MEL:
+  PY:
+  VEX:
+  OTHERS:

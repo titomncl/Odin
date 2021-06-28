@@ -1,0 +1,8 @@
+ASSET_TREE = "asset.yaml"
+ASSET_PUBLISH_TREE = "asset_publish.yaml"
+PLACE_TREE = "place.yaml"
+SHOT_TREE = "shot.yaml"
+TAKE_TREE = "prise.yaml"
+PROJECT_TREE = "project.yaml"
+QCM_TREE = "qcm.yaml"
+SEQ_TREE = "seq.yaml"
