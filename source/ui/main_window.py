@@ -45,6 +45,9 @@ class MainWindow(Qw.QMainWindow):
 
         self.create_project_dialog.create_btn.clicked.connect(self.create_prj_btn)
         self.manage_prj.lib_widget.create_chara_dialog.create_btn.clicked.connect(self.controller.chara_action)
+        self.manage_prj.lib_widget.create_props_dialog.create_btn.clicked.connect(self.controller.props_action)
+        self.manage_prj.lib_widget.create_set_dialog.create_btn.clicked.connect(self.controller.set_action)
+        self.manage_prj.lib_widget.create_fx_dialog.create_btn.clicked.connect(self.controller.fx_action)
 
     def create_menu(self):
         config = Qw.QMenu("&Config", self)
