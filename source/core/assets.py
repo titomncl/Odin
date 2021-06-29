@@ -1,6 +1,6 @@
 import os
-import trees_path
 
+from Odin.source.core import trees_path
 from Odin.source.core.create_tree import Tree
 from Odin.source.common import concat, make_dirs
 
@@ -39,8 +39,9 @@ def find_assets(root, project, type_):
     """
 
     Args:
+        root (str):
         project (str):
-        type_ (str): CHARACTER, PROPS, MODULE folder
+        type_ (str): CHARACTER, PROPS folder
 
     Returns:
         list(str): assets found in the folder
