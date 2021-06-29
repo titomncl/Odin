@@ -63,10 +63,10 @@ class Controller(object):
         props_is_correct = self.word_pattern.match(props_name)
 
         if props_is_correct:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.green_palette()
+            self.ui.manage_prj.lib_widget.create_props_dialog.green_palette()
             assets.create_asset(concat(self.root, self.project_name, separator="/"), props_name, "PROPS")
         else:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
+            self.ui.manage_prj.lib_widget.create_props_dialog.red_palette()
 
     def set_action(self):
         set_name = self.ui.manage_prj.lib_widget.create_set_dialog.text_field.text().upper()
@@ -74,10 +74,10 @@ class Controller(object):
         set_is_correct = self.word_pattern.match(set_name)
 
         if set_is_correct:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.green_palette()
+            self.ui.manage_prj.lib_widget.create_set_dialog.green_palette()
             sets.create_set(concat(self.root, self.project_name, separator="/"), set_name)
         else:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
+            self.ui.manage_prj.lib_widget.create_set_dialog.red_palette()
 
     def fx_action(self):
         fx_name = self.ui.manage_prj.lib_widget.create_fx_dialog.text_field.text().upper()
@@ -85,7 +85,7 @@ class Controller(object):
         fx_is_correct = self.word_pattern.match(fx_name)
 
         if fx_is_correct:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.green_palette()
+            self.ui.manage_prj.lib_widget.create_fx_dialog.green_palette()
             fx.create_fx(concat(self.root, self.project_name, separator="/"), fx_name)
         else:
-            self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
+            self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
