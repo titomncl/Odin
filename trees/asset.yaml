@@ -1,19 +1,15 @@
 MOD:
-  CAM:
-  RENDER:
-    OLD:
+  SCENE:
+    VERSION:
     PUBLISH:
 SHD:
-  CAM:
-  RENDER:
+  TEXTURES:
+    VERSION:
+    PUBLISH:
   SCENE:
-    OLD:
-    TEXTURES:
+    VERSION:
     PUBLISH:
 RIG:
-  CAM:
-  CLIPS:
-  RENDER:
   SCENE:
-    OLD:
+    VERSION:
     PUBLISH:

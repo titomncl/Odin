@@ -1,24 +1,26 @@
 HOUDINI:
   CACHEFILES:
-    OLD:
+    VERSION:
+    PUBLISH:
   SCENES:
-    OLD:
+    VERSION:
+    PUBLISH:
 GUERILLA:
   BUILD:
-    OLD:
+    VERSION:
+    PUBLISH:
   SCENES:
-    OLD:
+    VERSION:
+    PUBLISH:
 MAYA:
   CACHEFILES:
-    OLD:
+    VERSION:
+    PUBLISH:
   SCENES:
-    OLD:
+    VERSION:
+    PUBLISH:
 NUKE:
   SCRIPTS:
-    OLD:
+    VERSION:
+    PUBLISH:
   LUT:
-SCRIPTS:
-  MEL:
-  PY:
-  VEX:
-  OTHERS:

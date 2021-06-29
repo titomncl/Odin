@@ -32,17 +32,6 @@ DATA:
   LIB:
     PUBLISH:
       SET:
-        ASSEMBLAGE:
-          HD:
-            OLD:
-          LD:
-            OLD:
-        MODULES:
-          HD:
-          LD:
-          TEXTURES:
-            HD:
-            LD:
       FX:
       CHARA:
       PROPS:
@@ -60,9 +49,9 @@ OUT:
       OLD:
   DAILIES:
   COMMUNICATION:
-    PACKAKE_1:
-    PACKAKE_2:
-    PACKAKE_3:
-    PACKAKE_4:
-    PACKAKE_5:
+    PACKAGE_1:
+    PACKAGE_2:
+    PACKAGE_3:
+    PACKAGE_4:
+    PACKAGE_5:
 TMP:
