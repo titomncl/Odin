@@ -1,7 +1,7 @@
 import sys
 
 from Odin.source.controller.controller import Controller
-from Odin.source.ui.create_set import CreateSet as UI
+from Odin.source.ui.main_window import MainWindow as UI
 
 from qtpy import QtWidgets
 

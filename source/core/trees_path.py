@@ -8,8 +8,14 @@ def asset_tree():
 def asset_publish_tree():
     return os.path.join(os.path.dirname(trees.__file__), trees.ASSET_PUBLISH_TREE)
 
-def place_tree():
-    return os.path.join(os.path.dirname(trees.__file__), trees.PLACE_TREE)
+def set_tree():
+    return os.path.join(os.path.dirname(trees.__file__), trees.SET_TREE)
+
+def set_publish_tree():
+    return os.path.join(os.path.dirname(trees.__file__), trees.SET_PUBLISH_TREE)
+
+def fx_tree():
+    return os.path.join(os.path.dirname(trees.__file__), trees.FX_TREE)
 
 def shot_tree():
     return os.path.join(os.path.dirname(trees.__file__), trees.SHOT_TREE)
