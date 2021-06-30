@@ -10,16 +10,16 @@ class Lib(Qw.QWidget):
 
         self.create_chara_dialog = CreateDialog(self.controller,
                                                 "Create character...", "Character name:", "CHARA",
-                                                self.parent())
+                                                self)
         self.create_props_dialog = CreateDialog(self.controller,
                                                 "Create props...", "Props name:", "PROPS",
-                                                self.parent())
+                                                self)
         self.create_set_dialog = CreateDialog(self.controller,
                                               "Create set...", "Set name:", "SET",
-                                              self.parent())
+                                              self)
         self.create_fx_dialog = CreateDialog(self.controller,
                                              "Create FX...", "FX name:", "FX",
-                                             self.parent())
+                                             self)
 
         self.setLayout(self.btn_layout())
 

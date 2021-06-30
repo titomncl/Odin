@@ -3,9 +3,9 @@ from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
 
 
-class CreateDialog(Qw.QWidget):
+class CreateDialog(Qw.QDialog):
     def __init__(self, controller, title, label, place_holder, parent=None):
-        Qw.QWidget.__init__(self, parent)
+        Qw.QDialog.__init__(self, parent)
 
         self.setWindowTitle(title)
 
@@ -15,9 +15,7 @@ class CreateDialog(Qw.QWidget):
 
         self.setParent(parent)
 
-        self.setWindowFlags(Qc.Qt.Dialog)
-
-        self.setWindowModality(Qc.Qt.WindowModal)
+        self.setModal(True)
 
         self.set_ui()
 

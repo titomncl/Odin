@@ -1,5 +1,6 @@
 from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
+from qtpy import QtGui as Qg
 
 from Odin.source.ui.create_or_set_prj import CreateSet
 from Odin.source.ui.create_dialog import CreateDialog
@@ -14,6 +15,8 @@ class MainWindow(Qw.QMainWindow):
         self.controller = controller
 
         self.setWindowTitle("Odin")
+
+        self.setWindowIcon(Qg.QIcon("./icon/odin.png"))
 
         self.setMinimumSize(400, 250)
 
@@ -70,8 +73,9 @@ class MainWindow(Qw.QMainWindow):
         self.create_or_set.prod_cbox.clear()
         root = Qw.QFileDialog.getExistingDirectory(self, directory=self.controller.root,
                                                    options=Qw.QFileDialog.ShowDirsOnly)
-        self.controller.set_root(root)
-        self.update_combobox()
+        if root:
+            self.controller.set_root(root)
+            self.update_combobox()
 
     def create_prj_btn(self):
         self.controller.create_project()

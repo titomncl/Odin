@@ -54,7 +54,6 @@ class CreateSet(Qw.QWidget):
         self.prod_cbox = Qw.QComboBox()
         self.prod_cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
         self.prod_cbox.setFixedHeight(30)
-        self.prod_cbox.addItems(self.controller.projects)
 
         self.set_btn = Qw.QPushButton("SET PROJECT")
         self.set_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
