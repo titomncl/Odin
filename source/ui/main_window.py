@@ -38,6 +38,8 @@ class MainWindow(Qw.QMainWindow):
         self.menu_actions()
         self.create_menu()
 
+        self.update_combobox()
+
         self.init_connexions()
 
     def init_connexions(self):
@@ -82,8 +84,9 @@ class MainWindow(Qw.QMainWindow):
         self.update_combobox()
 
     def update_combobox(self):
-        self.create_or_set.prod_cbox.clear()
-        self.create_or_set.prod_cbox.addItems(self.controller.projects)
+        if self.controller.root:
+            self.create_or_set.prod_cbox.clear()
+            self.create_or_set.prod_cbox.addItems(self.controller.projects)
 
     def create_btn_action(self):
         self.create_project_dialog.show()
