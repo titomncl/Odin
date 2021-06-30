@@ -1,5 +1,4 @@
 from qtpy import QtWidgets as Qw
-from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
 
 from Odin.source.ui.create_or_set_prj import CreateSet
@@ -89,9 +88,7 @@ class MainWindow(Qw.QMainWindow):
     def create_btn_action(self):
         self.create_project_dialog.show()
 
-    # def create_prj_close_action(self):
-    #     self.create_prj.close()
-
     def set_btn_action(self):
-        self.stacked_widget.setCurrentWidget(self.manage_prj)
-        self.resize(400, 350)
+        if not self.create_or_set.prod_cbox.count() == 0:
+            self.stacked_widget.setCurrentWidget(self.manage_prj)
+            self.resize(400, 350)
