@@ -1,6 +1,7 @@
 from qtpy import QtWidgets as Qw
 from qtpy import QtGui as Qg
 from qtpy import QtCore as Qc
+from qtpy import QtGui as Qg
 
 from Odin.source.ui.create_or_set_prj import CreateSet
 from Odin.source.ui.create_dialog import CreateDialog
