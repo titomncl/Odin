@@ -18,6 +18,7 @@ class MainWindow(Qw.QMainWindow):
         self.setWindowIcon(Qg.QIcon("./icon/odin.png"))
 
         self.setMinimumSize(400, 250)
+        self.resize(400, 250)
 
         self.create_or_set = CreateSet(self.controller, self.parent())
         self.create_project_dialog = CreateDialog(self.controller,
@@ -67,8 +68,8 @@ class MainWindow(Qw.QMainWindow):
         self.create_project_action = Qw.QAction("&Create project...", self)
         self.create_project_action.triggered.connect(self.create_btn_action)
 
-        self.set_project_action = Qw.QAction("&Set project", self)
-        self.set_project_action.triggered.connect(self.set_btn_action)
+        self.set_project_action = Qw.QAction("&Change project", self)
+        self.set_project_action.triggered.connect(self.change_project_action)
 
     def set_change_root(self):
         self.create_or_set.prod_cbox.clear()
@@ -90,6 +91,10 @@ class MainWindow(Qw.QMainWindow):
 
     def create_btn_action(self):
         self.create_project_dialog.show()
+
+    def change_project_action(self):
+        self.stacked_widget.setCurrentWidget(self.create_or_set)
+        self.resize(400, 250)
 
     def set_btn_action(self):
         if not self.create_or_set.prod_cbox.count() == 0:
