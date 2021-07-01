@@ -1,5 +1,4 @@
 import sys
-import os
 
 from Odin.source.controller.controller import Controller
 from Odin.source.ui.main_window import MainWindow as UI
