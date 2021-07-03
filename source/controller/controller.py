@@ -54,11 +54,12 @@ class Controller(object):
         dev_env = "E:/DEV"
         venv = "/venv/Lib/site-packages"
 
+
         if os.path.isdir("E:/DEV/Odin"):
             os.environ["DEV_ENV"] = dev_env
             os.environ["venv"] = dev_env + venv
-        elif os.path.isdir(concat(self.root, self.project_name, "DEV/main", separator="/'")):
-            dev_env = concat(self.root, self.project_name, "DEV/main", separator="/'")
+        if os.path.isdir(concat(self.root, self.project_name, "DEV/main", separator="/")):
+            dev_env = concat(self.root, self.project_name, "DEV/main", separator="/")
             os.environ["DEV_ENV"] = dev_env
             os.environ["venv"] = dev_env + venv
 
