@@ -2,7 +2,8 @@ from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
 
-# from Odin.source.ui.create_prj import CreateProject
+import qtawesome as Qa
+
 
 class CreateSet(Qw.QWidget):
     def __init__(self, controller, parent=None):
@@ -40,7 +41,10 @@ class CreateSet(Qw.QWidget):
 
         h_layout = Qw.QHBoxLayout()
 
-        self.create_btn = Qw.QPushButton("CREATE\nPROJECT")
+        new_project_icon = Qa.icon('fa5s.plus-square',
+                                   options=[{"color": "#EF8229"}])
+        self.create_btn = Qw.QPushButton(new_project_icon, "CREATE\nPROJECT")
+        self.create_btn.setIconSize(Qc.QSize(64, 64))
         self.create_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
 
         h_layout.addWidget(self.create_btn)
@@ -55,7 +59,10 @@ class CreateSet(Qw.QWidget):
         self.prod_cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
         self.prod_cbox.setFixedHeight(30)
 
-        self.set_btn = Qw.QPushButton("SET PROJECT")
+        set_project_icon = Qa.icon('fa.folder-open',
+                                   options=[{"color": "#EF8229"}])
+        self.set_btn = Qw.QPushButton(set_project_icon, "SET PROJECT")
+        self.set_btn.setIconSize(Qc.QSize(64, 64))
         self.set_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
 
         v_layout.addWidget(self.prod_cbox)

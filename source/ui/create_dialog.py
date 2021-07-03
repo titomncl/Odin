@@ -1,11 +1,11 @@
 from qtpy import QtWidgets as Qw
-from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
+from qtpy import QtCore as Qc
 
 
-class CreateDialog(Qw.QDialog):
-    def __init__(self, controller, title, label, place_holder, parent=None):
-        Qw.QDialog.__init__(self, parent)
+class CreateDialog(Qw.QWidget):
+    def __init__(self, controller, title, label, place_holder, parent=None, choice=None):
+        Qw.QWidget.__init__(self, parent)
 
         self.setWindowTitle(title)
 
@@ -13,9 +13,11 @@ class CreateDialog(Qw.QDialog):
         self.label = label
         self.place_holder = place_holder
 
+        self.choice = choice
+
         self.setParent(parent)
 
-        self.setModal(True)
+        self.setWindowModality(Qc.Qt.WindowModal)
 
         self.set_ui()
 
@@ -33,6 +35,17 @@ class CreateDialog(Qw.QDialog):
         self.text_field.setPlaceholderText(self.place_holder)
 
         self.text_field.textChanged.connect(self.base_palette)
+
+        if self.choice:
+            choice_label = Qw.QLabel(self.choice)
+            choice_label.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Expanding)
+
+            self.cbox = Qw.QComboBox()
+            self.cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
+            self.cbox.setFixedHeight(20)
+
+            v_layout.addWidget(choice_label)
+            v_layout.addWidget(self.cbox)
 
         v_layout.addWidget(label)
         v_layout.addWidget(self.text_field)
@@ -59,21 +72,21 @@ class CreateDialog(Qw.QDialog):
         self.setLayout(main_layout)
 
     def red_palette(self):
-        red_color = Qg.QBrush(Qg.QColor(234, 102, 102, 255))
+        red_color = Qg.QBrush(Qg.QColor(234, 102, 102))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, red_color)
 
         self.text_field.setPalette(palette)
 
     def base_palette(self):
-        base_color = Qg.QBrush(Qg.QColor(255, 255, 255, 255))
+        base_color = Qg.QBrush(Qg.QColor(70, 86, 113))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, base_color)
 
         self.text_field.setPalette(palette)
 
     def green_palette(self):
-        base_color = Qg.QBrush(Qg.QColor(102, 234, 102, 255))
+        base_color = Qg.QBrush(Qg.QColor(102, 234, 102))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, base_color)
 

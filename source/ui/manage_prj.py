@@ -1,4 +1,6 @@
+import qtawesome as Qa
 from qtpy import QtWidgets as Qw
+from qtpy import QtCore as Qc
 
 from Odin.source.ui.lib_widget import Lib
 from Odin.source.ui.softwares import Softwares
@@ -40,12 +42,20 @@ class ManageProject(Qw.QWidget):
 
         btn_layout = Qw.QVBoxLayout()
 
-        self.lib_btn = Qw.QPushButton("Lib")
+        lib_icon = Qa.icon('fa5s.archive',
+                           options=[{"color": "#EF8229"}])
+
+        self.lib_btn = Qw.QPushButton(lib_icon, "Lib")
         self.lib_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.MinimumExpanding)
+        self.lib_btn.setIconSize(Qc.QSize(32, 32))
         self.lib_btn.setCheckable(True)
 
-        self.film_btn = Qw.QPushButton("Film")
+        film_icon = Qa.icon('fa5s.photo-video',
+                            options=[{"color": "#EF8229"}])
+
+        self.film_btn = Qw.QPushButton(film_icon, "Film")
         self.film_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.MinimumExpanding)
+        self.film_btn.setIconSize(Qc.QSize(32, 32))
         self.film_btn.setCheckable(True)
 
         btn_layout.addWidget(self.lib_btn)
@@ -89,12 +99,22 @@ class ManageProject(Qw.QWidget):
         if self.lib_btn.isChecked():
             self.stacked_widgets.setCurrentWidget(self.lib_widget)
             self.film_btn.setChecked(False)
+
+            self.parent().parent().setMinimumSize(600, 665)
+            self.parent().parent().resize(600, 665)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
+            self.parent().parent().setMinimumSize(400, 350)
+            self.parent().parent().resize(400, 350)
 
     def film_btn_action(self):
         if self.film_btn.isChecked():
             self.stacked_widgets.setCurrentWidget(self.film_widget)
             self.lib_btn.setChecked(False)
+
+            self.parent().parent().setMinimumSize(600, 480)
+            self.parent().parent().resize(600, 480)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
+            self.parent().parent().setMinimumSize(400, 350)
+            self.parent().parent().resize(400, 350)

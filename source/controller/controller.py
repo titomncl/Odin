@@ -1,4 +1,5 @@
 import re
+import os
 
 from Odin.source.core import project
 from Odin.source.core import config_parser
@@ -45,6 +46,24 @@ class Controller(object):
         if value[-1] == "/":
             new_value = value.split("/")[0]
         config_parser.change_content("ROOT_PATH", new_value)
+
+    def set_var_env(self):
+        os.environ["ROOT_PATH"] = self.root
+        os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
+
+        dev_env = "E:/DEV"
+        venv = "/venv/Lib/site-packages"
+
+
+        if os.path.isdir("E:/DEV/Odin"):
+            os.environ["DEV_ENV"] = dev_env
+            os.environ["venv"] = dev_env + venv
+        if os.path.isdir(concat(self.root, self.project_name, "DEV/main", separator="/")):
+            dev_env = concat(self.root, self.project_name, "DEV/main", separator="/")
+            os.environ["DEV_ENV"] = dev_env
+            os.environ["venv"] = dev_env + venv
+
+
 
     def chara_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field.text().upper()
