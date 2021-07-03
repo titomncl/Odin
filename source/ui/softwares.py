@@ -57,6 +57,9 @@ class Softwares(Qw.QWidget):
         self.houdini_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
         self.houdini_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
 
+        self.maya_btn.clicked.connect(self.maya_action)
+        self.houdini_btn.clicked.connect(self.houdini_action)
+
         btn_layout.addWidget(self.maya_btn)
         btn_layout.addWidget(self.zbrush)
         btn_layout.addWidget(self.houdini_btn)
@@ -149,3 +152,14 @@ class Softwares(Qw.QWidget):
         widget.setLayout(btn_layout)
 
         return widget
+
+    def maya_action(self):
+        from Odin.source.core import software
+
+        software.maya()
+
+    def houdini_action(self):
+        from Odin.source.core import software
+
+        software.houdini()
+

@@ -1,5 +1,6 @@
 from qtpy import QtWidgets as Qw
 from qtpy import QtGui as Qg
+from qtpy import QtCore as Qc
 
 from Odin.source.ui.create_or_set_prj import CreateSet
 from Odin.source.ui.create_dialog import CreateDialog
@@ -20,11 +21,14 @@ class MainWindow(Qw.QMainWindow):
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
 
-        self.create_or_set = CreateSet(self.controller, self.parent())
+        self.create_or_set = CreateSet(self.controller, self)
         self.create_project_dialog = CreateDialog(self.controller,
                                        "Create project...", "Project name:", "PRJ",
                                                   self.create_or_set)
-        self.manage_prj = ManageProject(self.controller, self.parent())
+        self.create_project_dialog.setWindowFlag(Qc.Qt.Tool)
+        self.create_project_dialog.setMinimumSize(200, 120)
+
+        self.manage_prj = ManageProject(self.controller, self)
 
         self.stacked_widget = Qw.QStackedWidget()
 
@@ -94,9 +98,14 @@ class MainWindow(Qw.QMainWindow):
 
     def change_project_action(self):
         self.stacked_widget.setCurrentWidget(self.create_or_set)
+        self.setMinimumSize(400, 250)
         self.resize(400, 250)
 
     def set_btn_action(self):
         if not self.create_or_set.prod_cbox.count() == 0:
+
+            self.controller.set_var_env()
+
             self.stacked_widget.setCurrentWidget(self.manage_prj)
+            self.setMinimumSize(400, 350)
             self.resize(400, 350)

@@ -99,12 +99,22 @@ class ManageProject(Qw.QWidget):
         if self.lib_btn.isChecked():
             self.stacked_widgets.setCurrentWidget(self.lib_widget)
             self.film_btn.setChecked(False)
+
+            self.parent().parent().setMinimumSize(600, 665)
+            self.parent().parent().resize(600, 665)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
+            self.parent().parent().setMinimumSize(400, 350)
+            self.parent().parent().resize(400, 350)
 
     def film_btn_action(self):
         if self.film_btn.isChecked():
             self.stacked_widgets.setCurrentWidget(self.film_widget)
             self.lib_btn.setChecked(False)
+
+            self.parent().parent().setMinimumSize(600, 480)
+            self.parent().parent().resize(600, 480)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
+            self.parent().parent().setMinimumSize(400, 350)
+            self.parent().parent().resize(400, 350)
