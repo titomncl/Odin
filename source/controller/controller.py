@@ -52,7 +52,7 @@ class Controller(object):
         os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
 
         dev_env = "E:/DEV"
-        venv = "/venv/Lib/site-packages"
+        venv = "/venv"
 
         if os.path.isdir("E:/DEV/Odin"):
             os.environ["DEV_ENV"] = dev_env
