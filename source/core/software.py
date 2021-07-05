@@ -11,7 +11,7 @@ def maya():
 
     launch_env["PYTHONPATH"] = os.getenv("DEV_ENV") + "/venv/27/Lib/site-packages;"
 
-    subprocess.Popen(maya, env=launch_env, cwd=r"C:\Program Files\Autodesk\Maya2019")
+    subprocess.Popen(maya, env=launch_env, cwd=r"C:\Program Files\Autodesk\Maya2019", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 def houdini():
