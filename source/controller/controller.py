@@ -16,7 +16,6 @@ class Controller(object):
 
         self.word_pattern = re.compile(r"^([A-Z0-9]+)$")
 
-
     def show(self):
         self.ui.show()
 
@@ -41,7 +40,8 @@ class Controller(object):
     def project_name(self):
         return self.ui.create_or_set.prod_cbox.currentText()
 
-    def set_root(self, value):
+    @staticmethod
+    def set_root(value):
         new_value = value
         if value[-1] == "/":
             new_value = value.split("/")[0]
@@ -54,7 +54,6 @@ class Controller(object):
         dev_env = "E:/DEV"
         venv = "/venv/Lib/site-packages"
 
-
         if os.path.isdir("E:/DEV/Odin"):
             os.environ["DEV_ENV"] = dev_env
             os.environ["venv"] = dev_env + venv
@@ -62,8 +61,6 @@ class Controller(object):
             dev_env = concat(self.root, self.project_name, "DEV/main", separator="/")
             os.environ["DEV_ENV"] = dev_env
             os.environ["venv"] = dev_env + venv
-
-
 
     def chara_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field.text().upper()

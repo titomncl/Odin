@@ -14,4 +14,6 @@ def houdini():
 
     houdini = concat(os.getcwd().replace("\\", "/"), "softwaresList/houdini.bat", separator="/")
 
-    subprocess.Popen(houdini, shell=True)
+    launch_env = {"PYTHONPATH": os.getenv("venv") + "/27/Lib/site-packages"}
+
+    subprocess.Popen(houdini, env=launch_env)
