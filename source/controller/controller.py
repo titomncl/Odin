@@ -1,4 +1,5 @@
 import re
+import os
 
 from Odin.source.core import project
 from Odin.source.core import config_parser
@@ -14,7 +15,6 @@ class Controller(object):
         self.ui = ui(self, parent)
 
         self.word_pattern = re.compile(r"^([A-Z0-9]+)$")
-
 
     def show(self):
         self.ui.show()
@@ -40,11 +40,27 @@ class Controller(object):
     def project_name(self):
         return self.ui.create_or_set.prod_cbox.currentText()
 
-    def set_root(self, value):
+    @staticmethod
+    def set_root(value):
         new_value = value
         if value[-1] == "/":
             new_value = value.split("/")[0]
         config_parser.change_content("ROOT_PATH", new_value)
+
+    def set_var_env(self):
+        os.environ["ROOT_PATH"] = self.root
+        os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
+
+        dev_env = "E:/DEV"
+        venv = "/venv"
+
+        if os.path.isdir("E:/DEV/Odin"):
+            os.environ["DEV_ENV"] = dev_env
+            os.environ["venv"] = dev_env + venv
+        if os.path.isdir(concat(self.root, self.project_name, "DEV/develop", separator="/")):  # TODO change to main after tests
+            dev_env = concat(self.root, self.project_name, "DEV/develop", separator="/")
+            os.environ["DEV_ENV"] = dev_env
+            os.environ["venv"] = dev_env + venv
 
     def chara_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field.text().upper()
