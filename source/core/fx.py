@@ -5,11 +5,12 @@ from Odin.source.core.create_tree import Tree
 from Odin.source.common import concat, make_dirs
 
 
-def create_fx(root, fx_name, asset_type="FX"):
+def create_fx(root, project, fx_name, asset_type="FX"):
     """
 
     Args:
         root (str): root path of the project without the slash at the end
+        project (str): project
         set_name (str): asset name
         asset_type (str): FX by default
 
@@ -17,7 +18,7 @@ def create_fx(root, fx_name, asset_type="FX"):
         bool: True if the project was created, False if it was not
 
     """
-    set_path = concat(root, "DATA/LIB", asset_type.upper(), fx_name, separator="/")
+    set_path = concat(root, project, "DATA/LIB", asset_type.upper(), fx_name, separator="/")
     set_tree = Tree.create_from_template(trees_path.fx_tree(), set_path)
 
     asset_created = make_dirs(set_path)

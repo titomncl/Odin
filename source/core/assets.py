@@ -5,11 +5,12 @@ from Odin.source.core.create_tree import Tree
 from Odin.source.common import concat, make_dirs
 
 
-def create_asset(root, asset_name, asset_type):
+def create_asset(root, project, asset_name, asset_type):
     """
 
     Args:
         root (str): root path of the project without the slash at the end
+        project (str): project
         asset_name (str): asset name
         asset_type (str): CHARA or PROPS
 
@@ -17,10 +18,11 @@ def create_asset(root, asset_name, asset_type):
         bool: True if the project was created, False if it was not
 
     """
-    asset_path = concat(root, "DATA/LIB", asset_type.upper(), asset_name, separator="/")
+    asset_path = concat(root, project, "DATA/LIB", asset_type.upper(), asset_name, separator="/")
     asset_tree = Tree.create_from_template(trees_path.asset_tree(), asset_path)
 
-    asset_publish_path = concat(root, "DATA/LIB/PUBLISH", asset_type.upper(), asset_name, separator="/")
+    asset_publish_path = concat(root, project, "DATA/LIB/PUBLISH",
+                                asset_type.upper(), asset_name, separator="/")
     asset_publish_tree = Tree.create_from_template(trees_path.asset_publish_tree(), asset_publish_path)
 
     asset_created = make_dirs(asset_path)

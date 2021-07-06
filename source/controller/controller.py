@@ -69,7 +69,7 @@ class Controller(object):
 
         if chara_is_correct:
             self.ui.manage_prj.lib_widget.create_chara_dialog.green_palette()
-            assets.create_asset(concat(self.root, self.project_name, separator="/"), chara_name, "CHARA")
+            assets.create_asset(self.root, self.project_name, chara_name, "CHARA")
         else:
             self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
 
@@ -80,7 +80,7 @@ class Controller(object):
 
         if props_is_correct:
             self.ui.manage_prj.lib_widget.create_props_dialog.green_palette()
-            assets.create_asset(concat(self.root, self.project_name, separator="/"), props_name, "PROPS")
+            assets.create_asset(self.root, self.project_name, props_name, "PROPS")
         else:
             self.ui.manage_prj.lib_widget.create_props_dialog.red_palette()
 
@@ -91,7 +91,7 @@ class Controller(object):
 
         if set_is_correct:
             self.ui.manage_prj.lib_widget.create_set_dialog.green_palette()
-            sets.create_set(concat(self.root, self.project_name, separator="/"), set_name)
+            sets.create_set(self.root, self.project_name, set_name)
         else:
             self.ui.manage_prj.lib_widget.create_set_dialog.red_palette()
 
@@ -102,7 +102,7 @@ class Controller(object):
 
         if fx_is_correct:
             self.ui.manage_prj.lib_widget.create_fx_dialog.green_palette()
-            fx.create_fx(concat(self.root, self.project_name, separator="/"), fx_name)
+            fx.create_fx(self.root, self.project_name, fx_name)
         else:
             self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
 
