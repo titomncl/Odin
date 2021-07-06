@@ -45,6 +45,9 @@ def find_fx(root, project, type_="FX"):
     if project:
         path = concat(root, project, "DATA/LIB", type_, separator="\\")
 
-        assets = next(os.walk(path))[1]
+        try:
+            assets = next(os.walk(path))[1]
 
-        return assets
+            return assets
+        except StopIteration:
+            return list()

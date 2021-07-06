@@ -50,6 +50,9 @@ def find_sets(root, project, type_="SET"):
     if project:
         path = concat(root, project, "DATA/LIB", type_, separator="\\")
 
-        assets = next(os.walk(path))[1]
+        try:
+            assets = next(os.walk(path))[1]
 
-        return assets
+            return assets
+        except StopIteration:
+            return list()
