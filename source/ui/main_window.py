@@ -54,10 +54,14 @@ class MainWindow(Qw.QMainWindow):
         self.create_or_set.close_btn.clicked.connect(self.close)
 
         self.create_project_dialog.create_btn.clicked.connect(self.create_prj_btn)
+
         self.manage_prj.lib_widget.create_chara_dialog.create_btn.clicked.connect(self.controller.chara_action)
         self.manage_prj.lib_widget.create_props_dialog.create_btn.clicked.connect(self.controller.props_action)
         self.manage_prj.lib_widget.create_set_dialog.create_btn.clicked.connect(self.controller.set_action)
         self.manage_prj.lib_widget.create_fx_dialog.create_btn.clicked.connect(self.controller.fx_action)
+
+        self.manage_prj.film_widget.create_seq_dialog.create_btn.clicked.connect(self.controller.seq_action)
+        self.manage_prj.film_widget.create_shot_dialog.create_btn.clicked.connect(self.controller.shot_action)
 
     def create_menu(self):
         config = Qw.QMenu("&Config", self)
@@ -106,6 +110,9 @@ class MainWindow(Qw.QMainWindow):
         if not self.create_or_set.prod_cbox.count() == 0:
 
             self.controller.set_var_env()
+
+            self.manage_prj.film_widget.create_shot_dialog.cbox.clear()
+            self.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.controller.sequences)
 
             self.stacked_widget.setCurrentWidget(self.manage_prj)
             self.setMinimumSize(400, 350)

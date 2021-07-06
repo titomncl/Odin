@@ -37,12 +37,12 @@ class Film(Qw.QWidget):
     def init_dialog(self):
         self.create_seq_dialog = CreateDialog(self.controller,
                                                 "Create sequence...", "New sequence:", "S###",
-                                                self)
+                                                self, close_btn=False)
 
         self.create_seq_dialog.text_field.setText("S")
 
         self.create_shot_dialog = CreateDialog(self.controller,
                                                "Create shot...", "New shot:", "P###",
-                                               self, "Sequence:")
+                                               self, "Sequence:", close_btn=False)
 
         self.create_shot_dialog.text_field.setText("P")

@@ -1,21 +1,23 @@
-import trees_path
+import os
 
+from Odin.source.core import trees_path
 from Odin.source.core.create_tree import Tree
 from Odin.source.common import concat, make_dirs
 
 
-def create_sequences(root, sequence):
+def create_sequences(root, project, sequence):
     """
 
     Args:
         root (str): root path of the project without the slash at the end
+        project (str): project
         sequence (str): sequence name
 
     Returns:
         bool: True if the project was created, False if it was not
 
     """
-    seq_path = concat(root, "DATA/FILM", sequence, separator="/")
+    seq_path = concat(root, project, "DATA/FILM", sequence, separator="/")
     seq_tree = Tree.create_from_template(trees_path.seq_tree(), seq_path)
 
     seq_created = make_dirs(seq_path)
@@ -26,3 +28,27 @@ def create_sequences(root, sequence):
         return True
     else:
         return False
+
+
+def find_sequences(root, project):
+    """
+
+    Args:
+        root (str):
+        project (str):
+
+    Returns:
+        list(str): sequences found in the folder
+
+    """
+
+    if project:
+        path = concat(root, project, "DATA/FILM", separator="\\")
+
+        try:
+            seq = next(os.walk(path))[1]
+            seq.sort()
+
+            return seq
+        except StopIteration:
+            return list()

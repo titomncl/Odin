@@ -3,7 +3,7 @@ import os
 
 from Odin.source.core import project, software
 from Odin.source.core import config_parser
-from Odin.source.core import assets, sets, fx
+from Odin.source.core import assets, sets, fx, sequence, shot
 
 from Odin.source.common import concat
 
@@ -39,6 +39,10 @@ class Controller(object):
     @property
     def project_name(self):
         return self.ui.create_or_set.prod_cbox.currentText()
+
+    @property
+    def sequences(self):
+        return sequence.find_sequences(self.root, self.project_name)
 
     @staticmethod
     def set_root(value):
@@ -105,6 +109,37 @@ class Controller(object):
             fx.create_fx(self.root, self.project_name, fx_name)
         else:
             self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
+
+    def seq_action(self):
+        seq_name = self.ui.manage_prj.film_widget.create_seq_dialog.text_field.text().upper()
+        seq_pattern = re.compile(r"S(\d{3})")
+
+        seq_is_correct = seq_pattern.match(seq_name)
+
+        if seq_is_correct:
+            self.ui.manage_prj.film_widget.create_seq_dialog.green_palette()
+            sequence.create_sequences(self.root, self.project_name, seq_name)
+
+            self.ui.manage_prj.film_widget.create_shot_dialog.cbox.clear()
+            self.ui.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.sequences)
+        else:
+            self.ui.manage_prj.film_widget.create_seq_dialog.red_palette()
+
+    def shot_action(self):
+        shot_name = self.ui.manage_prj.film_widget.create_shot_dialog.text_field.text().upper()
+
+        shot_pattern = re.compile(r"P(\d{3})")
+
+        shot_is_correct = shot_pattern.match(shot_name)
+
+        if shot_is_correct:
+            self.ui.manage_prj.film_widget.create_shot_dialog.green_palette()
+
+            seq_name = self.ui.manage_prj.film_widget.create_shot_dialog.cbox.currentText()
+
+            shot.create_shot(self.root, self.project_name, seq_name, shot_name)
+        else:
+            self.ui.manage_prj.film_widget.create_shot_dialog.red_palette()
 
     def soft_action(self):
         soft_name = self.ui.sender().text().lower()

@@ -1,14 +1,16 @@
-import trees_path
+import os
 
+from Odin.source.core import trees_path
 from Odin.source.core.create_tree import Tree
 from Odin.source.common import concat, make_dirs
 
 
-def create_shot(root, seq, shot):
+def create_shot(root, project, seq, shot):
     """
 
     Args:
         root (str): root path of the project without the slash at the end
+        project (str): project
         sequence (str): sequence name
         shot (str): shot name
 
@@ -16,7 +18,7 @@ def create_shot(root, seq, shot):
         bool: True if the project was created, False if it was not
 
     """
-    shot_path = concat(root, "DATA/FILM", seq, shot, separator="/")
+    shot_path = concat(root, project, "DATA/FILM", seq, shot, separator="/")
     shot_tree = Tree.create_from_template(trees_path.shot_tree(), shot_path)
 
     seq_created = make_dirs(shot_path)
@@ -27,3 +29,16 @@ def create_shot(root, seq, shot):
         return True
     else:
         return False
+
+def find_shots(root, project, seq):
+
+    if seq:
+        path = concat(root, project, "DATA/FILM", seq, separator="\\")
+
+        try:
+            shots = next(os.walk(path))[1]
+            shots.sort()
+
+            return shots
+        except StopIteration:
+            return list()
