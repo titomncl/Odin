@@ -4,7 +4,7 @@ from qtpy import QtCore as Qc
 
 
 class CreateDialog(Qw.QWidget):
-    def __init__(self, controller, title, label, place_holder, parent=None, choice=None):
+    def __init__(self, controller, title, label, place_holder, parent=None, choice=None, close_btn=True):
         Qw.QWidget.__init__(self, parent)
 
         self.setWindowTitle(title)
@@ -14,6 +14,7 @@ class CreateDialog(Qw.QWidget):
         self.place_holder = place_holder
 
         self.choice = choice
+        self.is_close_btn = close_btn
 
         self.setParent(parent)
 
@@ -59,7 +60,9 @@ class CreateDialog(Qw.QWidget):
         self.close_btn.clicked.connect(self.close)
 
         h_layout.addWidget(self.create_btn)
-        h_layout.addWidget(self.close_btn)
+
+        if self.is_close_btn:
+            h_layout.addWidget(self.close_btn)
         v_layout.addLayout(h_layout)
 
         # ------------ SET LAYOUT ------------

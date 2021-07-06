@@ -28,13 +28,13 @@ class Lib(Qw.QWidget):
     def init_dialog(self):
         self.create_chara_dialog = CreateDialog(self.controller,
                                                 "Create character...", "Character name:", "CHARA",
-                                                self)
+                                                self, close_btn=False)
         self.create_props_dialog = CreateDialog(self.controller,
                                                 "Create props...", "Props name:", "PROPS",
-                                                self)
+                                                self, close_btn=False)
         self.create_set_dialog = CreateDialog(self.controller,
                                               "Create set...", "Set name:", "SET",
-                                              self)
+                                              self, close_btn=False)
         self.create_fx_dialog = CreateDialog(self.controller,
                                              "Create FX...", "FX name:", "FX",
-                                             self)
+                                             self, close_btn=False)
