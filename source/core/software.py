@@ -10,7 +10,7 @@ def get_launch_env(py_ver):
     return launch_env
 
 
-def launch_software(name, version):
+def launch_software(name, version, cwd):
 
     soft = os.getcwd().replace("\\", "/") + "/softwaresList/" + name + ".bat"
 
@@ -18,4 +18,4 @@ def launch_software(name, version):
 
         launch_env = get_launch_env(version)
 
-        subprocess.Popen(soft, env=launch_env)
+        subprocess.Popen(soft, env=launch_env, cwd=cwd)

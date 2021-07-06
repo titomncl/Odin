@@ -50,8 +50,11 @@ class Softwares(Qw.QWidget):
         houdini_ico = Qg.QIcon("./icon/houdini.ico")
 
         self.maya = self.soft_button("Maya", maya_ico, "27")
+        self.maya.setProperty("cwd", r"C:\Program Files\Autodesk\Maya2019")
+
         self.zbrush = self.soft_button("ZBrush", zbrush_ico, "27")
         self.houdini = self.soft_button("Houdini", houdini_ico, "27")
+        self.houdini.setProperty("cwd", r"C:\Program Files\Side Effects Software\Houdini 18.0.532")
 
         btn_layout.addWidget(self.maya)
         btn_layout.addWidget(self.zbrush)
