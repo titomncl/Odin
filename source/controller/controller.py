@@ -16,6 +16,8 @@ class Controller(object):
 
         self.word_pattern = re.compile(r"^([A-Z0-9]+)$")
 
+        self.env = "main"
+
     def show(self):
         self.ui.show()
 
@@ -55,16 +57,13 @@ class Controller(object):
         os.environ["ROOT_PATH"] = self.root
         os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
 
-        dev_env = "E:/DEV"
         venv = "/venv"
 
-        if os.path.isdir("E:/DEV/Odin"):
-            os.environ["DEV_ENV"] = dev_env
-            os.environ["venv"] = dev_env + venv
-        elif os.path.isdir(concat(self.root, self.project_name, "DEV/main", separator="/")):
-            dev_env = concat(self.root, self.project_name, "DEV/main", separator="/")
-            os.environ["DEV_ENV"] = dev_env
-            os.environ["venv"] = dev_env + venv
+        env_path = concat(self.root, self.project_name, "DEV", self.env, separator="/")
+
+        if os.path.isdir(env_path):
+            os.environ["DEV_ENV"] = env_path
+            os.environ["venv"] = env_path + venv
 
     def chara_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field.text().upper()
