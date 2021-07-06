@@ -27,6 +27,19 @@ class Softwares(Qw.QWidget):
 
         self.setLayout(main_layout)
 
+    def soft_button(self, text, icon, py_version):
+        btn = Qw.QToolButton()
+        btn.setIcon(icon)
+        btn.setIconSize(Qc.QSize(48, 48))
+        btn.setText(text)
+        btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
+        btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
+        btn.setProperty("python", py_version)
+
+        btn.clicked.connect(self.controller.soft_action)
+
+        return btn
+
     def modeling_set_widget(self):
         widget = Qw.QWidget()
 
@@ -36,33 +49,13 @@ class Softwares(Qw.QWidget):
         zbrush_ico = Qg.QIcon("./icon/zbrush.ico")
         houdini_ico = Qg.QIcon("./icon/houdini.ico")
 
-        self.maya_btn = Qw.QToolButton()
-        self.maya_btn.setIcon(maya_ico)
-        self.maya_btn.setIconSize(Qc.QSize(48, 48))
-        self.maya_btn.setText("Maya")
-        self.maya_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.maya_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
+        self.maya = self.soft_button("Maya", maya_ico, "27")
+        self.zbrush = self.soft_button("ZBrush", zbrush_ico, "27")
+        self.houdini = self.soft_button("Houdini", houdini_ico, "27")
 
-        self.zbrush = Qw.QToolButton()
-        self.zbrush.setIcon(zbrush_ico)
-        self.zbrush.setIconSize(Qc.QSize(48, 48))
-        self.zbrush.setText("ZBrush")
-        self.zbrush.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.zbrush.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.houdini_btn = Qw.QToolButton()
-        self.houdini_btn.setIcon(houdini_ico)
-        self.houdini_btn.setIconSize(Qc.QSize(48, 48))
-        self.houdini_btn.setText("Houdini")
-        self.houdini_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.houdini_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.maya_btn.clicked.connect(self.maya_action)
-        self.houdini_btn.clicked.connect(self.houdini_action)
-
-        btn_layout.addWidget(self.maya_btn)
+        btn_layout.addWidget(self.maya)
         btn_layout.addWidget(self.zbrush)
-        btn_layout.addWidget(self.houdini_btn)
+        btn_layout.addWidget(self.houdini)
 
         widget.setLayout(btn_layout)
 
@@ -78,37 +71,14 @@ class Softwares(Qw.QWidget):
         mari_ico = Qg.QIcon("./icon/mari.ico")
         photoshop_ico = Qg.QIcon("./icon/photoshop.ico")
 
-        self.designer_btn = Qw.QToolButton()
-        self.designer_btn.setIcon(designer_ico)
-        self.designer_btn.setIconSize(Qc.QSize(48, 48))
-        self.designer_btn.setText("Designer")
-        self.designer_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.designer_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
+        self.designer = self.soft_button("Designer", designer_ico, "38")
+        self.painter = self.soft_button("Painter", painter_ico, "38")
+        self.mari = self.soft_button("Mari", mari_ico, "27")
+        self.photoshop = self.soft_button("Photoshop", photoshop_ico, "27")
 
-        self.painter_btn = Qw.QToolButton()
-        self.painter_btn.setIcon(painter_ico)
-        self.painter_btn.setIconSize(Qc.QSize(48, 48))
-        self.painter_btn.setText("Painter")
-        self.painter_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.painter_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.mari_btn = Qw.QToolButton()
-        self.mari_btn.setIcon(mari_ico)
-        self.mari_btn.setIconSize(Qc.QSize(48, 48))
-        self.mari_btn.setText("Mari")
-        self.mari_btn.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.mari_btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.photoshop = Qw.QToolButton()
-        self.photoshop.setIcon(photoshop_ico)
-        self.photoshop.setIconSize(Qc.QSize(48, 48))
-        self.photoshop.setText("Photoshop")
-        self.photoshop.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.photoshop.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        btn_layout.addWidget(self.designer_btn)
-        btn_layout.addWidget(self.painter_btn)
-        btn_layout.addWidget(self.mari_btn)
+        btn_layout.addWidget(self.designer)
+        btn_layout.addWidget(self.painter)
+        btn_layout.addWidget(self.mari)
         btn_layout.addWidget(self.photoshop)
 
         widget.setLayout(btn_layout)
@@ -124,26 +94,9 @@ class Softwares(Qw.QWidget):
         nuke_ico = Qg.QIcon("./icon/nuke.ico")
         resolve_ico = Qg.QIcon("./icon/resolve.ico")
 
-        self.guerilla = Qw.QToolButton()
-        self.guerilla.setIcon(guerilla_ico)
-        self.guerilla.setIconSize(Qc.QSize(48, 48))
-        self.guerilla.setText("Guerilla")
-        self.guerilla.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.guerilla.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.nuke = Qw.QToolButton()
-        self.nuke.setIcon(nuke_ico)
-        self.nuke.setIconSize(Qc.QSize(48, 48))
-        self.nuke.setText("Nuke")
-        self.nuke.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.nuke.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
-
-        self.resolve = Qw.QToolButton()
-        self.resolve.setIcon(resolve_ico)
-        self.resolve.setIconSize(Qc.QSize(48, 48))
-        self.resolve.setText("Resolve")
-        self.resolve.setToolButtonStyle(Qc.Qt.ToolButtonTextUnderIcon)
-        self.resolve.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
+        self.guerilla = self.soft_button("Guerilla", guerilla_ico, "27")
+        self.nuke = self.soft_button("Nuke", nuke_ico, "27")
+        self.resolve = self.soft_button("Resolve", resolve_ico, "27")
 
         btn_layout.addWidget(self.guerilla)
         btn_layout.addWidget(self.nuke)
@@ -152,14 +105,3 @@ class Softwares(Qw.QWidget):
         widget.setLayout(btn_layout)
 
         return widget
-
-    def maya_action(self):
-        from Odin.source.core import software
-
-        software.maya()
-
-    def houdini_action(self):
-        from Odin.source.core import software
-
-        software.houdini()
-

@@ -1,7 +1,7 @@
 import re
 import os
 
-from Odin.source.core import project
+from Odin.source.core import project, software
 from Odin.source.core import config_parser
 from Odin.source.core import assets, sets, fx
 
@@ -105,3 +105,9 @@ class Controller(object):
             fx.create_fx(concat(self.root, self.project_name, separator="/"), fx_name)
         else:
             self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
+
+    def soft_action(self):
+        soft_name = self.ui.sender().text().lower()
+        py_version = self.ui.sender().property("python")
+
+        software.launch_software(soft_name, py_version)

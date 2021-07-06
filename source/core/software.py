@@ -1,7 +1,6 @@
 import subprocess
 import os
 
-from Odin.source.common import concat
 
 def get_launch_env(py_ver):
     launch_env = os.environ.copy()
@@ -10,19 +9,13 @@ def get_launch_env(py_ver):
 
     return launch_env
 
-def maya():
 
-    maya = concat(os.getcwd().replace("\\", "/"), "softwaresList/maya.bat", separator="/")
+def launch_software(name, version):
 
-    launch_env = get_launch_env("27")
+    soft = os.getcwd().replace("\\", "/") + "/softwaresList/" + name + ".bat"
 
-    subprocess.Popen(maya, env=launch_env, cwd=r"C:\Program Files\Autodesk\Maya2019")
+    if os.path.isfile(soft):
 
+        launch_env = get_launch_env(version)
 
-def houdini():
-
-    houdini = concat(os.getcwd().replace("\\", "/"), "softwaresList/houdini.bat", separator="/")
-
-    launch_env = get_launch_env("27")
-
-    subprocess.Popen(houdini, env=launch_env, cwd=r"C:\Program Files\Autodesk\Maya2019")
+        subprocess.Popen(soft, env=launch_env)
