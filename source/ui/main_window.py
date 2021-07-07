@@ -1,5 +1,4 @@
 from qtpy import QtWidgets as Qw
-from qtpy import QtGui as Qg
 from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
 
@@ -81,7 +80,8 @@ class MainWindow(Qw.QMainWindow):
         self.set_project_action.triggered.connect(self.change_project_action)
 
     def set_change_root(self):
-        self.create_or_set.prod_cbox.clear()
+        if self.stacked_widget.currentWidget() is not self.create_or_set:
+            self.change_project_action()
         root = Qw.QFileDialog.getExistingDirectory(self, directory=self.controller.root,
                                                    options=Qw.QFileDialog.ShowDirsOnly)
         if root:
