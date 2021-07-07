@@ -38,7 +38,7 @@ def parse_file():
 def get_value(key):
     try:
         return parse_file()[key]
-    except IOError and KeyError:
+    except IOError or KeyError:
         return None
 
 
