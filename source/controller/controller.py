@@ -39,6 +39,10 @@ class Controller(object):
         return config_parser.get_value("ROOT_PATH")
 
     @property
+    def recent_project(self):
+        return config_parser.get_value("RECENT_PROJECT")
+
+    @property
     def project_name(self):
         return self.ui.create_or_set.prod_cbox.currentText()
 
@@ -53,7 +57,14 @@ class Controller(object):
             new_value = value.split("/")[0]
         config_parser.change_content("ROOT_PATH", new_value)
 
+    @staticmethod
+    def set_recent_project(value):
+        config_parser.change_content("RECENT_PROJECT", value)
+
     def set_var_env(self):
+
+        self.set_recent_project(self.project_name)
+
         os.environ["ROOT_PATH"] = self.root
         os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
 

@@ -98,6 +98,11 @@ class MainWindow(Qw.QMainWindow):
             self.create_or_set.prod_cbox.clear()
             self.create_or_set.prod_cbox.addItems(self.controller.projects)
 
+            if self.controller.recent_project:
+                prj_index = self.create_or_set.prod_cbox.findText(self.controller.recent_project)
+                if prj_index != -1:
+                    self.create_or_set.prod_cbox.setCurrentIndex(prj_index)
+
     def create_btn_action(self):
         self.create_project_dialog.show()
 
