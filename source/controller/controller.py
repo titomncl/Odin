@@ -40,7 +40,7 @@ class Controller(object):
 
     @property
     def recent_project(self):
-        return config_parser.get_value("RECENT_PROJECT")
+        return config_parser.get_value("LAST_PROJECT")
 
     @property
     def project_name(self):
@@ -59,7 +59,7 @@ class Controller(object):
 
     @staticmethod
     def set_recent_project(value):
-        config_parser.change_content("RECENT_PROJECT", value)
+        config_parser.change_content("LAST_PROJECT", value)
 
     def set_var_env(self):
 
