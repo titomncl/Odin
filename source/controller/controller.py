@@ -14,7 +14,7 @@ class Controller(object):
 
         self.ui = ui(self, parent)
 
-        self.word_pattern = re.compile(r"^([A-Z0-9]+)$")
+        self.word_pattern = re.compile(r"^([A-Z0-9_]+)$")
 
         self.env = "main"
 
