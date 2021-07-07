@@ -56,6 +56,7 @@ class Controller(object):
         if value[-1] == "/":
             new_value = value.split("/")[0]
         config_parser.change_content("ROOT_PATH", new_value)
+        print(13)
 
     @staticmethod
     def set_recent_project(value):
