@@ -1,0 +1,18 @@
+designer:
+  cwd: C:\Program Files\Allegorithmic\Substance Designer
+  exe: C:\Program Files\Allegorithmic\Substance Designer\Substance Designer.exe
+houdini:
+  cwd: C:\Program Files\Side Effects Software\Houdini 18.5.596
+  exe: C:\Program Files\Side Effects Software\Houdini 18.5.596\bin\houdini.exe
+mari:
+  cwd: null
+  exe: null
+maya:
+  cwd: C:\Program Files\Autodesk\Maya2019
+  exe: C:\Program Files\Autodesk\Maya2019\bin\maya.exe
+painter:
+  cwd: C:\Program Files\Allegorithmic\Substance Painter
+  exe: C:\Program Files\Allegorithmic\Substance Painter\Substance Painter.exe
+photoshop:
+  cwd: C:\Program Files\Adobe\Adobe Photoshop 2021
+  exe: C:\Program Files\Adobe\Adobe Photoshop 2021\Photoshop.exe
