@@ -1,4 +1,4 @@
 set PYTHONPATH=%PYTHONPATH%;%ROOT_PATH%;%PFE_ENV%;%DEV_ENV%;
 set HOUDINI_TOOLBAR_PATH=%DEV_ENV%/Houdini/toolbar
 
-%1
+start "" %1
