@@ -30,15 +30,34 @@ class CreateSet(Qw.QWidget):
         ipm_label.setFont(Qg.QFont("Calibri", 20))
 
         main_layout.addWidget(ipm_label, alignment=Qc.Qt.AlignCenter)
-        main_layout.addSpacerItem(Qw.QSpacerItem(200, 4))
+        # main_layout.addSpacerItem(Qw.QSpacerItem(200, 4))
+        main_layout.addLayout(self.root_and_project_layout())
         main_layout.addLayout(self.buttons_layout())
-        main_layout.addSpacerItem(Qw.QSpacerItem(200, 10))
+        # main_layout.addSpacerItem(Qw.QSpacerItem(200, 10))
         main_layout.addLayout(self.close_layout())
 
         self.setLayout(main_layout)
 
-    def buttons_layout(self):
+    def root_and_project_layout(self):
 
+        label = Qw.QLabel("Root path:")
+        self.root_tip = Qw.QLabel("G:/.shortcut-targets-by-id/1LKqbnGUt5-Lrfl9lElekEI0vY2DOIoog")
+
+        h_layout = Qw.QHBoxLayout()
+
+        self.prod_cbox = Qw.QComboBox()
+        self.prod_cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
+        self.prod_cbox.setFixedHeight(30)
+        self.prod_cbox.setFixedWidth(100)
+
+        h_layout.addWidget(label)
+        h_layout.addWidget(self.root_tip, Qc.Qt.AlignLeft)
+        h_layout.addSpacerItem(Qw.QSpacerItem(20, 20))
+        h_layout.addWidget(self.prod_cbox, alignment=Qc.Qt.AlignRight)
+
+        return h_layout
+
+    def buttons_layout(self):
         h_layout = Qw.QHBoxLayout()
 
         new_project_icon = Qa.icon('fa5s.plus-square',
@@ -47,38 +66,27 @@ class CreateSet(Qw.QWidget):
         self.create_btn.setIconSize(Qc.QSize(64, 64))
         self.create_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
 
-        h_layout.addWidget(self.create_btn)
-        h_layout.addLayout(self.set_prj_layout())
-
-        return h_layout
-
-    def set_prj_layout(self):
-        v_layout = Qw.QVBoxLayout()
-
-        self.prod_cbox = Qw.QComboBox()
-        self.prod_cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
-        self.prod_cbox.setFixedHeight(30)
-
         set_project_icon = Qa.icon('fa.folder-open',
                                    options=[{"color": "#EF8229"}])
         self.set_btn = Qw.QPushButton(set_project_icon, "SET PROJECT")
         self.set_btn.setIconSize(Qc.QSize(64, 64))
         self.set_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
 
-        v_layout.addWidget(self.prod_cbox)
-        v_layout.addSpacerItem(Qw.QSpacerItem(100, 4))
-        v_layout.addWidget(self.set_btn)
+        h_layout.addWidget(self.create_btn)
+        h_layout.addWidget(self.set_btn)
 
-        return v_layout
+        return h_layout
 
     def close_layout(self):
 
         h_layout = Qw.QHBoxLayout()
 
         self.close_btn = Qw.QPushButton("Close")
-        self.close_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
+        self.close_btn.setFixedHeight(30)
+        self.close_btn.setFixedWidth(100)
+        # self.close_btn.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
 
-        h_layout.addSpacerItem(Qw.QSpacerItem(300, 1))
-        h_layout.addWidget(self.close_btn)
+        # h_layout.addSpacerItem(Qw.QSpacerItem(300, 1))
+        h_layout.addWidget(self.close_btn, alignment=Qc.Qt.AlignRight)
 
         return h_layout

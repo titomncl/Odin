@@ -95,6 +95,7 @@ class MainWindow(Qw.QMainWindow):
 
     def update_combobox(self):
         if self.controller.root:
+            self.create_or_set.root_tip.setText(self.controller.root_tip)
             self.create_or_set.prod_cbox.clear()
             self.create_or_set.prod_cbox.addItems(self.controller.projects)
 

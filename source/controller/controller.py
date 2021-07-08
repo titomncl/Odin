@@ -50,6 +50,13 @@ class Controller(object):
     def sequences(self):
         return sequence.find_sequences(self.root, self.project_name)
 
+    @property
+    def root_tip(self):
+        if len(self.root) > 30:
+            return ".../" + self.root[30:]
+        else:
+            return self.root + "/"
+
     @staticmethod
     def set_root(value):
         new_value = value
