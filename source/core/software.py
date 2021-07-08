@@ -1,6 +1,8 @@
 import subprocess
 import os
 
+from Odin.source.core import config_parser
+
 
 def get_launch_env(py_ver):
     launch_env = os.environ.copy()
@@ -10,12 +12,17 @@ def get_launch_env(py_ver):
     return launch_env
 
 
-def launch_software(name, version, cwd):
+def launch_software(name, version):
 
-    soft = os.getcwd().replace("\\", "/") + "/softwaresList/" + name + ".bat"
+    bat_file = os.getcwd().replace("\\", "/") + "/softwaresList/" + name + ".bat"
 
-    if os.path.isfile(soft):
+    if os.path.isfile(bat_file):
+        soft_config = config_parser.get_value(name)
+
+        cwd = soft_config["cwd"]
+        exe = soft_config["exe"]
+        cmd = [bat_file, exe]
 
         launch_env = get_launch_env(version)
 
-        subprocess.Popen(soft, env=launch_env, cwd=cwd)
+        subprocess.Popen(cmd, env=launch_env, cwd=cwd)

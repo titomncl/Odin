@@ -154,6 +154,5 @@ class Controller(object):
     def soft_action(self):
         soft_name = self.ui.sender().text().lower()
         py_version = self.ui.sender().property("python")
-        cwd = self.ui.sender().property("cwd")
 
-        software.launch_software(soft_name, py_version, cwd)
+        software.launch_software(soft_name, py_version)
