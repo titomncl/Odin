@@ -66,7 +66,7 @@ class Controller(object):
         self.set_recent_project(self.project_name)
 
         os.environ["ROOT_PATH"] = self.root
-        os.environ["PFE_ENV"] = concat(self.root, self.project_name, separator="/")
+        os.environ["PROJECT_ENV"] = concat(self.root, self.project_name, separator="/")
 
         venv = "/venv"
 
