@@ -5,6 +5,7 @@ from qtpy import QtGui as Qg
 from Odin.source.ui.create_or_set_prj import CreateSet
 from Odin.source.ui.create_dialog import CreateDialog
 from Odin.source.ui.manage_prj import ManageProject
+from Odin.source.globals import Logger as log
 
 
 class MainWindow(Qw.QMainWindow):
@@ -123,3 +124,6 @@ class MainWindow(Qw.QMainWindow):
             self.stacked_widget.setCurrentWidget(self.manage_prj)
             self.setMinimumSize(400, 350)
             self.resize(400, 350)
+
+    def closeEvent(self, a0: Qg.QCloseEvent) -> None:
+        log.info("Close Odin")

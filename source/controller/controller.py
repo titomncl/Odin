@@ -1,6 +1,7 @@
 import re
 import os
 
+from Odin.source.globals import Logger as log
 from Odin.source.core import project, software
 from Odin.source.core import config_parser
 from Odin.source.core import assets, sets, fx, sequence, shot
@@ -79,9 +80,14 @@ class Controller(object):
 
         env_path = concat(self.root, self.project_name, "DEV", self.env, separator="/")
 
+        log.info("Project set: " + concat(self.root, self.project_name, separator="/"))
+
         if os.path.isdir(env_path):
             os.environ["DEV_ENV"] = env_path
             os.environ["venv"] = env_path + venv
+
+        log.info("DEV_ENV: " + env_path)
+        log.info("venv: " + env_path + venv)
 
     def chara_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field.text().upper()
