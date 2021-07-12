@@ -30,10 +30,8 @@ class CreateSet(Qw.QWidget):
         ipm_label.setFont(Qg.QFont("Calibri", 20))
 
         main_layout.addWidget(ipm_label, alignment=Qc.Qt.AlignCenter)
-        # main_layout.addSpacerItem(Qw.QSpacerItem(200, 4))
         main_layout.addLayout(self.root_and_project_layout())
         main_layout.addLayout(self.buttons_layout())
-        # main_layout.addSpacerItem(Qw.QSpacerItem(200, 10))
         main_layout.addLayout(self.close_layout())
 
         self.setLayout(main_layout)
@@ -84,9 +82,7 @@ class CreateSet(Qw.QWidget):
         self.close_btn = Qw.QPushButton("Close")
         self.close_btn.setFixedHeight(30)
         self.close_btn.setFixedWidth(100)
-        # self.close_btn.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
 
-        # h_layout.addSpacerItem(Qw.QSpacerItem(300, 1))
         h_layout.addWidget(self.close_btn, alignment=Qc.Qt.AlignRight)
 
         return h_layout
