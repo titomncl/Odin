@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 
 from logging.handlers import TimedRotatingFileHandler
 
@@ -8,7 +9,8 @@ from Odin.source.common import make_dirs, concat
 
 def log(name):
 
-    make_dirs("logs")
+    log_path = concat(os.path.expanduser('~').replace("\\", "/"), ".logs", name, separator="/")
+    make_dirs(log_path)
 
     logger = logging.getLogger(name)
     logger.handlers = list()
@@ -16,27 +18,19 @@ def log(name):
 
     date_format = "%Y-%m-%d %H:%M:%S"
 
-    # sys.stderr = StreamToLogger(logger, sys.stderr, logging.ERROR)
-
-    formatter = logging.Formatter('%(asctime)s -- %(levelname)s -- %(message)s', datefmt=date_format)
-
-    file_handler = TimedRotatingFileHandler(filename=concat("logs/", name, ".log"),
+    file_formatter = logging.Formatter('%(asctime)s -- [%(levelname)s] -- %(message)s', datefmt=date_format)
+    file_handler = TimedRotatingFileHandler(filename="{}/{}.log".format(log_path, name),
                                             when="midnight", backupCount=7, encoding="utf-8")
-    file_handler.setFormatter(formatter)
+    file_handler.setFormatter(file_formatter)
 
     logger.addHandler(file_handler)
 
     stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(formatter)
+    console_formatter = logging.Formatter('%(asctime)s -- %(levelname)s -- %(message)s', datefmt=date_format)
+    stdout_handler.setFormatter(console_formatter)
     stdout_handler.setLevel(logging.DEBUG)
     logger.addHandler(stdout_handler)
 
-    # stderr_handler = logging.StreamHandler(sys.stderr)
-    # stderr_handler.setFormatter(formatter)
-    # stderr_handler.setLevel(logging.ERROR)
-    # logger.addHandler(stderr_handler)
-
-    # sys.stdout = StreamToLogger(logger, sys.stdout, logging.DEBUG)
     sys.stderr = StreamToLogger(logger, sys.stderr, logging.ERROR)
 
     return logger
