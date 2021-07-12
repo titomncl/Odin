@@ -1,6 +1,7 @@
 import subprocess
 import os
 
+from Odin.source.globals import Logger as log
 from Odin.source.core import config_parser
 
 
@@ -22,6 +23,10 @@ def launch_software(name, version):
         cwd = soft_config["cwd"]
         exe = soft_config["exe"]
         cmd = [bat_file, exe]
+
+        log.info("Starting {}".format(name))
+        log.info(exe)
+        log.info(cwd)
 
         launch_env = get_launch_env(version)
 

@@ -1,5 +1,6 @@
 import os
 
+from Odin.source.globals import Logger as log
 from Odin.source.common import concat
 
 
@@ -79,11 +80,11 @@ class Tree(object):
     def create_on_disk(self):
 
         if not os.path.exists(self.full_name) and self._parent:
-            print(concat("CREATE: ", self.full_name))
+            log.info(concat("CREATE: ", self.full_name))
             # pass
             os.mkdir(self.full_name)
         else:
-            print(concat(self.full_name, ": Folder is exists"))
+            log.warning(concat(self.full_name, ": Folder is exists"))
 
         for child in self._children:
             child.create_on_disk()
