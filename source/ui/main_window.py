@@ -24,7 +24,7 @@ class MainWindow(Qw.QMainWindow):
 
         self.create_or_set = CreateSet(self.controller, self)
         self.create_project_dialog = CreateDialog(self.controller,
-                                       "Create project...", "Project name:", "PRJ",
+                                                  "Create project...", "Project name:", "PRJ",
                                                   self.create_or_set)
         self.create_project_dialog.setWindowFlag(Qc.Qt.Tool)
         self.create_project_dialog.setMinimumSize(200, 120)
