@@ -16,7 +16,7 @@ def get_launch_env(py_ver):
 
 def launch_software(name, version):
 
-    bat_file = os.getcwd().replace("\\", "/") + "/softwaresList/" + name + ".bat"
+    bat_file = os.getcwd().replace("\\", "/") + "/softwareList/" + name + ".bat"
 
     if os.path.isfile(bat_file):
         soft_config = Parser().open("./config/config_file.yaml").data[name]
