@@ -1,7 +1,10 @@
 import os
 
+from typing import NoReturn, Dict
+
 from Odin.source.globals import Logger as log
-from Odin.source.common import concat
+
+from CommonTools.concat import concat
 
 
 class Tree(object):
@@ -10,57 +13,13 @@ class Tree(object):
 
     """
     def __init__(self, parent, name):
-
+        # type: (Tree, str) -> Tree
         self._parent = parent
         self._name = name
         self._children = list()
 
-    def get_parent(self, index=0):
-        """
-
-        Args:
-            index:
-
-        Returns:
-
-        """
-        if not index:
-            return self._parent
-        else:
-            return self._parent.get_parent(index-1)
-
-    def get_depth(self):
-        """
-
-        Returns:
-
-        """
-        if self._parent:
-            return self._parent.get_depth() + 1
-        else:
-            return -1
-
-    def get_hierarchy(self):
-        hierarchy = ""
-
-        for depth in range(self.get_depth()):
-            hierarchy += " "
-
-        hierarchy += "/" + self._name + "\\n"
-
-        for child in self._children:
-            hierarchy += child.get_hierarchy()
-
-        return hierarchy
-
-    def sort(self):
-
-        self._children.sort(key=lambda x: x.name)
-
-        for child in self._children:
-            child.sort()
-
     def create_child(self, name):
+        # type: (str) -> Tree
         child = Tree(self, name)
         self._children.append(child)
 
@@ -68,20 +27,15 @@ class Tree(object):
 
     @property
     def full_name(self):
+        # type: () -> str
         if self._parent:
             return concat(self._parent.full_name, self._name, separator="/")
         else:
             return self._name
 
-    @property
-    def name(self):
-        return self._name
-
     def create_on_disk(self):
-
         if not os.path.exists(self.full_name) and self._parent:
             log.info(concat("CREATE: ", self.full_name))
-            # pass
             os.mkdir(self.full_name)
         else:
             log.warning(concat(self.full_name, ": Folder is exists"))
@@ -91,6 +45,7 @@ class Tree(object):
 
     @staticmethod
     def create_from_template(template_path, root_):
+        # type: (str, str) -> Tree
         """
 
         Args:
@@ -112,6 +67,7 @@ class Tree(object):
 
 
 def create_tree(tree, root):
+    # type: (Dict[str: dict or None], Tree) -> NoReturn
     """
     Args:
         tree ({str: {} or None}):
