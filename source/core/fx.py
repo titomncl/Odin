@@ -2,7 +2,9 @@ import os
 
 from Odin.source.core import trees_path
 from Odin.source.core.create_tree import Tree
-from Odin.source.common import concat, make_dirs
+
+from CommonTools.os_ import make_dirs
+from CommonTools.concat import concat
 
 
 def create_fx(root, project, fx_name, asset_type="FX"):

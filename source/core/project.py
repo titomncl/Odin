@@ -1,8 +1,10 @@
 import glob
 
 from Odin.source.core import trees_path
-from Odin.source.common import concat, make_dirs
 from Odin.source.core.create_tree import Tree
+
+from CommonTools.os_ import make_dirs
+from CommonTools.concat import concat
 
 
 def create_project(root, project):

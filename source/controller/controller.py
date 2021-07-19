@@ -2,8 +2,7 @@ import re
 import os
 
 from Odin.source.globals import Logger as log
-from Odin.source.core import project, software
-from Odin.source.core import config_parser
+from Odin.source.core import project, launch_software
 from Odin.source.core import assets, sets, fx, sequence, shot
 
 from CommonTools.yaml_parser import Parser
