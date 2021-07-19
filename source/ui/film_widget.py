@@ -21,7 +21,15 @@ class Film(Qw.QWidget):
         v_layout.addWidget(self.create_seq_dialog)
         v_layout.addWidget(self.create_shot_dialog)
 
-        return v_layout
+        _frame = Qw.QFrame()
+        _frame.setFrameStyle(Qw.QFrame.StyledPanel | Qw.QFrame.Sunken)
+        _frame.setSizePolicy(Qw.QSizePolicy.Policy.Minimum, Qw.QSizePolicy.Policy.Fixed)
+        _frame.setLayout(v_layout)
+
+        main_layout = Qw.QVBoxLayout()
+        main_layout.addWidget(_frame)
+
+        return main_layout
 
     def btn_layout(self):
         main_layout = Qw.QVBoxLayout()
@@ -35,14 +43,29 @@ class Film(Qw.QWidget):
         return main_layout
 
     def init_dialog(self):
-        self.create_seq_dialog = CreateDialog(self.controller,
-                                                "Create sequence...", "New sequence:", "S###",
-                                                self, close_btn=False)
 
-        self.create_seq_dialog.text_field.setText("S")
+        # Init sequence dialog
+        self.create_seq_dialog = CreateDialog("Create sequence...", "New sequence:", "S###", self)
+        seq_layout = self.create_seq_dialog.layout()
 
-        self.create_shot_dialog = CreateDialog(self.controller,
-                                               "Create shot...", "New shot:", "P###",
-                                               self, "Sequence:", close_btn=False)
+        self.create_seq_btn = Qw.QPushButton("Create")
+        self.create_seq_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
 
-        self.create_shot_dialog.text_field.setText("P")
+        seq_layout.addWidget(self.create_seq_btn)
+
+        self.create_seq_dialog.setLayout(seq_layout)
+
+        self.create_seq_dialog.text_field = "S"
+
+        # Init shot dialog
+        self.create_shot_dialog = CreateDialog("Create shot...", "New shot:", "P###", self, "Sequence:")
+        shot_layout = self.create_shot_dialog.layout()
+
+        self.create_shot_btn = Qw.QPushButton("Create")
+        self.create_shot_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+
+        shot_layout.addWidget(self.create_shot_btn)
+
+        self.create_shot_dialog.setLayout(shot_layout)
+
+        self.create_shot_dialog._text_field.setText("P")

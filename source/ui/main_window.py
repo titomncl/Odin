@@ -22,12 +22,9 @@ class MainWindow(Qw.QMainWindow):
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
 
-        self.create_or_set = CreateSet(self.controller, self)
-        self.create_project_dialog = CreateDialog(self.controller,
-                                                  "Create project...", "Project name:", "PRJ",
-                                                  self.create_or_set)
-        self.create_project_dialog.setWindowFlag(Qc.Qt.Tool)
-        self.create_project_dialog.setMinimumSize(200, 120)
+        self.create_or_set = CreateSet(self)
+        self.create_project_dialog = CreateDialog("Create project...", "Project name:", "PRJ", self.create_or_set)
+        self.add_widget_project_dialog()
 
         self.manage_prj = ManageProject(self.controller, self)
 
@@ -53,15 +50,22 @@ class MainWindow(Qw.QMainWindow):
         self.create_or_set.set_btn.clicked.connect(self.set_btn_action)
         self.create_or_set.close_btn.clicked.connect(self.close)
 
-        self.create_project_dialog.create_btn.clicked.connect(self.create_prj_btn)
+    def add_widget_project_dialog(self):
+        self.create_project_dialog.setWindowFlag(Qc.Qt.WindowType.Tool)
+        layout = self.create_project_dialog.layout()
 
-        self.manage_prj.lib_widget.create_chara_dialog.create_btn.clicked.connect(self.controller.chara_action)
-        self.manage_prj.lib_widget.create_props_dialog.create_btn.clicked.connect(self.controller.props_action)
-        self.manage_prj.lib_widget.create_set_dialog.create_btn.clicked.connect(self.controller.set_action)
-        self.manage_prj.lib_widget.create_fx_dialog.create_btn.clicked.connect(self.controller.fx_action)
+        self.create_project_btn = Qw.QPushButton("Create")
+        self.create_project_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
 
-        self.manage_prj.film_widget.create_seq_dialog.create_btn.clicked.connect(self.controller.seq_action)
-        self.manage_prj.film_widget.create_shot_dialog.create_btn.clicked.connect(self.controller.shot_action)
+        close_btn = Qw.QPushButton("Close")
+        close_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+        close_btn.clicked.connect(self.create_project_dialog.close)
+
+        h_layout = Qw.QHBoxLayout()
+        h_layout.addWidget(self.create_project_btn)
+        h_layout.addWidget(close_btn)
+
+        layout.addLayout(h_layout)
 
     def create_menu(self):
         config = Qw.QMenu("&Config", self)

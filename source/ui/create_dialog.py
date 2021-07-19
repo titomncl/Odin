@@ -4,93 +4,86 @@ from qtpy import QtCore as Qc
 
 
 class CreateDialog(Qw.QWidget):
-    def __init__(self, controller, title, label, place_holder, parent=None, choice=None, close_btn=True):
+    def __init__(self, title, label, place_holder, parent=None, cbox_label=None):
         Qw.QWidget.__init__(self, parent)
 
         self.setWindowTitle(title)
 
-        self.controller = controller
-        self.label = label
-        self.place_holder = place_holder
+        self._text = label
+        self._place_holder = place_holder
 
-        self.choice = choice
-        self.is_close_btn = close_btn
+        self._cbox_label = cbox_label
 
-        self.setParent(parent)
+        self._text_field = Qw.QLineEdit("")
 
-        self.setWindowModality(Qc.Qt.WindowModal)
+        self.setWindowModality(Qc.Qt.WindowModality.WindowModal)
 
-        self.set_ui()
+        self.setLayout(self.dialog_layout())
 
-    def set_ui(self):
+    def dialog_layout(self):
+        label = Qw.QLabel(self._text)
+        label.setSizePolicy(Qw.QSizePolicy.Policy.Fixed, Qw.QSizePolicy.Policy.Fixed)
 
-        main_layout = Qw.QVBoxLayout()
-        main_layout.setContentsMargins(10, 10, 10, 10)
+        self._text_field.setPlaceholderText(self._place_holder)
+        self._text_field.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+        self._text_field.textChanged.connect(self.base_palette)
 
         v_layout = Qw.QVBoxLayout()
 
-        label = Qw.QLabel(self.label)
-        label.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Expanding)
-
-        self.text_field = Qw.QLineEdit()
-        self.text_field.setPlaceholderText(self.place_holder)
-
-        self.text_field.textChanged.connect(self.base_palette)
-
-        if self.choice:
-            choice_label = Qw.QLabel(self.choice)
-            choice_label.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Expanding)
-
-            self.cbox = Qw.QComboBox()
-            self.cbox.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Fixed)
-            self.cbox.setFixedHeight(20)
-
-            v_layout.addWidget(choice_label)
-            v_layout.addWidget(self.cbox)
+        if self._cbox_label:
+            v_layout.addLayout(self.cbox_layout())
 
         v_layout.addWidget(label)
-        v_layout.addWidget(self.text_field)
+        v_layout.addWidget(self._text_field)
 
-        h_layout = Qw.QHBoxLayout()
-        self.setContentsMargins(0, 0, 0, 0)
+        main_layout = Qw.QVBoxLayout()
+        main_layout.addLayout(v_layout)
 
-        self.create_btn = Qw.QPushButton("Create")
-        self.close_btn = Qw.QPushButton("Close")
+        return main_layout
 
-        self.close_btn.clicked.connect(self.close)
+    def cbox_layout(self):
+        label = Qw.QLabel(self._cbox_label)
+        label.setSizePolicy(Qw.QSizePolicy.Policy.Fixed, Qw.QSizePolicy.Policy.Expanding)
 
-        h_layout.addWidget(self.create_btn)
+        self._cbox = Qw.QComboBox()
+        self._cbox.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+        self._cbox.setFixedHeight(20)
 
-        if self.is_close_btn:
-            h_layout.addWidget(self.close_btn)
-        v_layout.addLayout(h_layout)
+        cbox_layout = Qw.QVBoxLayout()
+        cbox_layout.addWidget(label)
+        cbox_layout.addWidget(self._cbox)
 
-        # ------------ SET LAYOUT ------------
-
-        frame = Qw.QFrame()
-        frame.setFrameStyle(Qw.QFrame.StyledPanel | Qw.QFrame.Sunken)
-        frame.setLayout(v_layout)
-
-        main_layout.addWidget(frame)
-        self.setLayout(main_layout)
+        return cbox_layout
 
     def red_palette(self):
         red_color = Qg.QBrush(Qg.QColor(234, 102, 102))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, red_color)
 
-        self.text_field.setPalette(palette)
+        self._text_field.setPalette(palette)
 
     def base_palette(self):
         base_color = Qg.QBrush(Qg.QColor(70, 86, 113))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, base_color)
 
-        self.text_field.setPalette(palette)
+        self._text_field.setPalette(palette)
 
     def green_palette(self):
         base_color = Qg.QBrush(Qg.QColor(102, 234, 102))
         palette = Qg.QPalette()
         palette.setBrush(Qg.QPalette.All, Qg.QPalette.Base, base_color)
 
-        self.text_field.setPalette(palette)
+        self._text_field.setPalette(palette)
+
+    @property
+    def text_field(self):
+        return self._text_field.text().upper()
+
+    @text_field.setter
+    def text_field(self, value):
+        self._text_field.setText(value)
+
+    @property
+    def cbox(self):
+        return self._cbox
