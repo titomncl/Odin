@@ -9,7 +9,11 @@ from Odin.source.globals import Logger as log
 def get_launch_env(py_ver):
     launch_env = os.environ.copy()
 
-    launch_env["PYTHONPATH"] = os.path.join(os.getenv("venv"), py_ver, "Lib/site-packages;")
+    python_path = os.path.join(os.getenv("venv"), py_ver, "Lib/site-packages;")
+
+    log.info("PYTHONPATH: {}".format(python_path))
+
+    launch_env["PYTHONPATH"] = python_path
 
     return launch_env
 
