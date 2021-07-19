@@ -6,12 +6,17 @@ from Odin.source.core import project, software
 from Odin.source.core import config_parser
 from Odin.source.core import assets, sets, fx, sequence, shot
 
-from Odin.source.common import concat
+from CommonTools.yaml_parser import Parser
+
+from CommonTools.concat import concat
 
 
 class Controller(object):
 
     def __init__(self, ui, parent=None):
+        # type: (QtWidgets.QMainWindow(), Optional[QtWidgets.QApplication]) -> NoReturn
+
+        self._config_parser = Parser().open("./config/config_file.yaml")
 
         self.ui = ui(self, parent)
 
@@ -37,11 +42,36 @@ class Controller(object):
 
     @property
     def root(self):
-        return config_parser.get_value("ROOT_PATH")
+        # type: () -> str
+        return self._config_parser.data["ROOT_PATH"]
+
+    @root.setter
+    def root(self, value):
+        # type: (str) -> NoReturn
+        self._config_parser.data["ROOT_PATH"] = value
+        self._config_parser.write()
 
     @property
     def recent_project(self):
-        return config_parser.get_value("LAST_PROJECT")
+        # type: () -> str
+        return self._config_parser.data["LAST_PROJECT"]
+
+    @recent_project.setter
+    def recent_project(self, value):
+        # type: (str) -> NoReturn
+        self._config_parser.data["LAST_PROJECT"] = value
+        self._config_parser.write()
+
+    @property
+    def tool_path(self):
+        # type: () -> str
+        return self._config_parser.data["TOOLS_PATH"]
+
+    @tool_path.setter
+    def tool_path(self, value):
+        # type: (str) -> NoReturn
+        self._config_parser.data["TOOLS_PATH"] = value
+        self._config_parser.write()
 
     @property
     def project_name(self):
