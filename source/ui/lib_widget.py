@@ -1,10 +1,11 @@
 from qtpy import QtWidgets as Qw
+from qtpy import QtCore as Qc
 
 from Odin.source.ui.create_dialog import CreateDialog
 
 
 class Lib(Qw.QWidget):
-    def __init__(self, controller, parent=None):
+    def __init__(self, parent=None):
         Qw.QWidget.__init__(self, parent)
 
         self.create_chara_dialog = None

@@ -6,7 +6,7 @@ import qtawesome as Qa
 
 
 class CreateSet(Qw.QWidget):
-    def __init__(self, controller, parent=None):
+    def __init__(self, parent=None):
         """
 
         Args:
@@ -15,8 +15,6 @@ class CreateSet(Qw.QWidget):
         """
 
         Qw.QWidget.__init__(self, parent)
-
-        self.controller = controller
 
         self.set_ui()
 
@@ -29,7 +27,7 @@ class CreateSet(Qw.QWidget):
         ipm_label.setFixedHeight(30)
         ipm_label.setFont(Qg.QFont("Calibri", 20))
 
-        main_layout.addWidget(ipm_label, alignment=Qc.Qt.AlignCenter)
+        main_layout.addWidget(ipm_label, alignment=Qc.Qt.AlignmentFlag.AlignCenter)
         main_layout.addLayout(self.root_and_project_layout())
         main_layout.addLayout(self.buttons_layout())
         main_layout.addLayout(self.close_layout())
@@ -39,7 +37,7 @@ class CreateSet(Qw.QWidget):
     def root_and_project_layout(self):
 
         label = Qw.QLabel("Root path:")
-        self.root_tip = Qw.QLabel("G:/.shortcut-targets-by-id/1LKqbnGUt5-Lrfl9lElekEI0vY2DOIoog")
+        self.root_tip = Qw.QLabel("Not set")
 
         h_layout = Qw.QHBoxLayout()
 
@@ -49,9 +47,9 @@ class CreateSet(Qw.QWidget):
         self.prod_cbox.setFixedWidth(100)
 
         h_layout.addWidget(label)
-        h_layout.addWidget(self.root_tip, Qc.Qt.AlignLeft)
+        h_layout.addWidget(self.root_tip, Qc.Qt.AlignmentFlag.AlignLeft)
         h_layout.addSpacerItem(Qw.QSpacerItem(20, 20))
-        h_layout.addWidget(self.prod_cbox, alignment=Qc.Qt.AlignRight)
+        h_layout.addWidget(self.prod_cbox, alignment=Qc.Qt.AlignmentFlag.AlignRight)
 
         return h_layout
 
@@ -83,6 +81,6 @@ class CreateSet(Qw.QWidget):
         self.close_btn.setFixedHeight(30)
         self.close_btn.setFixedWidth(100)
 
-        h_layout.addWidget(self.close_btn, alignment=Qc.Qt.AlignRight)
+        h_layout.addWidget(self.close_btn, alignment=Qc.Qt.AlignmentFlag.AlignRight)
 
         return h_layout

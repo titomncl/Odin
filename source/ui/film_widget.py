@@ -4,10 +4,8 @@ from Odin.source.ui.create_dialog import CreateDialog
 
 
 class Film(Qw.QWidget):
-    def __init__(self, controller, parent=None):
+    def __init__(self, parent=None):
         Qw.QWidget.__init__(self, parent)
-
-        self.controller = controller
 
         self.init_dialog()
 

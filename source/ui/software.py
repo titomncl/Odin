@@ -3,11 +3,9 @@ from qtpy import QtGui as Qg
 from qtpy import QtCore as Qc
 
 
-class Softwares(Qw.QWidget):
-    def __init__(self, controller, parent=None):
+class Software(Qw.QWidget):
+    def __init__(self, parent=None):
         Qw.QWidget.__init__(self, parent)
-
-        self.controller = controller
 
         self.set_ui()
 
@@ -36,8 +34,6 @@ class Softwares(Qw.QWidget):
         btn.setSizePolicy(Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Fixed)
         btn.setProperty("python", py_version)
 
-        btn.clicked.connect(self.controller.soft_action)
-
         return btn
 
     def modeling_set_widget(self):
@@ -50,7 +46,6 @@ class Softwares(Qw.QWidget):
         houdini_ico = Qg.QIcon("./icon/houdini.ico")
 
         self.maya = self.soft_button("Maya", maya_ico, "27")
-
         self.zbrush = self.soft_button("ZBrush", zbrush_ico, "27")
         self.houdini = self.soft_button("Houdini", houdini_ico, "27")
 
