@@ -86,8 +86,6 @@ class Controller(object):
     def change_root_path(self):
         value = self.ui.get_new_path(self.root)
 
-        if value[-1] != "/":
-            value += "/"
         self.root = value
         self.load_root()
 
@@ -96,8 +94,6 @@ class Controller(object):
         value = self.ui.get_new_path(self.root)
 
         if value:
-            if value[-1] != "/":
-                value += "/"
 
             self.tool_path = value
             log.info("Tools path set: " + self.tool_path)
@@ -195,9 +191,9 @@ class Controller(object):
     def root_tip(self):
         # type: () -> str
         if len(self.root) > 30:
-            return ".../" + self.root[30:]
+            return ".../" + self.root[30:] + "/"
         else:
-            return self.root
+            return self.root + "/"
 
     @property
     def sequences(self):
