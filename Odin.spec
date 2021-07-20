@@ -5,9 +5,9 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['E:\\DEV\\Odin'],
+             pathex=['E:\\DEV\\Odin', 'E:\\DEV\\Odin\\venv'],
              binaries=[],
-             datas=[('config/*', 'config'), ('icon/*', 'icon'), ('trees/*yaml', 'trees'), ('softwaresList/*', 'softwaresList')],
+             datas=[('config/*', 'config'), ('icon/*', 'icon'), ('trees/*yaml', 'trees'), ('softwareList/*', 'softwareList'), ('venv/*', 'venv')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

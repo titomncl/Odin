@@ -4,7 +4,8 @@ import os
 
 from logging.handlers import TimedRotatingFileHandler
 
-from Odin.source.common import make_dirs, concat
+from CommonTools.os_ import make_dirs
+from CommonTools.concat import concat
 
 
 def log(name):
@@ -48,7 +49,6 @@ class StreamToLogger(object):
 
     def write(self, buf):
         self.stream.write(buf)
-        # self.logger.log(self.log_level, repr(buf))
         self.linebuf += buf
         if buf == '\n':
             self.flush()

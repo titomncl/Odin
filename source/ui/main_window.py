@@ -2,6 +2,8 @@ from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
 
+from typing import NoReturn, Optional
+
 from Odin.source.ui.create_or_set_prj import CreateSet
 from Odin.source.ui.create_dialog import CreateDialog
 from Odin.source.ui.manage_prj import ManageProject
@@ -9,7 +11,8 @@ from Odin.source.globals import Logger as log
 
 
 class MainWindow(Qw.QMainWindow):
-    def __init__(self, controller, parent):
+    def __init__(self, controller, parent=None):
+        # type: (object, Optional[Qw.QApplication]) -> NoReturn
 
         super(MainWindow, self).__init__(parent=parent)
 
@@ -22,14 +25,11 @@ class MainWindow(Qw.QMainWindow):
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
 
-        self.create_or_set = CreateSet(self.controller, self)
-        self.create_project_dialog = CreateDialog(self.controller,
-                                                  "Create project...", "Project name:", "PRJ",
-                                                  self.create_or_set)
-        self.create_project_dialog.setWindowFlag(Qc.Qt.Tool)
-        self.create_project_dialog.setMinimumSize(200, 120)
+        self.create_or_set = CreateSet(self)
+        self.create_project_dialog = CreateDialog("Create project...", "Project name:", "PRJ", self.create_or_set)
+        self.add_widget_project_dialog()
 
-        self.manage_prj = ManageProject(self.controller, self)
+        self.manage_prj = ManageProject(self)
 
         self.stacked_widget = Qw.QStackedWidget()
 
@@ -44,66 +44,54 @@ class MainWindow(Qw.QMainWindow):
         self.menu_actions()
         self.create_menu()
 
-        self.update_combobox()
+        self._init_connexions()
 
-        self.init_connexions()
-
-    def init_connexions(self):
+    def _init_connexions(self):
         self.create_or_set.create_btn.clicked.connect(self.create_btn_action)
-        self.create_or_set.set_btn.clicked.connect(self.set_btn_action)
         self.create_or_set.close_btn.clicked.connect(self.close)
 
-        self.create_project_dialog.create_btn.clicked.connect(self.create_prj_btn)
+    def add_widget_project_dialog(self):
+        self.create_project_dialog.setWindowFlag(Qc.Qt.WindowType.Tool)
+        layout = self.create_project_dialog.layout()
 
-        self.manage_prj.lib_widget.create_chara_dialog.create_btn.clicked.connect(self.controller.chara_action)
-        self.manage_prj.lib_widget.create_props_dialog.create_btn.clicked.connect(self.controller.props_action)
-        self.manage_prj.lib_widget.create_set_dialog.create_btn.clicked.connect(self.controller.set_action)
-        self.manage_prj.lib_widget.create_fx_dialog.create_btn.clicked.connect(self.controller.fx_action)
+        self.create_project_btn = Qw.QPushButton("Create")
+        self.create_project_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
 
-        self.manage_prj.film_widget.create_seq_dialog.create_btn.clicked.connect(self.controller.seq_action)
-        self.manage_prj.film_widget.create_shot_dialog.create_btn.clicked.connect(self.controller.shot_action)
+        close_btn = Qw.QPushButton("Close")
+        close_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+        close_btn.clicked.connect(self.create_project_dialog.close)
+
+        h_layout = Qw.QHBoxLayout()
+        h_layout.addWidget(self.create_project_btn)
+        h_layout.addWidget(close_btn)
+
+        layout.addLayout(h_layout)
 
     def create_menu(self):
         config = Qw.QMenu("&Config", self)
         self.menu_bar.addMenu(config)
-        config.addAction(self.set_change_root_action)
+        config.addAction(self.change_root_action)
+        config.addSeparator()
         config.addAction(self.create_project_action)
         config.addAction(self.set_project_action)
+        config.addSeparator()
+        config.addAction(self.set_tools_path)
 
     def menu_actions(self):
-        self.set_change_root_action = Qw.QAction("&Set/Change root..", self)
-        self.set_change_root_action.triggered.connect(self.set_change_root)
+        self.change_root_action = Qw.QAction("Change root..", self)
 
-        self.create_project_action = Qw.QAction("&Create project...", self)
+        self.create_project_action = Qw.QAction("Create project...", self)
         self.create_project_action.triggered.connect(self.create_btn_action)
 
-        self.set_project_action = Qw.QAction("&Change project", self)
+        self.set_project_action = Qw.QAction("Change project", self)
         self.set_project_action.triggered.connect(self.change_project_action)
 
-    def set_change_root(self):
-        if self.stacked_widget.currentWidget() is not self.create_or_set:
-            self.change_project_action()
-        root = Qw.QFileDialog.getExistingDirectory(self, directory=self.controller.root,
+        self.set_tools_path = Qw.QAction("Set tools path...", self)
+
+    def get_new_path(self, root):
+        # type: (str) -> str
+        return Qw.QFileDialog.getExistingDirectory(self, directory=root,
                                                    options=Qw.QFileDialog.ShowDirsOnly)
-        if root:
-            self.controller.set_root(root)
-            self.update_combobox()
-
-    def create_prj_btn(self):
-        self.controller.create_project()
-
-        self.update_combobox()
-
-    def update_combobox(self):
-        if self.controller.root:
-            self.create_or_set.root_tip.setText(self.controller.root_tip)
-            self.create_or_set.prod_cbox.clear()
-            self.create_or_set.prod_cbox.addItems(self.controller.projects)
-
-            if self.controller.recent_project:
-                prj_index = self.create_or_set.prod_cbox.findText(self.controller.recent_project)
-                if prj_index != -1:
-                    self.create_or_set.prod_cbox.setCurrentIndex(prj_index)
 
     def create_btn_action(self):
         self.create_project_dialog.show()
@@ -113,17 +101,6 @@ class MainWindow(Qw.QMainWindow):
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
 
-    def set_btn_action(self):
-        if not self.create_or_set.prod_cbox.count() == 0:
-
-            self.controller.set_var_env()
-
-            self.manage_prj.film_widget.create_shot_dialog.cbox.clear()
-            self.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.controller.sequences)
-
-            self.stacked_widget.setCurrentWidget(self.manage_prj)
-            self.setMinimumSize(400, 350)
-            self.resize(400, 350)
-
-    def closeEvent(self, a0: Qg.QCloseEvent) -> None:
+    def closeEvent(self, close_event):
+        # type: (Qg.QCloseEvent) -> NoReturn
         log.info("Close Odin")

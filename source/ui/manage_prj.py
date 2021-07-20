@@ -3,12 +3,12 @@ from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
 
 from Odin.source.ui.lib_widget import Lib
-from Odin.source.ui.softwares import Softwares
+from Odin.source.ui.software import Software
 from Odin.source.ui.film_widget import Film
 
 
 class ManageProject(Qw.QWidget):
-    def __init__(self, controller, parent=None):
+    def __init__(self, parent=None):
         """
 
         Args:
@@ -18,9 +18,7 @@ class ManageProject(Qw.QWidget):
 
         Qw.QWidget.__init__(self, parent)
 
-        self.controller = controller
-
-        self.software_widget = Softwares(self.controller, self.parent())
+        self.software_widget = Software(self.parent())
 
         self.set_ui()
 
@@ -82,12 +80,12 @@ class ManageProject(Qw.QWidget):
         return Qw.QWidget()
 
     def lib_btn_widget(self):
-        widget = Lib(self.controller, self.parent())
+        widget = Lib(self.parent())
 
         return widget
 
     def film_btn_widget(self):
-        widget = Film(self.controller, self.parent())
+        widget = Film(self.parent())
 
         return widget
 
@@ -100,8 +98,8 @@ class ManageProject(Qw.QWidget):
             self.stacked_widgets.setCurrentWidget(self.lib_widget)
             self.film_btn.setChecked(False)
 
-            self.parent().parent().setMinimumSize(600, 665)
-            self.parent().parent().resize(600, 665)
+            self.parent().parent().setMinimumSize(600, 500)
+            self.parent().parent().resize(600, 500)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
             self.parent().parent().setMinimumSize(400, 350)
@@ -112,8 +110,8 @@ class ManageProject(Qw.QWidget):
             self.stacked_widgets.setCurrentWidget(self.film_widget)
             self.lib_btn.setChecked(False)
 
-            self.parent().parent().setMinimumSize(600, 480)
-            self.parent().parent().resize(600, 480)
+            self.parent().parent().setMinimumSize(600, 500)
+            self.parent().parent().resize(600, 500)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
             self.parent().parent().setMinimumSize(400, 350)
