@@ -90,8 +90,13 @@ class MainWindow(Qw.QMainWindow):
 
     def get_new_path(self, root):
         # type: (str) -> str
-        return Qw.QFileDialog.getExistingDirectory(self, directory=root,
+        path = Qw.QFileDialog.getExistingDirectory(self, directory=root,
                                                    options=Qw.QFileDialog.ShowDirsOnly)
+
+        if path:
+            return path
+        else:
+            raise RuntimeError("Path can't be empty")
 
     def create_btn_action(self):
         self.create_project_dialog.show()
