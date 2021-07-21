@@ -12,13 +12,18 @@
 * Download the latest release
 * Unzip the file
 * Put the Odin folder wherever you want
-* Run Odin.exe
+* Run `Odin.exe`
 
 ## First use:
-When running Odin for the first time, a file dialog while pop-up. You'll need to specify the root path that will contain the projects.
-You are now able to create a new project.
-Now your project is created, you can set your project. A new pop-up shows up to ask you the path to the folder that contains the scripts used by the DCCs.
-> I recommend to have a directory that contains repositories with the names of your DCCs.
+When running Odin for the first time, a pop-up will ask you to specify the root path that will contain the projects.
+You can cancel it, but another pop-up will ask you if you are sure to cancel.
+
+Now you set the root path, you can create your project.
+
+You can specify a tool path that contain the tools you use in the DCCs software.
+If you work in a production, it may be set by the Pipeline-TD.
+
+> I recommend having a directory that contains repositories with the names of your DCCs.
 #### Example:
 ```yaml
 - 📂 <dev-tools-folder>: the folder that contains the repositories
