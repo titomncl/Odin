@@ -212,7 +212,10 @@ class Controller(object):
         if len(self.root) > 30:
             return ".../" + self.root[30:] + "/"
         else:
-            return self.root + "/"
+            if self.root[-1] != "/":
+                return self.root + "/"
+            else:
+                return self.root
 
     @property
     def sequences(self):
