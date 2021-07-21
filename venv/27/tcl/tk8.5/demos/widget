@@ -22,7 +22,7 @@ namespace import ::msgcat::mc
 wm title . [mc "Widget Demonstration"]
 if {[tk windowingsystem] eq "x11"} {
     # This won't work everywhere, but there's no other way in core Tk at the
-    # moment to display a coloured icon.
+    # moment to display a coloured resources.
     image create photo TclPowered \
 	    -file [file join $tk_library images logo64.gif]
     wm iconwindow . [toplevel ._iconWindow]
