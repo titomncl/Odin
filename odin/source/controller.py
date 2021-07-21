@@ -36,6 +36,14 @@ class Controller(object):
     def show(self):
         self.ui.show()
 
+    def init_root(self):
+        try:
+            self.root = self.ui.get_new_path("")
+            self.load_root()
+        except RuntimeError as e:
+            log.error(concat("Exit: ", str(e)))
+            raise SystemExit
+
     def load_root(self):
         try:
             self.ui.create_or_set.root_tip.setText(self.root_tip)
@@ -43,8 +51,20 @@ class Controller(object):
 
             log.info("Root path set: " + self.root)
         except KeyError:
-            self.root = self.ui.get_new_path("")
-            self.load_root()
+            from .ui.message_box import MessageBox
+
+            msg_box = MessageBox("Set root path", self.ui)
+            msg_box.add_text("No root path found.")
+            msg_box.add_informative_text("Specify the root path that will contain your project")
+            action_btn = msg_box.action_button("Browse...", msg_box.ButtonRole.ActionRole)
+            cancel_btn = msg_box.abort_button("Cancel", msg_box.ButtonRole.RejectRole)
+            msg_box.exec()
+
+            if msg_box.clickedButton() == action_btn:
+                self.init_root()
+            elif msg_box.clickedButton() == cancel_btn:
+                if msg_box.abort_action():
+                    self.load_root()
 
     def load_recent_project(self):
         try:
