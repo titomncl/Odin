@@ -2,7 +2,7 @@ import os
 
 from typing import NoReturn, Dict
 
-from Odin.source.globals import Logger as log
+from ..globals import Logger as log
 
 from CommonTools.concat import concat
 

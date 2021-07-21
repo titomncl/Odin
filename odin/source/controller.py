@@ -5,9 +5,9 @@ from qtpy import QtWidgets
 
 from typing import NoReturn, Optional
 
-from Odin.source.globals import Logger as log
-from Odin.source.core import project, launch_software
-from Odin.source.core import assets, sets, fx, sequence, shot
+from .globals import Logger as log
+from .core import project, launch_software
+from .core import assets, sets, fx, sequence, shot
 
 from CommonTools.yaml_parser import Parser
 
@@ -22,7 +22,7 @@ class Controller(object):
     def __init__(self, ui, parent=None):
         # type: (QtWidgets.QMainWindow(), Optional[QtWidgets.QApplication]) -> NoReturn
 
-        self._config_parser = Parser().open("./config/config_file.yaml")
+        self._config_parser = Parser().open("./odin/config/config_file.yaml")
 
         self.ui = ui(self, parent)
 

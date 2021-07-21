@@ -4,10 +4,10 @@
 
 import sys
 
-from Odin.source.globals import Logger as log
-from Odin.source.controller.controller import Controller
-from Odin.source.ui.main_window import MainWindow
-from Odin.source.ui.palette import Palette
+from odin.source.globals import Logger as log
+from odin.source.controller import Controller
+from odin.source.ui.main_window import MainWindow
+from odin.source.ui.palette import Palette
 
 from qtpy import QtWidgets
 

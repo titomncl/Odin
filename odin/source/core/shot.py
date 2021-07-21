@@ -1,7 +1,7 @@
 import os
 
-from Odin.source.core import trees_path
-from Odin.source.core.create_tree import Tree
+from . import trees_path
+from .create_tree import Tree
 
 from CommonTools.os_ import make_dirs
 from CommonTools.concat import concat

@@ -2,9 +2,9 @@ import qtawesome as Qa
 from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
 
-from Odin.source.ui.lib_widget import Lib
-from Odin.source.ui.software import Software
-from Odin.source.ui.film_widget import Film
+from .lib_widget import Lib
+from .software import Software
+from .film_widget import Film
 
 
 class ManageProject(Qw.QWidget):
