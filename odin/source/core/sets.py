@@ -1,37 +1,36 @@
 import os
 
-from Odin.source.core import trees_path
-from Odin.source.core.create_tree import Tree
+from . import trees_path
+from .create_tree import Tree
 
 from CommonTools.os_ import make_dirs
 from CommonTools.concat import concat
 
 
-def create_asset(root, project, asset_name, asset_type):
+def create_set(root, project, set_name, asset_type="SET"):
     """
 
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
-        asset_name (str): asset name
-        asset_type (str): CHARA or PROPS
+        set_name (str): asset name
+        asset_type (str): SET by default
 
     Returns:
         bool: True if the project was created, False if it was not
 
     """
-    asset_path = concat(root, project, "DATA/LIB", asset_type.upper(), asset_name, separator="/")
-    asset_tree = Tree.create_from_template(trees_path.asset_tree(), asset_path)
+    set_path = concat(root, project, "DATA/LIB", asset_type.upper(), set_name, separator="/")
+    set_tree = Tree.create_from_template(trees_path.set_tree(), set_path)
 
-    asset_publish_path = concat(root, project, "DATA/LIB/PUBLISH",
-                                asset_type.upper(), asset_name, separator="/")
-    asset_publish_tree = Tree.create_from_template(trees_path.asset_publish_tree(), asset_publish_path)
+    asset_publish_path = concat(root, project, "DATA/LIB/PUBLISH", asset_type.upper(), set_name, separator="/")
+    asset_publish_tree = Tree.create_from_template(trees_path.set_publish_tree(), asset_publish_path)
 
-    asset_created = make_dirs(asset_path)
+    asset_created = make_dirs(set_path)
     asset_publish_created = make_dirs(asset_publish_path)
 
     if asset_created and asset_publish_created:
-        asset_tree.create_on_disk()
+        set_tree.create_on_disk()
         asset_publish_tree.create_on_disk()
 
         return True
@@ -39,13 +38,13 @@ def create_asset(root, project, asset_name, asset_type):
         return False
 
 
-def find_assets(root, project, type_):
+def find_sets(root, project, type_="SET"):
     """
 
     Args:
         root (str):
         project (str):
-        type_ (str): CHARACTER, PROPS folder
+        type_ (str): SET folder by default
 
     Returns:
         list(str): assets found in the folder

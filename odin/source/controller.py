@@ -1,13 +1,13 @@
 import re
 import os
 
-from qtpy import QtWidgets
+from qtpy.QtWidgets import QMainWindow, QApplication
 
 from typing import NoReturn, Optional
 
-from Odin.source.globals import Logger as log
-from Odin.source.core import project, launch_software
-from Odin.source.core import assets, sets, fx, sequence, shot
+from .globals import Logger as log
+from .core import project, launch_software
+from .core import assets, sets, fx, sequence, shot
 
 from CommonTools.yaml_parser import Parser
 
@@ -20,9 +20,9 @@ class Controller(object):
 
     """
     def __init__(self, ui, parent=None):
-        # type: (QtWidgets.QMainWindow(), Optional[QtWidgets.QApplication]) -> NoReturn
+        # type: (callable(QMainWindow), Optional[QApplication]) -> NoReturn
 
-        self._config_parser = Parser().open("./config/config_file.yaml")
+        self._config_parser = Parser().open("./odin/config/config_file.yaml")
 
         self.ui = ui(self, parent)
 
@@ -36,6 +36,14 @@ class Controller(object):
     def show(self):
         self.ui.show()
 
+    def init_root(self):
+        try:
+            self.root = self.ui.get_new_path("")
+            self.load_root()
+        except RuntimeError as e:
+            log.error(concat("Exit: ", str(e)))
+            raise SystemExit
+
     def load_root(self):
         try:
             self.ui.create_or_set.root_tip.setText(self.root_tip)
@@ -43,8 +51,20 @@ class Controller(object):
 
             log.info("Root path set: " + self.root)
         except KeyError:
-            self.root = self.ui.get_new_path("")
-            self.load_root()
+            from .ui.message_box import MessageBox
+
+            msg_box = MessageBox("Set root path", self.ui)
+            msg_box.add_text("No root path found.")
+            msg_box.add_informative_text("Specify the root path that will contain your project")
+            action_btn = msg_box.action_button("Browse...", msg_box.ButtonRole.ActionRole)
+            cancel_btn = msg_box.abort_button("Cancel", msg_box.ButtonRole.RejectRole)
+            msg_box.exec()
+
+            if msg_box.clickedButton() == action_btn:
+                self.init_root()
+            elif msg_box.clickedButton() == cancel_btn:
+                if msg_box.abort_action():
+                    self.load_root()
 
     def load_recent_project(self):
         try:
@@ -91,15 +111,12 @@ class Controller(object):
 
     def change_tools_path(self):
         # type: () -> bool
-        value = self.ui.get_new_path(self.root)
-
-        if value:
-
-            self.tool_path = value
+        try:
+            self.tool_path = self.ui.get_new_path(self.root)
+            os.environ["DEV_ENV"] = self.tool_path
             log.info("Tools path set: " + self.tool_path)
-
             return True
-        else:
+        except RuntimeError:
             return False
 
     def create_project(self):
@@ -115,12 +132,15 @@ class Controller(object):
 
     def set_project(self):
         try:
-            tool_path_set = self.tool_path
-            log.info("Tools path set: " + self.tool_path)
+            if self.tool_path:
+                log.info("Tools path set: " + self.tool_path)
+            else:
+                log.info("No tools path set")
         except KeyError:
-            tool_path_set = self.change_tools_path()
+            self.tool_path = ""
+            log.info("No tools path set")
 
-        if not self.ui.create_or_set.prod_cbox.count() == 0 and tool_path_set:
+        if not self.ui.create_or_set.prod_cbox.count() == 0:
             self.set_var_env()
             self.ui.stacked_widget.setCurrentWidget(self.ui.manage_prj)
 
@@ -128,7 +148,7 @@ class Controller(object):
             self.ui.resize(400, 350)
 
     def set_var_env(self):
-
+        # type: () -> NoReturn
         self.recent_project = self.project_name
 
         os.environ["ROOT_PATH"] = self.root
@@ -138,7 +158,6 @@ class Controller(object):
 
         log.info("Project set: " + self.root + self.project_name)
 
-        os.environ["DEV_ENV"] = self.tool_path
         os.environ["venv"] = venv
 
         log.info("DEV_ENV: " + self.tool_path)
@@ -193,7 +212,10 @@ class Controller(object):
         if len(self.root) > 30:
             return ".../" + self.root[30:] + "/"
         else:
-            return self.root + "/"
+            if self.root[-1] != "/":
+                return self.root + "/"
+            else:
+                return self.root
 
     @property
     def sequences(self):

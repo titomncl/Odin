@@ -15,6 +15,7 @@ class CreateDialog(Qw.QWidget):
         self._cbox_label = cbox_label
 
         self._text_field = Qw.QLineEdit("")
+        self._cbox = Qw.QComboBox()
 
         self.setWindowModality(Qc.Qt.WindowModality.WindowModal)
 
@@ -45,7 +46,6 @@ class CreateDialog(Qw.QWidget):
         label = Qw.QLabel(self._cbox_label)
         label.setSizePolicy(Qw.QSizePolicy.Policy.Fixed, Qw.QSizePolicy.Policy.Expanding)
 
-        self._cbox = Qw.QComboBox()
         self._cbox.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
         self._cbox.setFixedHeight(20)
 

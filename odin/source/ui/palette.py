@@ -16,6 +16,7 @@ class Palette(QPalette):
         self.setColor(QPalette.Window, PRIMARY)
         self.setColor(QPalette.WindowText, WHITE)
         self.setColor(QPalette.Base, SECONDARY)
+        self.setColor(QPalette.Background, PRIMARY)
         self.setColor(QPalette.AlternateBase, PRIMARY)
         self.setColor(QPalette.ToolTipBase, WHITE)
         self.setColor(QPalette.ToolTipText, WHITE)

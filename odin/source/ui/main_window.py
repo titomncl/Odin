@@ -4,10 +4,10 @@ from qtpy import QtGui as Qg
 
 from typing import NoReturn, Optional
 
-from Odin.source.ui.create_or_set_prj import CreateSet
-from Odin.source.ui.create_dialog import CreateDialog
-from Odin.source.ui.manage_prj import ManageProject
-from Odin.source.globals import Logger as log
+from .create_or_set_prj import CreateSet
+from .create_dialog import CreateDialog
+from .manage_prj import ManageProject
+from ..globals import Logger as log
 
 
 class MainWindow(Qw.QMainWindow):
@@ -20,7 +20,7 @@ class MainWindow(Qw.QMainWindow):
 
         self.setWindowTitle("Odin")
 
-        self.setWindowIcon(Qg.QIcon("./icon/odin.png"))
+        self.setWindowIcon(Qg.QIcon("./odin/resources/odin.png"))
 
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
@@ -90,8 +90,13 @@ class MainWindow(Qw.QMainWindow):
 
     def get_new_path(self, root):
         # type: (str) -> str
-        return Qw.QFileDialog.getExistingDirectory(self, directory=root,
+        path = Qw.QFileDialog.getExistingDirectory(self, directory=root,
                                                    options=Qw.QFileDialog.ShowDirsOnly)
+
+        if path:
+            return path
+        else:
+            raise RuntimeError("Path can't be empty")
 
     def create_btn_action(self):
         self.create_project_dialog.show()

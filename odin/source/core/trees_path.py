@@ -1,6 +1,7 @@
 import os
 
-from Odin import trees
+from ... import trees
+
 
 def asset_tree():
     return os.path.join("./trees", trees.ASSET_TREE)

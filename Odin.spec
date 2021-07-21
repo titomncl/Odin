@@ -4,10 +4,10 @@
 block_cipher = None
 
 
-a = Analysis(['main.py'],
+a = Analysis(['odin/main.py'],
              pathex=['E:\\DEV\\Odin', 'E:\\DEV\\Odin\\venv'],
              binaries=[],
-             datas=[('config/*', 'config'), ('icon/*', 'icon'), ('trees/*yaml', 'trees'), ('softwareList/*', 'softwareList'), ('venv/*', 'venv')],
+             datas=[('odin/config/*', 'odin/config'), ('odin/resources/*', 'odin/resources'), ('odin/trees/*yaml', 'odin/trees'), ('odin/softwareList/*', 'odin/softwareList'), ('venv/*', 'venv')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -27,7 +27,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False , icon='icon\\odin.ico')
+          console=False , icon='odin\\resources\\odin.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

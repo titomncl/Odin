@@ -1,6 +1,6 @@
 from qtpy import QtWidgets as Qw
 
-from Odin.source.ui.create_dialog import CreateDialog
+from .create_dialog import CreateDialog
 
 
 class Film(Qw.QWidget):

@@ -1,7 +1,7 @@
 from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
 
-from Odin.source.ui.create_dialog import CreateDialog
+from .create_dialog import CreateDialog
 
 
 class Lib(Qw.QWidget):
@@ -25,10 +25,10 @@ class Lib(Qw.QWidget):
 
         v_layout.setContentsMargins(5, 5, 5, 5)
 
-        v_layout.addWidget(self.create_chara_dialog, alignment=Qc.Qt.AlignVCenter)
-        v_layout.addWidget(self.create_props_dialog, alignment=Qc.Qt.AlignVCenter)
-        v_layout.addWidget(self.create_set_dialog, alignment=Qc.Qt.AlignVCenter)
-        v_layout.addWidget(self.create_fx_dialog, alignment=Qc.Qt.AlignVCenter)
+        v_layout.addWidget(self.create_chara_dialog, alignment=Qc.Qt.AlignmentFlag.AlignVCenter)
+        v_layout.addWidget(self.create_props_dialog, alignment=Qc.Qt.AlignmentFlag.AlignVCenter)
+        v_layout.addWidget(self.create_set_dialog, alignment=Qc.Qt.AlignmentFlag.AlignVCenter)
+        v_layout.addWidget(self.create_fx_dialog, alignment=Qc.Qt.AlignmentFlag.AlignVCenter)
 
         main_layout = Qw.QVBoxLayout()
         main_layout.setContentsMargins(0, 0, 0, 0)
