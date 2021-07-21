@@ -111,15 +111,12 @@ class Controller(object):
 
     def change_tools_path(self):
         # type: () -> bool
-        value = self.ui.get_new_path(self.root)
-
-        if value:
-
-            self.tool_path = value
+        try:
+            self.tool_path = self.ui.get_new_path(self.root)
+            os.environ["DEV_ENV"] = self.tool_path
             log.info("Tools path set: " + self.tool_path)
-
             return True
-        else:
+        except RuntimeError:
             return False
 
     def create_project(self):
