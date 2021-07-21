@@ -11,8 +11,6 @@ from odin.source.ui.palette import Palette
 
 from qtpy import QtWidgets
 
-__version__ = '0.1.4'
-__author__ = 'Thomas Nicole'
 
 if __name__ == '__main__':
     log.info("Init Odin")
