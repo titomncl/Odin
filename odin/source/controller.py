@@ -1,7 +1,7 @@
 import re
 import os
 
-from qtpy import QtWidgets
+from qtpy.QtWidgets import QMainWindow, QApplication
 
 from typing import NoReturn, Optional
 
@@ -20,7 +20,7 @@ class Controller(object):
 
     """
     def __init__(self, ui, parent=None):
-        # type: (QtWidgets.QMainWindow(), Optional[QtWidgets.QApplication]) -> NoReturn
+        # type: (callable(QMainWindow), Optional[QApplication]) -> NoReturn
 
         self._config_parser = Parser().open("./odin/config/config_file.yaml")
 
@@ -148,7 +148,7 @@ class Controller(object):
             self.ui.resize(400, 350)
 
     def set_var_env(self):
-
+        # type: () -> NoReturn
         self.recent_project = self.project_name
 
         os.environ["ROOT_PATH"] = self.root
@@ -158,7 +158,6 @@ class Controller(object):
 
         log.info("Project set: " + self.root + self.project_name)
 
-        os.environ["DEV_ENV"] = self.tool_path
         os.environ["venv"] = venv
 
         log.info("DEV_ENV: " + self.tool_path)
