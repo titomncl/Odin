@@ -132,12 +132,15 @@ class Controller(object):
 
     def set_project(self):
         try:
-            tool_path_set = self.tool_path
-            log.info("Tools path set: " + self.tool_path)
+            if self.tool_path:
+                log.info("Tools path set: " + self.tool_path)
+            else:
+                log.info("No tools path set")
         except KeyError:
-            tool_path_set = self.change_tools_path()
+            self.tool_path = ""
+            log.info("No tools path set")
 
-        if not self.ui.create_or_set.prod_cbox.count() == 0 and tool_path_set:
+        if not self.ui.create_or_set.prod_cbox.count() == 0:
             self.set_var_env()
             self.ui.stacked_widget.setCurrentWidget(self.ui.manage_prj)
 
