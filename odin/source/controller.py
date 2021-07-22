@@ -8,10 +8,8 @@ from typing import NoReturn, Optional
 from .globals import Logger as log
 from .core import project, launch_software
 from .core import assets, sets, fx, sequence, shot
-
-from CommonTools.yaml_parser import Parser
-
-from CommonTools.concat import concat
+from .common import concat
+from .core.yaml_parser import Parser
 
 
 class Controller(object):
