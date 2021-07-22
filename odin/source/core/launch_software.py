@@ -1,8 +1,7 @@
 import subprocess
 import os
 
-from CommonTools.yaml_parser import Parser
-
+from .yaml_parser import Parser
 from ..globals import Logger as log
 
 

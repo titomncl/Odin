@@ -4,8 +4,7 @@ import os
 
 from logging.handlers import TimedRotatingFileHandler
 
-from CommonTools.os_ import make_dirs
-from CommonTools.concat import concat
+from .common import make_dirs, concat
 
 
 def log(name):

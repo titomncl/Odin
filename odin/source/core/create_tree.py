@@ -3,8 +3,7 @@ import os
 from typing import NoReturn, Dict
 
 from ..globals import Logger as log
-
-from CommonTools.concat import concat
+from ..common import concat
 
 
 class Tree(object):
@@ -56,11 +55,11 @@ class Tree(object):
             Tree:
 
         """
-        import yaml
+        from .yaml_parser import Parser
 
         root = Tree(None, root_)
 
-        template_file = yaml.load(open(template_path), Loader=yaml.Loader)
+        template_file = Parser().open(template_path).data
 
         create_tree(template_file, root)
         return root
