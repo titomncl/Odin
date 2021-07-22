@@ -5,7 +5,7 @@ PROJECT_NAME:
       DESIGN:
       SCENARIO:
       REFS:
-    TOURNAGE:
+    FILMING:
       CONFO:
         EXR:
         PROXY:
@@ -15,58 +15,37 @@ PROJECT_NAME:
         MAKING_OF:
       RUSH:
         DAY#:
-  MONTAGE:
-    CHUTIER:
-      AUDIO:
-      VIDEO:
-    RESOLVE:
-    REFS:
-    EXPORT:
-      AUDIO:
-      VIDEO:
   DATA:
     FILM:
+      EDITING:
+        VERSION:
+        PUBLISH:
       <S###>:
         <P###>:
-          HOUDINI:
-            CACHEFILES:
+          ANIMATION:
+            VERSION:
+              <S###P###>_<VERSION>.ext
+            PUBLISH:
+              <S###P###>_CACHE.abc
+          LIGHTING:
+            VERSION:
+            PUBLISH:
+          COMPOSITING:
+            CACHE:
+            VERSION:
+            PUBLISH:
+          FX:
+            CACHE:
               <S###P###>_CACHE.vdb
               <S###P###>_CACHE.abc
               <S###P###>_CACHE.bgeo.sc
-            SCENES:
-              VERSION:
-                <S###P###>_<VERSION>.hip
-              PUBLISH:
-                <S###P###>.hip
-          GUERILLA:
-            BUILD:
-              VERSION:
-                <S###P###>_BUILD_<VERSION>.gproject
-              PUBLISH:
-                <S###P###>_BUILD.gproject
-            SCENES:
-              VERSION:
-                <S###P###>_<VERSION>.gproject
-              PUBLISH:
-                <S###P###>_.gproject
-          MAYA:
-            CACHEFILES:
-              <S###P###>_CACHE.abc
-            SCENES:
-              VERSION:
-                <S###P###>_<VERSION>.ma
-              PUBLISH:
-                <S###P###>.ma
-          NUKE:
-            SCRIPTS:
-              VERSION:
-                <S###P###>_<VERSION>.nk
-              PUBLISH:
-                <S###P###>.nk
-            LUT:
+            VERSION:
+              <S###P###>_<VERSION>.ext
+            PUBLISH:
+              <S###P###>.ext
         PREVIZ:
           SCENES:
-            OLD:
+            VERSION:
           SOURCEIMAGES:
     LIB:
       PUBLISH:

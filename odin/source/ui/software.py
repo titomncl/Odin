@@ -41,9 +41,9 @@ class Software(Qw.QWidget):
 
         btn_layout = Qw.QHBoxLayout()
 
-        maya_ico = Qg.QIcon("./odin/resources/maya.ico")
-        zbrush_ico = Qg.QIcon("./odin/resources/zbrush.ico")
-        houdini_ico = Qg.QIcon("./odin/resources/houdini.ico")
+        maya_ico = Qg.QIcon("./odin/resources/icons/maya.ico")
+        zbrush_ico = Qg.QIcon("./odin/resources/icons/zbrush.ico")
+        houdini_ico = Qg.QIcon("./odin/resources/icons/houdini.ico")
 
         self.maya = self.soft_button("Maya", maya_ico, "27")
         self.zbrush = self.soft_button("ZBrush", zbrush_ico, "27")
@@ -62,10 +62,10 @@ class Software(Qw.QWidget):
 
         btn_layout = Qw.QHBoxLayout()
 
-        designer_ico = Qg.QIcon("./odin/resources/designer.ico")
-        painter_ico = Qg.QIcon("./odin/resources/painter.ico")
-        mari_ico = Qg.QIcon("./odin/resources/mari.ico")
-        photoshop_ico = Qg.QIcon("./odin/resources/photoshop.ico")
+        designer_ico = Qg.QIcon("./odin/resources/icons/designer.ico")
+        painter_ico = Qg.QIcon("./odin/resources/icons/painter.ico")
+        mari_ico = Qg.QIcon("./odin/resources/icons/mari.ico")
+        photoshop_ico = Qg.QIcon("./odin/resources/icons/photoshop.ico")
 
         self.designer = self.soft_button("Designer", designer_ico, "38")
         self.painter = self.soft_button("Painter", painter_ico, "38")
@@ -86,9 +86,9 @@ class Software(Qw.QWidget):
 
         btn_layout = Qw.QHBoxLayout()
 
-        guerilla_ico = Qg.QIcon("./odin/resources/guerilla.ico")
-        nuke_ico = Qg.QIcon("./odin/resources/nuke.ico")
-        resolve_ico = Qg.QIcon("./odin/resources/resolve.ico")
+        guerilla_ico = Qg.QIcon("./odin/resources/icons/guerilla.ico")
+        nuke_ico = Qg.QIcon("./odin/resources/icons/nuke.ico")
+        resolve_ico = Qg.QIcon("./odin/resources/icons/resolve.ico")
 
         self.guerilla = self.soft_button("Guerilla", guerilla_ico, "27")
         self.nuke = self.soft_button("Nuke", nuke_ico, "27")
