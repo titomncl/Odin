@@ -1,0 +1,7 @@
+PyQt5 ~= 5.15.4
+QtAwesome >= 1.0.3
+QtPy ~= 1.9.0
+Sphinx ~= 4.1.1
+black ~= 21.7b0
+myst_parser ~= 0.15.1
+sphinx-rtd-theme ~= 0.5.2
