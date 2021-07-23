@@ -159,6 +159,7 @@ class Controller(object):
 
         log.info("Project set: " + self.root + self.project_name)
 
+        os.environ["DEV_ENV"] = self.tool_path
         os.environ["venv"] = venv
 
         log.info("DEV_ENV: " + self.tool_path)
