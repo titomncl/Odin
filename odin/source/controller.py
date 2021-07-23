@@ -56,7 +56,7 @@ class Controller(object):
             msg_box.add_informative_text("Specify the root path that will contain your project")
             action_btn = msg_box.action_button("Browse...", msg_box.ButtonRole.ActionRole)
             cancel_btn = msg_box.abort_button("Cancel", msg_box.ButtonRole.RejectRole)
-            msg_box.exec()
+            msg_box.exec_()
 
             if msg_box.clickedButton() == action_btn:
                 self.init_root()
