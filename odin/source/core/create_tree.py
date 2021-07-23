@@ -1,6 +1,9 @@
 import os
 
-from typing import NoReturn, Dict, Union
+try:
+    from typing import NoReturn, Dict, Union
+except ImportError:
+    pass
 
 from ..globals import Logger as log
 from ..common import concat

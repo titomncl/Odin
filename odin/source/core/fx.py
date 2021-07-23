@@ -1,6 +1,9 @@
 import os
 
-from typing import Optional, List
+try:
+    from typing import Optional, List
+except ImportError:
+    pass
 
 from . import trees_path
 from .create_tree import Tree

@@ -1,6 +1,9 @@
 import os
 
-from typing import Any, Dict
+try:
+    from typing import Any, Dict
+except ImportError:
+    pass
 
 
 def concat(*args, **kwargs):

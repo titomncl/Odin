@@ -1,4 +1,7 @@
-from typing import NoReturn, Optional
+try:
+    from typing import NoReturn, Optional
+except ImportError:
+    pass
 
 
 class Parser(object):
