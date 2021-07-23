@@ -1,11 +1,14 @@
 import glob
 
+from typing import List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_project(root, project):
+    # type: (str, str) -> bool
     """
 
     Args:
@@ -30,6 +33,7 @@ def create_project(root, project):
 
 
 def find_project(root):
+    # type: (str) -> List[str]
     """
     Get the projects available in the root path
 
@@ -37,7 +41,7 @@ def find_project(root):
         root (str): root path
 
     Returns:
-        list(str): return all projects found
+        list (str): return all projects found
 
     """
     projects = glob.glob(root + "\\*\\DATA\\LIB")

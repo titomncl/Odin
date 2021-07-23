@@ -1,13 +1,15 @@
 import os
 
+from typing import List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_shot(root, project, seq, shot):
+    # type: (str, str, str, str) -> bool
     """
-
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
@@ -31,6 +33,17 @@ def create_shot(root, project, seq, shot):
         return False
 
 def find_shots(root, project, seq):
+    # type: (str, str, str) -> List[str]
+    """
+    Args:
+        root (str):
+        project (str):
+        seq (str):
+
+    Returns:
+        list (str): shots found in the folder
+
+    """
 
     if seq:
         path = concat(root, project, "DATA/FILM", seq, separator="\\")

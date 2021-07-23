@@ -8,7 +8,15 @@ from .common import make_dirs, concat
 
 
 def log(name):
+    # type: (str) -> logging.Logger
+    """
+    Args:
+        name (str): name to the log
 
+    Returns:
+        logging.Logger: Logger object to interact with the logger
+
+    """
     log_path = concat(os.path.expanduser('~').replace("\\", "/"), ".logs", name, separator="/")
     make_dirs(log_path)
 

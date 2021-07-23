@@ -1,13 +1,15 @@
 import os
 
+from typing import Optional, List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_fx(root, project, fx_name, asset_type="FX"):
+    # type: (str, str, str, Optional[str]) -> bool
     """
-
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
@@ -32,8 +34,8 @@ def create_fx(root, project, fx_name, asset_type="FX"):
 
 
 def find_fx(root, project, type_="FX"):
+    # type: (str, str, Optional[str]) -> List[str]
     """
-
     Args:
         root (str):
         project (str):

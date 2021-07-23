@@ -1,13 +1,15 @@
 import os
 
+from typing import Optional, List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_set(root, project, set_name, asset_type="SET"):
+    # type: (str, str, str, Optional[str]) -> bool
     """
-
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
@@ -37,8 +39,8 @@ def create_set(root, project, set_name, asset_type="SET"):
 
 
 def find_sets(root, project, type_="SET"):
+    # type: (str, str, Optional[str]) -> List[str]
     """
-
     Args:
         root (str):
         project (str):

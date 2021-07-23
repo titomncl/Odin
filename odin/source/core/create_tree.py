@@ -1,6 +1,6 @@
 import os
 
-from typing import NoReturn, Dict
+from typing import NoReturn, Dict, Union
 
 from ..globals import Logger as log
 from ..common import concat
@@ -10,9 +10,18 @@ class Tree(object):
     """
     Create an object Tree based on a given template.
 
+    Usage:
+        t = Tree().create_from_template('template/file.yaml')\n
+        t.create_on_disk()
+
+    Parameters:
+        parent (Tree):
+        name (str): folder name given to the root of the tree
+
     """
+
     def __init__(self, parent, name):
-        # type: (Tree, str) -> Tree
+        # type: (Union[Tree, None], str) -> Tree
         self._parent = parent
         self._name = name
         self._children = list()
@@ -47,12 +56,14 @@ class Tree(object):
         # type: (str, str) -> Tree
         """
 
+        Create a tree object with a yaml template file
+
         Args:
             template_path (str): path of the yaml template
             root_ (str): root for the new tree
 
         Returns:
-            Tree:
+            Tree: Tree object that contain the folders to create the tree
 
         """
         from .yaml_parser import Parser

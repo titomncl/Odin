@@ -1,13 +1,15 @@
 import os
 
+from typing import List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_asset(root, project, asset_name, asset_type):
+    # type: (str, str, str, str) -> bool
     """
-
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
@@ -38,15 +40,15 @@ def create_asset(root, project, asset_name, asset_type):
 
 
 def find_assets(root, project, type_):
+    # type: (str, str, str) -> List[str]
     """
-
     Args:
         root (str):
         project (str):
         type_ (str): CHARACTER, PROPS folder
 
     Returns:
-        list(str): assets found in the folder
+        list (str): assets found in the folder
 
     """
     if project:

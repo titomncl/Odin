@@ -6,21 +6,13 @@ class Parser(object):
     Yaml parser.
 
     Usage:
-        p = Parser().open('filepath')
-        p.filepath = 'your/new/file/path.yaml'
-        p.data = {'new': 'data'}
+        p = Parser().open('filepath')\n
+        p.filepath = 'your/new/file/path.yaml'\n
+        p.data = {'new': 'data'}\n
 
-    Args:
+    Parameters:
         filepath (str): path/of/your/file.yaml
         data (dict): data to put in the yaml file
-
-    Class methods:
-        open(file_): Generate a Parser object from the given yaml file
-                     or create a new one if the yaml file does not exists
-
-    Methods:
-        new(data, filepath): Create a new yaml
-        write(): Write the yaml file with the stored filepath and data
 
     """
 
@@ -39,7 +31,7 @@ class Parser(object):
             filepath (str): filepath of the yaml file
 
         Returns:
-            Parser:
+            Parser: Parser object that contain the new yaml file with its data
 
         """
         import yaml
@@ -62,7 +54,7 @@ class Parser(object):
     def write(self):
         # type: () -> NoReturn
         """
-        Write the yaml file
+        Write the data in the yaml file
 
         Raises:
             RuntimeError: if the file does not exist
@@ -100,6 +92,16 @@ class Parser(object):
     @classmethod
     def open(cls, file_):
         # type: (str) -> Parser
+        '''
+        Generate a Parser object from the given yaml file or create one if the yaml file does not exists
+
+        Args:
+            file_ (str): yaml file path to open
+
+        Returns:
+            Parser: Parser object that contain the yaml file with its data
+
+        '''
         import yaml
 
         try:

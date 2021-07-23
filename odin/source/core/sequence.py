@@ -1,13 +1,15 @@
 import os
 
+from typing import List
+
 from . import trees_path
 from .create_tree import Tree
 from ..common import make_dirs, concat
 
 
 def create_sequences(root, project, sequence):
+    # type: (str, str, str) -> bool
     """
-
     Args:
         root (str): root path of the project without the slash at the end
         project (str): project
@@ -31,14 +33,14 @@ def create_sequences(root, project, sequence):
 
 
 def find_sequences(root, project):
+    # type: (str, str) -> List[str]
     """
-
     Args:
         root (str):
         project (str):
 
     Returns:
-        list(str): sequences found in the folder
+        list (str): sequences found in the folder
 
     """
 
