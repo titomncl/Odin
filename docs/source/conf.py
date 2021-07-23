@@ -58,7 +58,7 @@ exclude_patterns = []
 #
 html_theme = 'sphinx_rtd_theme'
 
-html_favicon = '../../odin/resources/icons/odin.ico'
+html_favicon = os.path.abspath('../../odin/resources/icons/odin.ico')
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
