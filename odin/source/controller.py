@@ -3,7 +3,7 @@ import os
 
 from qtpy.QtWidgets import QMainWindow, QApplication
 
-from typing import NoReturn, Optional
+from typing import NoReturn, Optional, List
 
 from .globals import Logger as log
 from .core import project, launch_software
@@ -167,7 +167,7 @@ class Controller(object):
 
     @property
     def projects(self):
-        # type: () -> str
+        # type: () -> List[str]
         return project.find_project(self.root)
 
     @property
