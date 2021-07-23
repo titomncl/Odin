@@ -7,7 +7,7 @@
 Welcome to Odin's documentation!
 ================================
 
-.. image:: ../../odin/resources/repository-open-graph-odin.png
+.. image:: resources/repository-open-graph-odin.png
    :width: 600
 
 .. toctree::
