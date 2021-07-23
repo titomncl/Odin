@@ -95,7 +95,7 @@ class Parser(object):
     @classmethod
     def open(cls, file_):
         # type: (str) -> Parser
-        '''
+        """
         Generate a Parser object from the given yaml file or create one if the yaml file does not exists
 
         Args:
@@ -104,7 +104,7 @@ class Parser(object):
         Returns:
             Parser: Parser object that contain the yaml file with its data
 
-        '''
+        """
         import yaml
 
         try:

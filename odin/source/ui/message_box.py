@@ -69,7 +69,7 @@ class MessageBox(Qw.QMessageBox):
         abort_msg.setStandardButtons(abort_msg.Yes | abort_msg.No)
         abort_msg.setDefaultButton(abort_msg.Yes)
 
-        action = abort_msg.exec()
+        action = abort_msg.exec_()
 
         if action == abort_msg.Yes:
             raise SystemExit
