@@ -102,10 +102,12 @@ class Controller(object):
         self.ui.manage_prj.software_widget.resolve.clicked.connect(self.soft_action)
 
     def change_root_path(self):
-        value = self.ui.get_new_path(self.root)
-
-        self.root = value
-        self.load_root()
+        try:
+            value = self.ui.get_new_path(self.root)
+            self.root = value
+            self.load_root()
+        except RuntimeError as e:
+            log.warning(e)
 
     def change_tools_path(self):
         # type: () -> bool
@@ -114,7 +116,8 @@ class Controller(object):
             os.environ["DEV_ENV"] = self.tool_path
             log.info("Tools path set: " + self.tool_path)
             return True
-        except RuntimeError:
+        except RuntimeError as e:
+            log.warning(e)
             return False
 
     def create_project(self):
