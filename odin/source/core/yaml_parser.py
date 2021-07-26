@@ -9,7 +9,7 @@ class Parser(object):
     Yaml parser.
 
     Usage:
-        p = Parser().open('filepath')\n
+        p = Parser.open('filepath')\n
         p.filepath = 'your/new/file/path.yaml'\n
         p.data = {'new': 'data'}\n
 

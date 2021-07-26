@@ -1,10 +1,10 @@
 
-# Sources
+# Technical documentation
 
 ```{eval-rst}
 .. toctree::
-    core.md
-    ui.md
-    other.md
+    sources/core.md
+    sources/ui.md
+    sources/other.md
 
 ```
