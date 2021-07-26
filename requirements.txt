@@ -5,3 +5,4 @@ Sphinx ~= 4.1.1
 black ~= 21.7b0
 myst_parser ~= 0.15.1
 sphinx-rtd-theme ~= 0.5.2
+furo ~= 2021.7.5b38
