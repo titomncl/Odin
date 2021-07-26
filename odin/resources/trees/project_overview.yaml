@@ -19,30 +19,36 @@ PROJECT_NAME:
     FILM:
       EDITING:
         VERSION:
+          <PROJECT_NAME>_EDIT_<VERSION>.ext
         PUBLISH:
+          <PROJECT_NAME>_EDIT.ext
       <S###>:
         <P###>:
           ANIMATION:
             VERSION:
-              <S###P###>_<VERSION>.ext
+              <S###P###>_ANIM_<VERSION>.ext
             PUBLISH:
-              <S###P###>_CACHE.abc
+              <S###P###>_ANIM.ext
           LIGHTING:
             VERSION:
+              <S###P###>_LIGHTING_<VERSION>.ext
             PUBLISH:
+              <S###P###>_LIGHTING.ext
           COMPOSITING:
             CACHE:
             VERSION:
+              <S###P###>_COMPO_<VERSION>.ext
             PUBLISH:
+              <S###P###>_COMPO.ext
           FX:
             CACHE:
-              <S###P###>_CACHE.vdb
-              <S###P###>_CACHE.abc
-              <S###P###>_CACHE.bgeo.sc
+              <S###P###>_FX_CACHE.vdb
+              <S###P###>_FX_CACHE.abc
+              <S###P###>_FX_CACHE.bgeo.sc
             VERSION:
-              <S###P###>_<VERSION>.ext
+              <S###P###>_FX_<VERSION>.ext
             PUBLISH:
-              <S###P###>.ext
+              <S###P###>_FX.ext
         PREVIZ:
           SCENES:
             VERSION:
@@ -184,13 +190,22 @@ PROJECT_NAME:
                 PUBLISH:
                   <PROPS_NAME>_RIG.ma
   OUT:
-    RENDER:
-      FILMS:
-    COMPO:
-      FILMS:
-    MONTAGE:
-      EXPORTS:
-        OLD:
+    <S###>:
+      <P###>:
+        ANIMATION:
+          <S###P###>_ANIM.abc
+        LIGHTING:
+          <S###P###>_LIGHTING.exr
+        COMPOSITING:
+          <S###P###>_COMPO.exr
+        FX:
+          <S###P###>_FX.vdb
+          <S###P###>_FX.abc
+    EDITING:
+      VERSION:
+        <PROJECT_NAME>_EDIT_<VERSION>.mp4
+      PUBLISH:
+        <PROJECT_NAME>_EDIT.mp4
     DAILIES:
     COMMUNICATION:
       PACKAGE_1:
