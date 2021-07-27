@@ -54,10 +54,13 @@ class Parser(object):
 
         return self
 
-    def write(self):
-        # type: () -> NoReturn
+    def write(self, data=None):
+        # type: (dict) -> NoReturn
         """
         Write the data in the yaml file
+
+        Args:
+            data (dict):
 
         Raises:
             RuntimeError: if the file does not exist
@@ -65,6 +68,8 @@ class Parser(object):
         """
         import yaml
         import os
+
+        self.data = data or self.data
 
         if os.path.isfile(self.filepath):
             with open(self.filepath, "w") as file_:
