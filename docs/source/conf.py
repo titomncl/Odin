@@ -40,6 +40,8 @@ extensions = [
 
 extlinks = {'release': ('https://github.com/titomncl/Odin/releases/' + release, '')}
 
+
+
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown'
