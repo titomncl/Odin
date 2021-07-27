@@ -4,7 +4,7 @@ IN:
     DESIGN:
     SCENARIO:
     REFS:
-  TOURNAGE:
+  FILMING:
     CONFO:
       EXR:
       PROXY:
@@ -18,17 +18,11 @@ IN:
       DAY3:
       DAY4:
       DAY5:
-MONTAGE:
-  CHUTIER:
-    AUDIO:
-    VIDEO:
-  RESOLVE:
-  REFS:
-  EXPORT:
-    AUDIO:
-    VIDEO:
 DATA:
   FILM:
+    EDITING:
+      VERSION:
+      PUBLISH:
   LIB:
     PUBLISH:
       SET:
@@ -40,13 +34,9 @@ DATA:
     CHARA:
     PROPS:
 OUT:
-  RENDER:
-    FILMS:
-  COMPO:
-    FILMS:
-  MONTAGE:
-    EXPORTS:
-      OLD:
+  EDITING:
+    VERSION:
+    PUBLISH:
   DAILIES:
   COMMUNICATION:
     PACKAGE_1:
