@@ -33,9 +33,12 @@ extensions = [
     'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx.ext.coverage'
+    'sphinx.ext.coverage',
+    'sphinx.ext.extlinks'
 
 ]
+
+extlinks = {'release': ('https://github.com/titomncl/Odin/releases/' + release, '')}
 
 source_suffix = {
     '.rst': 'restructuredtext',
