@@ -153,7 +153,7 @@ class Controller(object):
         self.recent_project = self.project_name
 
         os.environ["ROOT_PATH"] = self.root
-        os.environ["PROJECT_ENV"] = concat(self.root, self.project_name, separator="/")
+        os.environ["PROJECT_ENV"] = os.path.join(self.root, self.project_name)
 
         venv = os.path.abspath("./venv").replace("\\", "/")
 
