@@ -7,6 +7,7 @@ except ImportError:
 
 from . import trees_path
 from .create_tree import Tree
+from .yaml_parser import Parser
 from ..common import make_dirs, concat
 
 
@@ -63,3 +64,56 @@ def find_assets(root, project, type_):
             return assets
         except StopIteration:
             return list()
+
+
+class Asset(object):
+    def __init__(self, parent, name=None, task=None):
+        self._parent = parent
+        self._name = name
+        self._task = task
+        self._data = dict()
+
+    @property
+    def root(self):
+        return self._root
+
+    @root.setter
+    def root(self, value):
+        self._root = value
+
+    def new(self, name=None):
+        self._name = name or self._name
+
+        self._data[name] = Parser.open(trees_path.project_tree()).data
+
+        root = Tree(None, self._root)
+        root.create_tree(self._data, root)
+
+        root.create_on_disk()
+
+        prj_parser = Parser.open(concat(self._root, self._name, "/odin.yaml"))
+        prj_parser.write(self._data)
+
+    def list(self, root=None):
+        self._root = root or self._root
+
+        projects = glob.glob(self._root + "\\*\\odin.yaml")
+
+        projects_name = list()
+
+        for prj in projects:
+            project = prj.replace("\\", "/")
+            project = project.replace(self._root + "/", "")
+
+            project_name = project.split("/")[0]
+
+            projects_name.append(project_name)
+
+        return projects_name
+
+    # def get_assets(self):
+    #
+
+    @classmethod
+    def load(cls, root, name):
+        return cls(root, name)
