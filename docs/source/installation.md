@@ -21,8 +21,9 @@ It allows the user to:
 
 
 ## Installation
-
-* Download the latest [release](https://github.com/titomncl/Odin/releases/latest)
-* Unzip the file
-* Put the Odin folder wherever you want
-* Run `Odin.exe`
+```{eval-rst}
+- Download the latest :release:`release <>`
+- Unzip the file
+- Put the Odin folder wherever you want
+- Run `Odin.exe`
+```
