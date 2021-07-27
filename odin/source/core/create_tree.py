@@ -54,8 +54,7 @@ class Tree(object):
         for child in self._children:
             child.create_on_disk()
 
-    @staticmethod
-    def create_from_template(template_path, root_):
+    def create_from_template(self, template_path, root_):
         # type: (str, str) -> Tree
         """
 
@@ -75,19 +74,19 @@ class Tree(object):
 
         template_file = Parser().open(template_path).data
 
-        create_tree(template_file, root)
+        self.create_tree(template_file, root)
         return root
 
 
-def create_tree(tree, root):
-    # type: (Dict[str: dict or None], Tree) -> NoReturn
-    """
-    Args:
-        tree ({str: {} or None}):
-        root (Tree):
+    def create_tree(self, data, tree):
+        # type: (Dict[str: dict or None], Tree) -> NoReturn
+        """
+        Args:
+            data ({str: {} or None}):
+            tree (Tree):
 
-    """
-    for key, value in tree.items():
-        child = root.create_child(key)
-        if value:
-            create_tree(value, child)
+        """
+        for key, value in data.items():
+            child = tree.create_child(key)
+            if value:
+                self.create_tree(value, child)
