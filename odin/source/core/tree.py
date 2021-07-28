@@ -49,7 +49,7 @@ class Tree(object):
             log.info(concat("CREATE: ", self.full_name))
             os.mkdir(self.full_name)
         else:
-            log.warning(concat(self.full_name, ": Folder is exists"))
+            log.warning(concat(self.full_name, ": Folder exists"))
 
         for child in self._children:
             child.create_on_disk()
@@ -76,7 +76,6 @@ class Tree(object):
 
         self.create_tree(template_file, root)
         return root
-
 
     def create_tree(self, data, tree):
         # type: (Dict[str: dict or None], Tree) -> NoReturn
