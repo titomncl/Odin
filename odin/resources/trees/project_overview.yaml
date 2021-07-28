@@ -19,36 +19,34 @@ PROJECT_NAME:
     FILM:
       EDITING:
         VERSION:
-          <PROJECT_NAME>_EDIT_<VERSION>.ext
+          <PROJECT_NAME>_EDIT_<VERSION>.<ext>
         PUBLISH:
-          <PROJECT_NAME>_EDIT.ext
+          <PROJECT_NAME>_EDIT.<ext>
       <S###>:
         <P###>:
           ANIMATION:
             VERSION:
-              <S###P###>_ANIM_<VERSION>.ext
+              <S###P###>_ANIM_<VERSION>.<ext>
             PUBLISH:
-              <S###P###>_ANIM.ext
+              <S###P###>_ANIM.<ext>
           LIGHTING:
             VERSION:
-              <S###P###>_LIGHTING_<VERSION>.ext
+              <S###P###>_LIGHTING_<VERSION>.<ext>
             PUBLISH:
-              <S###P###>_LIGHTING.ext
+              <S###P###>_LIGHTING.<ext>
           COMPOSITING:
             CACHE:
             VERSION:
-              <S###P###>_COMPO_<VERSION>.ext
+              <S###P###>_COMPO_<VERSION>.<ext>
             PUBLISH:
-              <S###P###>_COMPO.ext
+              <S###P###>_COMPO.<ext>
           FX:
             CACHE:
-              <S###P###>_FX_CACHE.vdb
-              <S###P###>_FX_CACHE.abc
-              <S###P###>_FX_CACHE.bgeo.sc
+              <S###P###>_FX_CACHE.<ext>
             VERSION:
-              <S###P###>_FX_<VERSION>.ext
+              <S###P###>_FX_<VERSION>.<ext>
             PUBLISH:
-              <S###P###>_FX.ext
+              <S###P###>_FX.<ext>
         PREVIZ:
           SCENES:
             VERSION:
@@ -65,7 +63,8 @@ PROJECT_NAME:
             SHD:
               <SET_NAME>_<LAYER>_<COLORSPACE>.exr
         FX:
-          <FX_NAME>.ext
+          <FX_NAME>:
+            <FX_NAME>.<ext>
         CHARA:
           <CHARA_NAME>:
             MOD:
@@ -105,13 +104,9 @@ PROJECT_NAME:
                 <SET_NAME>_<LAYER>_<COLORSPACE>.exr
             SCENE:
               VERSION:
-                <SET_NAME>_SHD_<VERSION>.spp
-                <SET_NAME>_SHD_<VERSION>.sbs
-                <SET_NAME>_SHD_<VERSION>.mra
+                <SET_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
-                <SET_NAME>_SHD.spp
-                <SET_NAME>_SHD.sbs
-                <SET_NAME>_SHD.mra
+                <SET_NAME>_SHD.<ext>
       FX:
         <FX_NAME>:
           CACHEFILES:
@@ -126,9 +121,9 @@ PROJECT_NAME:
           MOD:
             SCENE:
               VERSION:
-                <CHARA_NAME>_MOD_<VERSION>.ext
+                <CHARA_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
-                <CHARA_NAME>_MOD.ext
+                <CHARA_NAME>_MOD.<ext>
           SHD:
             TEXTURES:
               VERSION:
@@ -138,13 +133,9 @@ PROJECT_NAME:
                 <CHARA_NAME>_<LAYER>_<COLORSPACE>.exr
             SCENE:
               VERSION:
-                <CHARA_NAME>_SHD_<VERSION>.spp
-                <CHARA_NAME>_SHD_<VERSION>.sbs
-                <CHARA_NAME>_SHD_<VERSION>.mra
+                <CHARA_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
-                <CHARA_NAME>_SHD.spp
-                <CHARA_NAME>_SHD.sbs
-                <CHARA_NAME>_SHD.mra
+                <CHARA_NAME>_SHD.<ext>
           RIG:
             SCENE:
               VERSION:
@@ -156,9 +147,9 @@ PROJECT_NAME:
           MOD:
             SCENE:
               VERSION:
-                <PROPS_NAME>_MOD_<VERSION>.ext
+                <PROPS_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
-                <PROPS_NAME>_MOD.ext
+                <PROPS_NAME>_MOD.<ext>
           SHD:
             TEXTURES:
               VERSION:
@@ -168,9 +159,9 @@ PROJECT_NAME:
                 <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
             SCENE:
               VERSION:
-                <PROPS_NAME>_SHD_<VERSION>.ext
+                <PROPS_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
-                <PROPS_NAME>_SHD.ext
+                <PROPS_NAME>_SHD.<ext>
           RIG:
             SCENE:
               VERSION:
@@ -187,12 +178,12 @@ PROJECT_NAME:
         COMPOSITING:
           <S###P###>_COMPO.exr
         FX:
-          <S###P###>_FX.ext
+          <S###P###>_FX.<ext>
     EDITING:
       VERSION:
-        <PROJECT_NAME>_EDIT_<VERSION>.ext
+        <PROJECT_NAME>_EDIT_<VERSION>.<ext>
       PUBLISH:
-        <PROJECT_NAME>_EDIT.ext
+        <PROJECT_NAME>_EDIT.<ext>
     DAILIES:
     COMMUNICATION:
       PACKAGE_1:
