@@ -1,4 +1,5 @@
 import glob
+import os
 
 try:
     from typing import List
@@ -6,7 +7,8 @@ except ImportError:
     pass
 
 from . import trees_path
-from .create_tree import Tree
+from .assets import Asset
+from .tree import Tree
 from .yaml_parser import Parser
 from ..common import make_dirs, concat
 
@@ -65,10 +67,15 @@ def find_project(root):
 
 class Project(object):
 
-    def __init__(self, root, name=None):
+    def __init__(self, root=None, name=None, data=None):
         self._root = root
         self._name = name
-        self._data = dict()
+        self._data = data or dict()
+        self._assets = None
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def root(self):
@@ -78,29 +85,16 @@ class Project(object):
     def data(self):
         return self._data
 
-    def print(self, name=None):
-        self._name = name or self._name
-
-        self._data[name] = Parser.open(trees_path.project_tree()).data
-
-        root = Tree(None, self._root)
-        root.create_tree(self._data, root)
-
-        root.create_on_disk()
-
-        prj_parser = Parser.open(concat(self._root, self._name, "/odin.yaml"))
-        prj_parser.write(self._data)
-
-    def list(self, root=None):
-        self._root = root or self._root
-
-        projects = glob.glob(self._root + "\\*\\odin.yaml")
+    @staticmethod
+    def list(root=None):
+        root = root or os.path.expanduser("~")
+        projects = glob.glob(root + "\\*\\odin.yaml")
 
         projects_name = list()
 
         for prj in projects:
             project = prj.replace("\\", "/")
-            project = project.replace(self._root + "/", "")
+            project = project.replace(root + "/", "")
 
             project_name = project.split("/")[0]
 
@@ -111,6 +105,28 @@ class Project(object):
     # def get_assets(self):
     #
 
+    def new_asset(self, name, task):
+        return Asset.new(self, name, task)
+
     @classmethod
     def load(cls, root, name):
-        return cls(root, name)
+
+        _data = Parser.open(os.path.join(root, name, "odin.yaml")).data
+
+        return cls(root, name, _data)
+
+    @classmethod
+    def new(cls, root, name):
+
+        _data = dict()
+        _data[name] = Parser.open(trees_path.project_tree()).data
+
+        tree = Tree(None, root)
+        tree.create_tree(_data, tree)
+
+        tree.create_on_disk()
+
+        prj_parser = Parser.open(os.path.join(root, name, "odin.yaml"))
+        prj_parser.write(_data)
+
+        return cls(root, name, _data)
