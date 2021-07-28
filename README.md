@@ -1,9 +1,10 @@
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/titomncl/odin?include_prereleases&sort=semver&style=for-the-badge">
-  <img src="https://img.shields.io/github/license/titomncl/odin?style=for-the-badge">
-  <img src="https://img.shields.io/github/downloads/titomncl/odin/total?style=for-the-badge">
-  <img src="https://img.shields.io/github/languages/code-size/titomncl/odin?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues-raw/titomncl/odin?color=red&style=for-the-badge">
+  <img src="https://img.shields.io/github/v/release/titomncl/odin?include_prereleases&style=flat-square">
+  <img src='https://readthedocs.org/projects/odin-project-manager/badge/?version=latest&style=flat-square' alt='Documentation Status' />
+  <img src="https://img.shields.io/github/license/titomncl/odin?style=flat-square">
+  <img src="https://img.shields.io/github/downloads/titomncl/odin/total?style=flat-square">
+  <img src="https://img.shields.io/github/languages/code-size/titomncl/odin?style=flat-square">
+  <img src="https://img.shields.io/github/issues-raw/titomncl/odin?color=red&style=flat-square">
 </p>
 
 ![repository-open-graph-odin](https://user-images.githubusercontent.com/70750510/126334220-9b6ddcad-235f-4f32-8caf-1eb290605f85.png)
@@ -58,6 +59,9 @@ If you work in a production, it may be set by the Pipeline-TD.
     - 📄 .gitignore:
     - 📄 README.md: Documentation of your repository
 ```
+
+### Update Odin
+If an update is available, a message box will shows up telling you a new version of Odin has been downloaded. 
 
 ### Change the configuration
 You can change the software launch path if it's absolutely necessary.
