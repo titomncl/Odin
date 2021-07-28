@@ -89,3 +89,24 @@ class Tree(object):
             child = tree.create_child(key)
             if value:
                 self.create_tree(value, child)
+
+
+def path_from_tree(data, word, path="", values=None):
+    _path = path
+    _values = values or dict()
+
+    for key, value in data.items():
+        if value:
+            _path = os.path.join(path, key)
+            try:
+                if word in value:
+                    if "PUBLISH" in _path:
+                        _values["PUBLISH"] = os.path.join(_path, word)
+                    else:
+                        _values["PATH"] = os.path.join(_path, word)
+            except KeyError:
+                pass
+
+            _values = path_from_tree(value, word, _path, _values)
+
+    return _values
