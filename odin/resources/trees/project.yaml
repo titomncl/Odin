@@ -23,6 +23,7 @@ DATA:
     EDITING:
       VERSION:
       PUBLISH:
+    SEQ:
   LIB:
     PUBLISH:
       SET:
@@ -34,6 +35,7 @@ DATA:
     CHARA:
     PROPS:
 OUT:
+  SEQ:
   EDITING:
     VERSION:
     PUBLISH:
