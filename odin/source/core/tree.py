@@ -102,6 +102,8 @@ def path_from_tree(data, word, path="", values=None):
                 if word in value:
                     if "PUBLISH" in _path:
                         _values["PUBLISH"] = os.path.join(_path, word)
+                    elif "OUT" in _path:
+                        _values["OUT"] = os.path.join(_path, word)
                     else:
                         _values["PATH"] = os.path.join(_path, word)
             except KeyError:
