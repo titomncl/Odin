@@ -21,6 +21,9 @@ def fx_tree():
 def shot_tree():
     return os.path.join("./odin/resources/trees", trees.SHOT_TREE)
 
+def shot_out_tree():
+    return os.path.join("./odin/resources/trees", trees.SHOT_OUT_TREE)
+
 def take_tree():
     return os.path.join("./odin/resources/trees", trees.TAKE_TREE)
 
