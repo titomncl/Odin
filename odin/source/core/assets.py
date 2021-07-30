@@ -122,9 +122,17 @@ class Asset(object):
         publish_tree.create_on_disk()
 
         prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
-        prj_parser.data[parent.name]["DATA"]["LIB"][task] = _data
-        prj_parser.data[parent.name]["DATA"]["LIB"]["PUBLISH"][task] = _data_publish
+
+        asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
+        asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"]["PUBLISH"]
+
+        if not asset_data[task] and not asset_publish_data[task]:
+            asset_data[task] = dict()
+            asset_publish_data[task] = dict()
+
+        asset_data[task].update(_data)
+        asset_publish_data[task].update(_data_publish)
 
         prj_parser.write()
 
-        return cls(parent, name, task, prj_parser.data)
+        return cls(parent, name, task, _data[name])
