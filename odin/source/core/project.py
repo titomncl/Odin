@@ -8,6 +8,7 @@ except ImportError:
 
 from . import trees_path
 from .assets import Asset
+from .sequence import Sequence
 from .tree import Tree
 from .yaml_parser import Parser
 from ..common import make_dirs, concat
@@ -102,15 +103,20 @@ class Project(object):
 
         return projects_name
 
-    # def get_assets(self):
-    #
+    def get_assets(self, task):
+        return Asset.list(self, task)
 
     def new_asset(self, name, task):
         return Asset.new(self, name, task)
 
+    def get_sequences(self):
+        return Sequence.list(self)
+
+    def new_sequence(self, name):
+        return Sequence.new(self, name)
+
     @classmethod
     def load(cls, root, name):
-
         _data = Parser.open(os.path.join(root, name, "odin.yaml")).data
 
         return cls(root, name, _data)
