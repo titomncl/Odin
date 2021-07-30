@@ -11,6 +11,8 @@ from .assets import Asset
 from .sequence import Sequence
 from .tree import Tree
 from .yaml_parser import Parser
+from ..globals import Logger as log
+from ..common import concat
 
 
 class Project(object):
@@ -81,5 +83,7 @@ class Project(object):
 
         prj_parser = Parser.open(os.path.join(root, name, "odin.yaml"))
         prj_parser.write(_data)
+
+        log.info(concat("Project '", name, "' was created."))
 
         return cls(root, name, _data)
