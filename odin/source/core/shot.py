@@ -56,8 +56,8 @@ class Shot(object):
 
         prj_parser = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml"))
 
-        shot_data = prj_parser.data[parent.name]["DATA"]["FILM"]["SEQ"]
-        shot_out_data = prj_parser.data[parent.name]["OUT"]["SEQ"]
+        shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"]["SEQ"]
+        shot_out_data = prj_parser.data[parent.parent.name]["OUT"]["SEQ"]
 
         if not shot_data[parent.name] and not shot_out_data[parent.name]:
             shot_data[parent.name] = dict()
