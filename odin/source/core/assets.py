@@ -70,8 +70,9 @@ class Asset(object):
         asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
         asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"]["PUBLISH"]
 
-        if not asset_data[task] and not asset_publish_data[task]:
+        if not asset_data[task]:
             asset_data[task] = dict()
+        if not asset_publish_data[task]:
             asset_publish_data[task] = dict()
 
         asset_data[task].update(_data)

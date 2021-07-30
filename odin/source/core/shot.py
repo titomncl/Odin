@@ -59,8 +59,9 @@ class Shot(object):
         shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"]["SEQ"]
         shot_out_data = prj_parser.data[parent.parent.name]["OUT"]["SEQ"]
 
-        if not shot_data[parent.name] and not shot_out_data[parent.name]:
+        if not shot_data[parent.name]:
             shot_data[parent.name] = dict()
+        if not shot_out_data[parent.name]:
             shot_out_data[parent.name] = dict()
 
         shot_data[parent.name].update(_data)
