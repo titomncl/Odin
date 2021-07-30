@@ -8,6 +8,8 @@ except ImportError:
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
+from ..globals import Logger as log
+from ..common import concat
 
 
 class Asset(object):
@@ -79,5 +81,7 @@ class Asset(object):
         asset_publish_data[task].update(_data_publish)
 
         prj_parser.write()
+
+        log.info(concat("Asset '", name, "' was created in '", task, "'"))
 
         return cls(parent, name, task, _data[name])
