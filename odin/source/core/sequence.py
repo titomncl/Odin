@@ -67,8 +67,9 @@ class Sequence(object):
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
             seq_out_data = prj_parser.data[parent.name]["OUT"]
 
-            if not seq_data["SEQ"] and not seq_out_data["SEQ"]:
+            if not seq_data["SEQ"]:
                 seq_data["SEQ"] = dict()
+            if not seq_out_data["SEQ"]:
                 seq_out_data["SEQ"] = dict()
 
             seq_data["SEQ"].update(_data)
