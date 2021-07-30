@@ -82,7 +82,7 @@ class Asset(object):
     @classmethod
     def load(cls, parent, name, task):
         _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
-        _data = _data["DATA"]["LIB"][task][name]
+        _data = _data[parent.name]["DATA"]["LIB"][task][name]
 
         return cls(parent, name, task, _data)
 
