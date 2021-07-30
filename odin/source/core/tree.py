@@ -46,7 +46,6 @@ class Tree(object):
 
     def create_on_disk(self):
         if not os.path.exists(self.full_name) and self._parent:
-            log.info(concat("CREATE: ", self.full_name))
             os.mkdir(self.full_name)
         else:
             log.warning(concat(self.full_name, ": Folder exists"))
