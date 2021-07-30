@@ -73,6 +73,14 @@ class Asset(object):
         self._task = task
         self._data = data or dict()
 
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def task(self):
+        return self._task
+
     @staticmethod
     def list(parent, task):
         path = path_from_tree(parent.data, task, parent.root)["PATH"]
