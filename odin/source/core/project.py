@@ -84,7 +84,7 @@ class Project(object):
 
     @property
     def data(self):
-        return self._data
+        return Parser.open(os.path.join(self.root, self.name, "odin.yaml")).data
 
     @staticmethod
     def list(root=None):
