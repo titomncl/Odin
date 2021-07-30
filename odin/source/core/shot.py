@@ -8,6 +8,8 @@ except ImportError:
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
+from ..globals import Logger as log
+from ..common import concat
 
 
 class Shot(object):
@@ -68,5 +70,7 @@ class Shot(object):
         shot_out_data[parent.name].update(_data_out)
 
         prj_parser.write()
+
+        log.info(concat("Shot '", name, "' was created."))
 
         return cls(parent, name, _data[name])
