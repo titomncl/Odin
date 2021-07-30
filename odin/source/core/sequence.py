@@ -9,6 +9,8 @@ from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
 from .shot import Shot
+from ..globals import Logger as log
+from ..common import concat
 
 
 class Sequence(object):
@@ -76,6 +78,8 @@ class Sequence(object):
             seq_out_data["SEQ"].update(_data_out)
 
             prj_parser.write()
+
+            log.info(concat("Sequence '", name, "' was created."))
 
             return cls(parent, name, _data[name])
         else:
