@@ -34,7 +34,7 @@ If you work in a production, it may be set by the Pipeline-TD.
 .. _change_config:
 ```
 
-## Change the configuration
+## Change configuration
 
 You can change the software launch path if it's absolutely necessary.
 
