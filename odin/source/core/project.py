@@ -2,7 +2,7 @@ import glob
 import os
 
 try:
-    from typing import List
+    from typing import List, Dict, NoReturn, Optional
 except ImportError:
     pass
 
@@ -18,6 +18,7 @@ from ..common import concat
 class Project(object):
 
     def __init__(self, root=None, name=None, data=None):
+        # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> Project
         self._root = root
         self._name = name
         self._data = data or dict()
@@ -25,18 +26,30 @@ class Project(object):
 
     @property
     def name(self):
+        # type: () -> str
         return self._name
 
     @property
     def root(self):
+        # type: () -> str
         return self._root
 
     @property
     def data(self):
+        # type: () -> Dict[str]
         return Parser.open(os.path.join(self.root, self.name, "odin.yaml")).data
 
     @staticmethod
     def list(root=None):
+        # type: (Optional[str]) -> List[str]
+        """
+        Args:
+            root (str):
+
+        Returns:
+            list(str): List of projects names
+
+        """
         root = root or os.path.expanduser("~")
         projects = glob.glob(root + "\\*\\odin.yaml")
 
@@ -53,26 +66,53 @@ class Project(object):
         return projects_name
 
     def get_assets(self, task):
+        # type: (str) -> Asset
         return Asset.list(self, task)
 
     def new_asset(self, name, task):
+        # type: (str, str) -> Asset
         return Asset.new(self, name, task)
 
     def get_sequences(self):
+        # type: () -> List[str]
         return Sequence.list(self)
 
     def new_sequence(self, name):
+        # type: (str) -> Sequence
         return Sequence.new(self, name)
 
     @classmethod
     def load(cls, root, name):
+        # type: (str, str) -> Project
+        """
+        Load an existing project
+
+        Args:
+            root (str): Path where the project is
+            name (str): Name of the project to load
+
+        Returns:
+            Project: Project object
+
+        """
         _data = Parser.open(os.path.join(root, name, "odin.yaml")).data
 
         return cls(root, name, _data)
 
     @classmethod
     def new(cls, root, name):
+        # type: (str, str) -> Project
+        """
+        Create a new project
 
+        Args:
+            root (str): Path to put the project in
+            name (str): Name of the project
+
+        Returns:
+            Project: Project object
+
+        """
         _data = dict()
         _data[name] = Parser.open(trees_path.project_tree()).data
 

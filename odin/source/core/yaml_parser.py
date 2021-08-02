@@ -20,7 +20,7 @@ class Parser(object):
     """
 
     def __init__(self, filepath=None, data=None):
-        # type: (Optional[str], Optional[dict]) -> NoReturn
+        # type: (Optional[str], Optional[dict]) -> Parser
         self.__file = filepath or str()
         self.__data = data or dict()
 
@@ -55,7 +55,7 @@ class Parser(object):
         return self
 
     def write(self, data=None):
-        # type: (dict) -> NoReturn
+        # type: (Optional[dict]) -> NoReturn
         """
         Write the data in the yaml file
 
@@ -98,13 +98,13 @@ class Parser(object):
         self.__data = values
 
     @classmethod
-    def open(cls, file_):
+    def open(cls, filepath):
         # type: (str) -> Parser
         """
         Generate a Parser object from the given yaml file or create one if the yaml file does not exists
 
         Args:
-            file_ (str): yaml file path to open
+            filepath (str): yaml file path to open
 
         Returns:
             Parser: Parser object that contain the yaml file with its data
@@ -113,9 +113,9 @@ class Parser(object):
         import yaml
 
         try:
-            data = yaml.load(open(file_, "r"), Loader=yaml.Loader)
+            data = yaml.load(open(filepath, "r"), Loader=yaml.Loader)
 
-            return cls(file_, data)
+            return cls(filepath, data)
         except IOError:
             data = dict()
-            return cls(file_, data).new()
+            return cls(filepath, data).new()
