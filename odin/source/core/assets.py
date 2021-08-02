@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import List
+    from typing import List, Dict, NoReturn, Optional
 except ImportError:
     pass
 
@@ -14,6 +14,7 @@ from ..common import concat
 
 class Asset(object):
     def __init__(self, parent, name=None, task=None, data=None):
+        # type: (Project, Optional[str], Optional[str], Optional[Dict[str]]) -> Asset
         self._parent = parent
         self._name = name
         self._task = task
@@ -21,20 +22,46 @@ class Asset(object):
 
     @property
     def name(self):
+        # type: () -> str
         return self._name
 
     @property
     def task(self):
+        # type: () -> str
         return self._task
 
     @staticmethod
     def list(parent, task):
+        # type: (Project, str) -> List[str]
+        """
+
+        Args:
+            parent (Project): Project object
+            task (str):
+
+        Returns:
+            list(str): List of the assets
+
+        """
         path = path_from_tree(parent.data, task, parent.root)["PATH"]
         assets = next(os.walk(path))[1]
         return assets
 
     @classmethod
     def load(cls, parent, name, task):
+        # type: (Project, str, str) -> Asset
+        """
+        Load an existing sequence
+
+        Args:
+            parent (Project): Project that contain the sequence
+            name (str): Name of the sequence to load
+            task (str): Name of the task
+
+        Returns:
+            Asset: Asset object
+
+        """
         _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
         _data = _data[parent.name]["DATA"]["LIB"][task][name]
 
@@ -42,6 +69,19 @@ class Asset(object):
 
     @classmethod
     def new(cls, parent, name, task):
+        # type: (Project, str, str) -> Asset
+        """
+        Create a new sequence
+
+        Args:
+            parent (Project): Project to put the sequence in
+            name (str): Name of the sequence
+            task (str): Name of the task
+
+        Returns:
+            Asset: Asset object
+
+        """
         _data = dict()
         _data_publish = dict()
 

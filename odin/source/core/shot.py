@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import List
+    from typing import List, Dict, NoReturn, Optional
 except ImportError:
     pass
 
@@ -15,22 +15,46 @@ from ..common import concat
 class Shot(object):
 
     def __init__(self, parent, name=None, data=None):
+        # type: (Sequence, Optional[str], Optional[Dict[str]]) -> Shot
         self._parent = parent
         self._name = name
         self._data = data
 
     @property
     def name(self):
+        # type: () -> str
         return self._name
 
     @staticmethod
     def list(parent):
+        # type: (Sequence) -> List[str]
+        """
+
+        Args:
+            parent (Sequence): Sequence object
+
+        Returns:
+            list(str): List of the shots
+
+        """
         path = path_from_tree(parent.parent.data, parent.name, parent.parent.root)["PATH"]
         seq = next(os.walk(path))[1]
         return seq
 
     @classmethod
     def load(cls, parent, name):
+        # type: (Sequence, str) -> Shot
+        """
+        Load an existing shot
+
+        Args:
+            parent (Sequence): Sequence that contain the shot
+            name (str): Name of the shot to load
+
+        Returns:
+            Shot: Shot object
+
+        """
         _data = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml")).data
         _data = _data[parent.parent.name]["DATA"]["FILM"]["SEQ"][parent.name][name]
 
@@ -38,6 +62,18 @@ class Shot(object):
 
     @classmethod
     def new(cls, parent, name):
+        # type: (Sequence, str) -> Shot
+        """
+        Create a new shot
+
+        Args:
+            parent (Sequence): Sequence to put the shot in
+            name (str): Name of the shot
+
+        Returns:
+            Shot: Shot object
+
+        """
         _data = dict()
         _data_out = dict()
 

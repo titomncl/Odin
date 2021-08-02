@@ -34,9 +34,12 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.coverage',
-    'sphinx.ext.extlinks'
-
+    'sphinx.ext.extlinks',
+    'sphinx_autodoc_typehints',
+    'seed_intersphinx_mapping',
 ]
+
+autodoc_typehints = "description"
 
 extlinks = {'release': ('https://github.com/titomncl/Odin/releases/' + release, '')}
 
