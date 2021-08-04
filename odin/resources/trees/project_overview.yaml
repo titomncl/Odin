@@ -14,7 +14,8 @@ PROJECT_NAME:
         HDRI:
         MAKING_OF:
       RUSH:
-        DAY#:
+        PREVIZ:
+        <DAY##>:
   DATA:
     FILM:
       EDITING:
@@ -51,7 +52,7 @@ PROJECT_NAME:
           PREVIZ:
             SCENES:
               VERSION:
-            SOURCEIMAGES:
+            MEDIA:
     LIB:
       PUBLISH:
         SET:
@@ -181,6 +182,11 @@ PROJECT_NAME:
             <S###P###>_COMPO.exr
           FX:
             <S###P###>_FX.<ext>
+    AUDIO:
+      VERSION:
+        <PROJECT_NAME>_AUDIO_<VERSION>.<ext>
+      PUBLISH:
+        <PROJECT_NAME>_AUDIO.<ext>
     EDITING:
       VERSION:
         <PROJECT_NAME>_EDIT_<VERSION>.<ext>
