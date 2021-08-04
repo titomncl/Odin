@@ -1,7 +1,9 @@
 try:
-    from typing import NoReturn, Optional
+    from typing import NoReturn, Optional, Union, Dict
 except ImportError:
     pass
+
+from ..globals import Logger as log
 
 
 class Parser(object):
@@ -24,14 +26,15 @@ class Parser(object):
         self.__file = filepath or str()
         self.__data = data or dict()
 
-    def new(self, data=None, filepath=None):
-        # type: (dict, str) -> Parser
+    @classmethod
+    def new(cls, filepath, data=None):
+        # type: (str, Optional[Dict[str]]) -> Parser
         """
         Create a new yaml file
 
         Args:
-            data (dict):
             filepath (str): filepath of the yaml file
+            data (dict):
 
         Returns:
             Parser: Parser object that contain the new yaml file with its data
@@ -41,18 +44,15 @@ class Parser(object):
         import os
         from CommonTools.os_ import make_dirs
 
-        self.filepath = filepath or self.filepath
-        self.data = data or self.data
-
-        path, _ = os.path.split(self.filepath)
+        path, _ = os.path.split(filepath)
         make_dirs(path)
 
-        content = yaml.safe_dump(self.data)
+        content = yaml.safe_dump(data)
 
-        with open(self.filepath, "w") as file_:
+        with open(filepath, "w") as file_:
             file_.write(content)
 
-        return self
+        return cls(filepath, data)
 
     def write(self, data=None):
         # type: (Optional[dict]) -> NoReturn
@@ -67,15 +67,11 @@ class Parser(object):
 
         """
         import yaml
-        import os
 
         self.data = data or self.data
 
-        if os.path.isfile(self.filepath):
-            with open(self.filepath, "w") as file_:
-                yaml.dump(self.data, file_)
-        else:
-            raise RuntimeError("Use 'Parser.new()' to create a new yaml file.")
+        with open(self.filepath, "w") as file_:
+            yaml.dump(self.data, file_)
 
     @property
     def filepath(self):
@@ -99,15 +95,18 @@ class Parser(object):
 
     @classmethod
     def open(cls, filepath):
-        # type: (str) -> Parser
+        # type: (str) -> Union[Parser, None]
         """
-        Generate a Parser object from the given yaml file or create one if the yaml file does not exists
+        Generate a Parser object from the given yaml file
 
         Args:
             filepath (str): yaml file path to open
 
         Returns:
             Parser: Parser object that contain the yaml file with its data
+
+        Raises:
+            IOError: if the file specified does not exist
 
         """
         import yaml
@@ -116,6 +115,6 @@ class Parser(object):
             data = yaml.load(open(filepath, "r"), Loader=yaml.Loader)
 
             return cls(filepath, data)
-        except IOError:
-            data = dict()
-            return cls(filepath, data).new()
+        except IOError as e:
+            log.warning(e)
+            return None
