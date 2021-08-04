@@ -16,6 +16,7 @@ class Film(Qw.QWidget):
 
         v_layout.setContentsMargins(5, 5, 5, 5)
 
+        v_layout.addWidget(self.create_filming_days_dialog)
         v_layout.addWidget(self.create_seq_dialog)
         v_layout.addWidget(self.create_shot_dialog)
 
@@ -29,18 +30,19 @@ class Film(Qw.QWidget):
 
         return main_layout
 
-    def btn_layout(self):
-        main_layout = Qw.QVBoxLayout()
-
-        self.new_seq = Qw.QPushButton("Add new sequence...")
-        self.new_shot = Qw.QPushButton("Add new shot...")
-
-        main_layout.addWidget(self.new_seq)
-        main_layout.addWidget(self.new_shot)
-
-        return main_layout
-
     def init_dialog(self):
+
+        # Init days of filming
+        self.create_filming_days_dialog = CreateDialog("Create filming days", "Add filming days:", "##", self)
+        film_layout = self.create_filming_days_dialog.layout()
+
+        self.create_filming_days_btn = Qw.QPushButton("Create")
+        self.create_filming_days_btn.setSizePolicy(Qw.QSizePolicy.Policy.Expanding, Qw.QSizePolicy.Policy.Fixed)
+
+        film_layout.addWidget(self.create_filming_days_btn)
+
+        self.create_filming_days_dialog.setLayout(film_layout)
+        self.create_filming_days_dialog.text_field = "1"
 
         # Init sequence dialog
         self.create_seq_dialog = CreateDialog("Create sequence...", "New sequence:", "S###", self)
@@ -52,7 +54,6 @@ class Film(Qw.QWidget):
         seq_layout.addWidget(self.create_seq_btn)
 
         self.create_seq_dialog.setLayout(seq_layout)
-
         self.create_seq_dialog.text_field = "S"
 
         # Init shot dialog
@@ -65,5 +66,4 @@ class Film(Qw.QWidget):
         shot_layout.addWidget(self.create_shot_btn)
 
         self.create_shot_dialog.setLayout(shot_layout)
-
-        self.create_shot_dialog._text_field.setText("P")
+        self.create_shot_dialog.text_field = "P"
