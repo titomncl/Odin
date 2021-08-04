@@ -92,6 +92,7 @@ class Controller(object):
 
         self.ui.manage_prj.lib_widget.create_btn.clicked.connect(self.create_asset_action)
 
+        self.ui.manage_prj.film_widget.create_filming_days_btn.clicked.connect(self.filming_days_action)
         self.ui.manage_prj.film_widget.create_seq_btn.clicked.connect(self.seq_action)
         self.ui.manage_prj.film_widget.create_shot_btn.clicked.connect(self.shot_action)
 
@@ -303,6 +304,30 @@ class Controller(object):
             self.project.new_asset(fx_name, "FX")
         else:
             self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
+
+    def filming_days_action(self):
+        days = self.ui.manage_prj.film_widget.create_filming_days_dialog.text_field
+
+        try:
+            days = int(days)
+            self.ui.manage_prj.film_widget.create_filming_days_dialog.green_palette()
+            rush_path = os.path.join(self.root, self.project_name, "IN/FILMING/RUSH").replace("\\", "/")
+
+            files = os.listdir(rush_path)
+
+            days_file = len([f for f in files if "DAY" in f])
+
+            for day in range(days):
+                day_offset = day + days_file + 1
+                day_path = rush_path + "/DAY" + str(day_offset).zfill(2)
+                os.mkdir(day_path)
+
+            log.info("Filming days created")
+
+        except ValueError:
+            self.ui.manage_prj.film_widget.create_filming_days_dialog.red_palette()
+            e = "Only integer are allowed here."
+            log.error(e)
 
     def seq_action(self):
         seq_name = self.ui.manage_prj.film_widget.create_seq_dialog.text_field
