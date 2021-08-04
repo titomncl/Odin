@@ -110,8 +110,8 @@ class ManageProject(Qw.QWidget):
             self.stacked_widgets.setCurrentWidget(self.film_widget)
             self.lib_btn.setChecked(False)
 
-            self.parent().parent().setMinimumSize(600, 500)
-            self.parent().parent().resize(600, 500)
+            self.parent().parent().setMinimumSize(600, 550)
+            self.parent().parent().resize(600, 550)
         else:
             self.stacked_widgets.setCurrentWidget(self.empty_w)
             self.parent().parent().setMinimumSize(400, 350)
