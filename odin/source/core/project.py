@@ -65,13 +65,13 @@ class Project(object):
 
         return projects_name
 
-    def get_assets(self, task):
-        # type: (str) -> Asset
-        return Asset.list(self, task)
+    def get_assets(self, asset_type):
+        # type: (str) -> List[str]
+        return Asset.list(self, asset_type)
 
-    def new_asset(self, name, task):
+    def new_asset(self, name, asset_type):
         # type: (str, str) -> Asset
-        return Asset.new(self, name, task)
+        return Asset.new(self, name, asset_type)
 
     def get_sequences(self):
         # type: () -> List[str]
