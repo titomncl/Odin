@@ -23,7 +23,9 @@ class Controller(object):
 
         self._project = None
 
-        self._config_parser = Parser().open("./odin/config/config_file.yaml")
+        self._config_parser = Parser.open("./config/config_file.yaml")
+        if not self._config_parser:
+            self._config_parser = Parser.new("./config/config_file.yaml")
 
         self.ui = ui(self, parent)
 
@@ -193,7 +195,11 @@ class Controller(object):
     @property
     def root(self):
         # type: () -> str
-        return self._config_parser.data["ROOT_PATH"]
+        p = self._config_parser
+        if p:
+            return p.data["ROOT_PATH"]
+        else:
+            return "Not set"
 
     @root.setter
     def root(self, value):
@@ -204,7 +210,11 @@ class Controller(object):
     @property
     def recent_project(self):
         # type: () -> str
-        return self._config_parser.data["LAST_PROJECT"]
+        p = self._config_parser
+        if p:
+            return p.data["LAST_PROJECT"]
+        else:
+            return ""
 
     @recent_project.setter
     def recent_project(self, value):
