@@ -94,10 +94,16 @@ class Project(object):
         Returns:
             Project: Project object
 
-        """
-        _data = Parser.open(os.path.join(root, name, "odin.yaml")).data
+        Raises:
+            RuntimeError: if the project does not exist
 
-        return cls(root, name, _data)
+        """
+        _file = Parser.open(os.path.join(root, name, "odin.yaml"))
+
+        if not _file:
+            raise RuntimeError("No project '{}' created in '{}'.".format(name, root))
+
+        return cls(root, name, _file.data)
 
     @classmethod
     def new(cls, root, name):
@@ -121,8 +127,7 @@ class Project(object):
 
         tree.create_on_disk()
 
-        prj_parser = Parser.open(os.path.join(root, name, "odin.yaml"))
-        prj_parser.write(_data)
+        Parser.new(os.path.join(root, name, "odin.yaml"), _data).write()
 
         log.info(concat("Project '", name, "' was created."))
 
