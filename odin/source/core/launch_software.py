@@ -19,10 +19,10 @@ def get_launch_env(py_ver):
 
 def launch_software(name, version):
 
-    bat_file = os.getcwd().replace("\\", "/") + "/odin/softwareList/" + name + ".bat"
+    bat_file = os.getcwd().replace("\\", "/") + "/softwareList/" + name + ".bat"
 
     if os.path.isfile(bat_file):
-        soft_config = Parser().open("./odin/config/software_config.yaml").data[name]
+        soft_config = Parser().open("./config/software_config.yaml").data[name]
 
         cwd = soft_config["cwd"]
         exe = soft_config["exe"]

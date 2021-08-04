@@ -20,7 +20,7 @@ class MainWindow(Qw.QMainWindow):
 
         self.setWindowTitle("Odin")
 
-        self.setWindowIcon(Qg.QIcon("./odin/resources/icons/odin.png"))
+        self.setWindowIcon(Qg.QIcon("./resources/icons/odin.png"))
 
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
