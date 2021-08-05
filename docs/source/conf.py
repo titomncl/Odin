@@ -58,6 +58,10 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+html_theme_options = {
+    "navigation_with_keys": True,
+}
+
 
 # -- Options for HTML output -------------------------------------------------
 
