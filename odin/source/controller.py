@@ -6,10 +6,11 @@ from qtpy.QtWidgets import QMainWindow, QApplication
 from typing import NoReturn, Optional, List
 
 from .globals import Logger as log
-from .core import project, launch_software
-from .core import assets, sets, fx, sequence, shot
+from .core import launch_software
 from .common import concat
 from .core.yaml_parser import Parser
+from .core.project import Project
+from .core.sequence import Sequence
 
 
 class Controller(object):
@@ -20,7 +21,11 @@ class Controller(object):
     def __init__(self, ui, parent=None):
         # type: (callable(QMainWindow), Optional[QApplication]) -> NoReturn
 
-        self._config_parser = Parser().open("./odin/config/config_file.yaml")
+        self._project = None
+
+        self._config_parser = Parser.open("./config/config_file.yaml")
+        if not self._config_parser:
+            self._config_parser = Parser.new("./config/config_file.yaml")
 
         self.ui = ui(self, parent)
 
@@ -87,6 +92,7 @@ class Controller(object):
 
         self.ui.manage_prj.lib_widget.create_btn.clicked.connect(self.create_asset_action)
 
+        self.ui.manage_prj.film_widget.create_filming_days_btn.clicked.connect(self.filming_days_action)
         self.ui.manage_prj.film_widget.create_seq_btn.clicked.connect(self.seq_action)
         self.ui.manage_prj.film_widget.create_shot_btn.clicked.connect(self.shot_action)
 
@@ -125,7 +131,7 @@ class Controller(object):
 
         if project_name not in self.projects and project_name != "" and len(project_name) < 5:
             self.ui.create_project_dialog.green_palette()
-            project.create_project(self.root, project_name)
+            Project.new(self.root, project_name)
         else:
             self.ui.create_project_dialog.red_palette()
 
@@ -142,8 +148,12 @@ class Controller(object):
             log.info("No tools path set")
 
         if not self.ui.create_or_set.prod_cbox.count() == 0:
+            self.project = Project.load(self.root, self.project_name)
             self.set_var_env()
             self.ui.stacked_widget.setCurrentWidget(self.ui.manage_prj)
+
+            self.ui.manage_prj.film_widget.create_shot_dialog.cbox.clear()
+            self.ui.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.sequences)
 
             self.ui.setMinimumSize(400, 350)
             self.ui.resize(400, 350)
@@ -155,7 +165,10 @@ class Controller(object):
         os.environ["ROOT_PATH"] = self.root
         os.environ["PROJECT_ENV"] = os.path.join(self.root, self.project_name)
 
-        venv = os.path.abspath("./venv").replace("\\", "/")
+        venv = os.path.abspath("venv").replace("\\", "/")
+
+        if not os.path.exists(venv):
+            venv = os.path.abspath("../venv").replace("\\", "/")
 
         log.info("Project set: " + self.root + self.project_name)
 
@@ -166,14 +179,31 @@ class Controller(object):
         log.info("venv: " + venv)
 
     @property
+    def project(self):
+        return self._project
+
+    @project.setter
+    def project(self, value):
+        self._project = value
+
+    @property
     def projects(self):
         # type: () -> List[str]
-        return project.find_project(self.root)
+        return Project.list(self.root)
+
+    @property
+    def sequences(self):
+        # type: () -> List[str]
+        return Sequence.list(self.project)
 
     @property
     def root(self):
         # type: () -> str
-        return self._config_parser.data["ROOT_PATH"]
+        p = self._config_parser
+        if p:
+            return p.data["ROOT_PATH"]
+        else:
+            return "Not set"
 
     @root.setter
     def root(self, value):
@@ -184,7 +214,11 @@ class Controller(object):
     @property
     def recent_project(self):
         # type: () -> str
-        return self._config_parser.data["LAST_PROJECT"]
+        p = self._config_parser
+        if p:
+            return p.data["LAST_PROJECT"]
+        else:
+            return ""
 
     @recent_project.setter
     def recent_project(self, value):
@@ -219,11 +253,6 @@ class Controller(object):
             else:
                 return self.root
 
-    @property
-    def sequences(self):
-        # type: () -> list
-        return sequence.find_sequences(self.root, self.project_name)
-
     def create_asset_action(self):
         chara_name = self.ui.manage_prj.lib_widget.create_chara_dialog.text_field
         props_name = self.ui.manage_prj.lib_widget.create_props_dialog.text_field
@@ -245,7 +274,7 @@ class Controller(object):
 
         if chara_is_correct:
             self.ui.manage_prj.lib_widget.create_chara_dialog.green_palette()
-            assets.create_asset(self.root, self.project_name, chara_name, "CHARA")
+            self.project.new_asset(chara_name, "CHARA")
         else:
             self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
 
@@ -255,7 +284,7 @@ class Controller(object):
 
         if props_is_correct:
             self.ui.manage_prj.lib_widget.create_props_dialog.green_palette()
-            assets.create_asset(self.root, self.project_name, props_name, "PROPS")
+            self.project.new_asset(props_name, "PROPS")
         else:
             self.ui.manage_prj.lib_widget.create_props_dialog.red_palette()
 
@@ -265,7 +294,7 @@ class Controller(object):
 
         if set_is_correct:
             self.ui.manage_prj.lib_widget.create_set_dialog.green_palette()
-            sets.create_set(self.root, self.project_name, set_name)
+            self.project.new_asset(set_name, "SET")
         else:
             self.ui.manage_prj.lib_widget.create_set_dialog.red_palette()
 
@@ -275,9 +304,33 @@ class Controller(object):
 
         if fx_is_correct:
             self.ui.manage_prj.lib_widget.create_fx_dialog.green_palette()
-            fx.create_fx(self.root, self.project_name, fx_name)
+            self.project.new_asset(fx_name, "FX")
         else:
             self.ui.manage_prj.lib_widget.create_fx_dialog.red_palette()
+
+    def filming_days_action(self):
+        days = self.ui.manage_prj.film_widget.create_filming_days_dialog.text_field
+
+        try:
+            days = int(days)
+            self.ui.manage_prj.film_widget.create_filming_days_dialog.green_palette()
+            rush_path = os.path.join(self.root, self.project_name, "IN/FILMING/RUSH").replace("\\", "/")
+
+            files = os.listdir(rush_path)
+
+            days_file = len([f for f in files if "DAY" in f])
+
+            for day in range(days):
+                day_offset = day + days_file + 1
+                day_path = rush_path + "/DAY" + str(day_offset).zfill(2)
+                os.mkdir(day_path)
+
+            log.info("Filming days created")
+
+        except ValueError:
+            self.ui.manage_prj.film_widget.create_filming_days_dialog.red_palette()
+            e = "Only integer are allowed here."
+            log.error(e)
 
     def seq_action(self):
         seq_name = self.ui.manage_prj.film_widget.create_seq_dialog.text_field
@@ -287,7 +340,7 @@ class Controller(object):
 
         if seq_is_correct:
             self.ui.manage_prj.film_widget.create_seq_dialog.green_palette()
-            sequence.create_sequences(self.root, self.project_name, seq_name)
+            self.project.new_sequence(seq_name)
 
             self.ui.manage_prj.film_widget.create_shot_dialog.cbox.clear()
             self.ui.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.sequences)
@@ -306,7 +359,7 @@ class Controller(object):
 
             seq_name = self.ui.manage_prj.film_widget.create_shot_dialog.cbox.currentText()
 
-            shot.create_shot(self.root, self.project_name, seq_name, shot_name)
+            Sequence.load(self.project, seq_name).new_shot(shot_name)
         else:
             self.ui.manage_prj.film_widget.create_shot_dialog.red_palette()
 

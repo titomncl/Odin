@@ -4,7 +4,7 @@ IN:
     DESIGN:
     SCENARIO:
     REFS:
-  TOURNAGE:
+  FILMING:
     CONFO:
       EXR:
       PROXY:
@@ -13,22 +13,13 @@ IN:
       HDRI:
       MAKING_OF:
     RUSH:
-      DAY1:
-      DAY2:
-      DAY3:
-      DAY4:
-      DAY5:
-MONTAGE:
-  CHUTIER:
-    AUDIO:
-    VIDEO:
-  RESOLVE:
-  REFS:
-  EXPORT:
-    AUDIO:
-    VIDEO:
+      PREVIZ:
 DATA:
   FILM:
+    EDITING:
+      VERSION:
+      PUBLISH:
+    SEQ:
   LIB:
     PUBLISH:
       SET:
@@ -40,13 +31,13 @@ DATA:
     CHARA:
     PROPS:
 OUT:
-  RENDER:
-    FILMS:
-  COMPO:
-    FILMS:
-  MONTAGE:
-    EXPORTS:
-      OLD:
+  SEQ:
+  AUDIO:
+    VERSION:
+    PUBLISH:
+  EDITING:
+    VERSION:
+    PUBLISH:
   DAILIES:
   COMMUNICATION:
     PACKAGE_1:

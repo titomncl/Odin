@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import NoReturn, Dict, Union
+    from typing import NoReturn, Dict, Union, Optional
 except ImportError:
     pass
 
@@ -46,16 +46,14 @@ class Tree(object):
 
     def create_on_disk(self):
         if not os.path.exists(self.full_name) and self._parent:
-            log.info(concat("CREATE: ", self.full_name))
             os.mkdir(self.full_name)
         else:
-            log.warning(concat(self.full_name, ": Folder is exists"))
+            log.warning(concat(self.full_name, ": Folder exists"))
 
         for child in self._children:
             child.create_on_disk()
 
-    @staticmethod
-    def create_from_template(template_path, root_):
+    def create_from_template(self, template_path, path):
         # type: (str, str) -> Tree
         """
 
@@ -63,7 +61,7 @@ class Tree(object):
 
         Args:
             template_path (str): path of the yaml template
-            root_ (str): root for the new tree
+            path (str): root path for the new tree
 
         Returns:
             Tree: Tree object that contain the folders to create the tree
@@ -71,23 +69,57 @@ class Tree(object):
         """
         from .yaml_parser import Parser
 
-        root = Tree(None, root_)
+        root = Tree(None, path)
 
         template_file = Parser().open(template_path).data
 
-        create_tree(template_file, root)
+        self.create_tree(template_file, root)
         return root
 
+    def create_tree(self, data, tree):
+        # type: (Dict[str], Tree) -> NoReturn
+        """
+        Args:
+            data (dict(str)):
+            tree (Tree):
 
-def create_tree(tree, root):
-    # type: (Dict[str: dict or None], Tree) -> NoReturn
+        """
+        for key, value in data.items():
+            child = tree.create_child(key)
+            if value:
+                self.create_tree(value, child)
+
+
+def path_from_tree(data, word, path="", values=None):
+    # type: (Dict[str], str, Optional[str], Optional[Dict[str]]) -> Dict[str]
     """
+
     Args:
-        tree ({str: {} or None}):
-        root (Tree):
+        data:
+        word:
+        path:
+        values:
+
+    Returns:
 
     """
-    for key, value in tree.items():
-        child = root.create_child(key)
+    _path = path
+    _values = values or dict()
+
+    for key, value in data.items():
         if value:
-            create_tree(value, child)
+            _path = os.path.join(path, key)
+            try:
+                if word in value:
+                    if "PUBLISH" in _path:
+                        _values["PUBLISH"] = os.path.join(_path, word)
+                    elif "OUT" in _path:
+                        _values["OUT"] = os.path.join(_path, word)
+                    else:
+                        _values["PATH"] = os.path.join(_path, word)
+            except KeyError:
+                pass
+
+            _values = path_from_tree(value, word, _path, _values)
+
+    return _values

@@ -6,7 +6,7 @@ except ImportError:
     pass
 
 from . import trees_path
-from .create_tree import Tree
+from .tree import Tree
 from ..common import make_dirs, concat
 
 

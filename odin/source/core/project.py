@@ -1,62 +1,134 @@
 import glob
+import os
 
 try:
-    from typing import List
+    from typing import List, Dict, NoReturn, Optional
 except ImportError:
     pass
 
 from . import trees_path
-from .create_tree import Tree
-from ..common import make_dirs, concat
+from .assets import Asset
+from .sequence import Sequence
+from .tree import Tree
+from .yaml_parser import Parser
+from ..globals import Logger as log
+from ..common import concat
 
 
-def create_project(root, project):
-    # type: (str, str) -> bool
-    """
+class Project(object):
 
-    Args:
-        root (str): root path of the project without the slash at the end
-        project (str): project name
+    def __init__(self, root=None, name=None, data=None):
+        # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> Project
+        self._root = root
+        self._name = name
+        self._data = data or dict()
+        self._assets = None
 
-    Returns:
-        bool: True if the project was created, False if it was not
+    @property
+    def name(self):
+        # type: () -> str
+        return self._name
 
-    """
-    project_path = concat(root, project, separator="/")
-    project_tree = Tree.create_from_template(trees_path.project_tree(), project_path)
+    @property
+    def root(self):
+        # type: () -> str
+        return self._root
 
-    project_created = make_dirs(project_path)
+    @property
+    def data(self):
+        # type: () -> Dict[str]
+        return Parser.open(os.path.join(self.root, self.name, "odin.yaml")).data
 
-    if project_created:
-        project_tree.create_on_disk()
+    @staticmethod
+    def list(root=None):
+        # type: (Optional[str]) -> List[str]
+        """
+        Args:
+            root (str):
 
-        return True
-    else:
-        return False
+        Returns:
+            list(str): List of projects names
 
+        """
+        root = root or os.path.expanduser("~")
+        projects = glob.glob(root + "\\*\\odin.yaml")
 
-def find_project(root):
-    # type: (str) -> List[str]
-    """
-    Get the projects available in the root path
+        projects_name = list()
 
-    Args:
-        root (str): root path
+        for prj in projects:
+            project = prj.replace("\\", "/")
+            project = project.replace(root + "/", "")
 
-    Returns:
-        list (str): return all projects found
+            project_name = project.split("/")[0]
 
-    """
-    projects = glob.glob(root + "\\*\\DATA\\LIB")
+            projects_name.append(project_name)
 
-    projects_name = list()
+        return projects_name
 
-    for prj in projects:
-        project = prj.replace("\\", "/")
-        project = project.replace(root + "/", "")
+    def get_assets(self, asset_type):
+        # type: (str) -> List[str]
+        return Asset.list(self, asset_type)
 
-        project_name = project.split("/")[0]
+    def new_asset(self, name, asset_type):
+        # type: (str, str) -> Asset
+        return Asset.new(self, name, asset_type)
 
-        projects_name.append(project_name)
+    def get_sequences(self):
+        # type: () -> List[str]
+        return Sequence.list(self)
 
-    return projects_name
+    def new_sequence(self, name):
+        # type: (str) -> Sequence
+        return Sequence.new(self, name)
+
+    @classmethod
+    def load(cls, root, name):
+        # type: (str, str) -> Project
+        """
+        Load an existing project
+
+        Args:
+            root (str): Path where the project is
+            name (str): Name of the project to load
+
+        Returns:
+            Project: Project object
+
+        Raises:
+            RuntimeError: if the project does not exist
+
+        """
+        _file = Parser.open(os.path.join(root, name, "odin.yaml"))
+
+        if not _file:
+            raise RuntimeError("No project '{}' created in '{}'.".format(name, root))
+
+        return cls(root, name, _file.data)
+
+    @classmethod
+    def new(cls, root, name):
+        # type: (str, str) -> Project
+        """
+        Create a new project
+
+        Args:
+            root (str): Path to put the project in
+            name (str): Name of the project
+
+        Returns:
+            Project: Project object
+
+        """
+        _data = dict()
+        _data[name] = Parser.open(trees_path.project_tree()).data
+
+        tree = Tree(None, root)
+        tree.create_tree(_data, tree)
+
+        tree.create_on_disk()
+
+        Parser.new(os.path.join(root, name, "odin.yaml"), _data).write()
+
+        log.info(concat("Project '", name, "' was created."))
+
+        return cls(root, name, _data)

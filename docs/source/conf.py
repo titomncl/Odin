@@ -34,11 +34,16 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.coverage',
-    'sphinx.ext.extlinks'
-
+    'sphinx.ext.extlinks',
+    'sphinx_autodoc_typehints',
+    'seed_intersphinx_mapping',
 ]
 
+autodoc_typehints = "description"
+
 extlinks = {'release': ('https://github.com/titomncl/Odin/releases/' + release, '')}
+
+
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -52,6 +57,10 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
+
+html_theme_options = {
+    "navigation_with_keys": True,
+}
 
 
 # -- Options for HTML output -------------------------------------------------

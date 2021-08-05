@@ -60,6 +60,9 @@ If you work in a production, it may be set by the Pipeline-TD.
     - 📄 README.md: Documentation of your repository
 ```
 
+### Update Odin
+If an update is available, a message box will shows up telling you a new version of Odin has been downloaded. 
+
 ### Change the configuration
 You can change the software launch path if it's absolutely necessary.
 
