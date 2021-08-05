@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://img.shields.io/github/v/release/titomncl/odin?include_prereleases&style=flat-square">
+  <img src="https://img.shields.io/github/v/release/titomncl/odin?style=flat-square">
   <img src='https://readthedocs.org/projects/odin-project-manager/badge/?version=latest&style=flat-square' alt='Documentation Status' />
   <img src="https://img.shields.io/github/license/titomncl/odin?style=flat-square">
   <img src="https://img.shields.io/github/downloads/titomncl/odin/total?style=flat-square">
