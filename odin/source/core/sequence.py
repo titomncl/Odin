@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import List, Dict, NoReturn, Optional
+    from typing import List, Dict, Optional
 except ImportError:
     pass
 
@@ -16,7 +16,7 @@ from ..common import concat
 class Sequence(object):
 
     def __init__(self, parent, name=None, data=None):
-        # type: (Project, Optional[str], Optional[Dict[str]]) -> Sequence
+        # type: ("odin.source.core.project.Project", Optional[str], Optional[Dict[str]]) -> None
         self.parent = parent
         self._name = name
         self._data = data
@@ -27,7 +27,7 @@ class Sequence(object):
         return self._name
 
     def get_shots(self):
-        # type: () -> Shot
+        # type: () -> List[str]
         return Shot.list(self)
 
     def new_shot(self, name):
@@ -36,14 +36,15 @@ class Sequence(object):
 
     @staticmethod
     def list(parent):
-        # type: (Project) -> List[str]
+        # type: ("odin.source.core.project.Project") -> List[str]
         """
+        List the sequences found in the given project.
 
         Args:
-            parent (Project): Project object
+            parent: Project object
 
         Returns:
-            list(str): List of the sequences
+            List of the sequences
 
         """
         path = path_from_tree(parent.data, "SEQ", parent.root)["PATH"]
@@ -52,16 +53,16 @@ class Sequence(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: (Project, str) -> Sequence
+        # type: ("odin.source.core.project.Project", str) -> Sequence
         """
-        Load an existing sequence
+        Load an existing sequence.
 
         Args:
-            parent (Project): Project that contain the sequence
-            name (str): Name of the sequence to load
+            parent: Project that contain the sequence
+            name: Name of the sequence to load
 
         Returns:
-            Sequence: Sequence object
+            Sequence object
 
         """
         _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
@@ -71,16 +72,16 @@ class Sequence(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: (Project, str) -> Sequence
+        # type: ("odin.source.core.project.Project", str) -> Sequence
         """
-        Create a new sequence
+        Create a new sequence.
 
         Args:
-            parent (Project): Project to put the sequence in
-            name (str): Name of the sequence
+            parent: Project to put the sequence in
+            name: Name of the sequence
 
         Returns:
-            Sequence: Sequence object
+            Sequence object
 
         """
         _data = dict()

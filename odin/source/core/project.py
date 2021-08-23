@@ -2,7 +2,7 @@ import glob
 import os
 
 try:
-    from typing import List, Dict, NoReturn, Optional
+    from typing import List, Dict, Optional
 except ImportError:
     pass
 
@@ -18,7 +18,7 @@ from ..common import concat
 class Project(object):
 
     def __init__(self, root=None, name=None, data=None):
-        # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> Project
+        # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> None
         self._root = root
         self._name = name
         self._data = data or dict()
@@ -43,11 +43,13 @@ class Project(object):
     def list(root=None):
         # type: (Optional[str]) -> List[str]
         """
+        List the projects found in the given root path.
+
         Args:
-            root (str):
+            root: folder path that contain the projects
 
         Returns:
-            list(str): List of projects names
+            List of projects names
 
         """
         root = root or os.path.expanduser("~")
@@ -85,14 +87,14 @@ class Project(object):
     def load(cls, root, name):
         # type: (str, str) -> Project
         """
-        Load an existing project
+        Load an existing project.
 
         Args:
-            root (str): Path where the project is
-            name (str): Name of the project to load
+            root: Path where the project is
+            name: Name of the project to load
 
         Returns:
-            Project: Project object
+            Project object
 
         Raises:
             RuntimeError: if the project does not exist
@@ -109,14 +111,14 @@ class Project(object):
     def new(cls, root, name):
         # type: (str, str) -> Project
         """
-        Create a new project
+        Create a new project.
 
         Args:
-            root (str): Path to put the project in
-            name (str): Name of the project
+            root: Path to put the project in
+            name: Name of the project
 
         Returns:
-            Project: Project object
+            Project object
 
         """
         _data = dict()

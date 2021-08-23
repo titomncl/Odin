@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import List, Dict, NoReturn, Optional
+    from typing import List, Dict, Optional
 except ImportError:
     pass
 
@@ -14,7 +14,7 @@ from ..common import concat
 
 class Asset(object):
     def __init__(self, parent, name=None, asset_type=None, data=None):
-        # type: (Project, Optional[str], Optional[str], Optional[Dict[str]]) -> Asset
+        # type: ("odin.source.core.project.Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent
         self._name = name
         self._asset_type = asset_type
@@ -32,15 +32,16 @@ class Asset(object):
 
     @staticmethod
     def list(parent, asset_type):
-        # type: (Project, str) -> List[str]
+        # type: ("odin.source.core.project.Project", str) -> List[str]
         """
+        List the assets found in the given project.
 
         Args:
-            parent (Project): Project object
-            asset_type (str): Type of the assets to list
+            parent: Project object
+            asset_type: Type of the assets to list
 
         Returns:
-            list(str): List of the assets
+            List of the assets
 
         """
         path = path_from_tree(parent.data, asset_type, parent.root)["PATH"]
@@ -49,17 +50,17 @@ class Asset(object):
 
     @classmethod
     def load(cls, parent, name, asset_type):
-        # type: (Project, str, str) -> Asset
+        # type: ("odin.source.core.project.Project", str, str) -> Asset
         """
-        Load an existing asset
+        Load an existing asset.
 
         Args:
-            parent (Project): Project that contain the asset
-            name (str): Name of the asset to load
-            asset_type (str): Type of the asset (Chara, props, set, fx)
+            parent: Project that contain the asset
+            name: Name of the asset to load
+            asset_type: Type of the asset (Chara, props, set, fx)
 
         Returns:
-            Asset: Asset object
+            Asset object
 
         """
         _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
@@ -69,17 +70,17 @@ class Asset(object):
 
     @classmethod
     def new(cls, parent, name, asset_type):
-        # type: (Project, str, str) -> Asset
+        # type: ("odin.source.core.project.Project", str, str) -> Asset
         """
-        Create a new sequence
+        Create a new sequence.
 
         Args:
-            parent (Project): Project to put the sequence in
-            name (str): Name of the sequence
-            asset_type (str): Type of the asset (Chara, props, set, fx)
+            parent: Project to put the sequence in
+            name: Name of the sequence
+            asset_type: Type of the asset (Chara, props, set, fx)
 
         Returns:
-            Asset: Asset object
+            Asset object
 
         """
         _data = dict()

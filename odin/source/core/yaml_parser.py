@@ -1,5 +1,5 @@
 try:
-    from typing import NoReturn, Optional, Union, Dict
+    from typing import Optional, Union, Dict
 except ImportError:
     pass
 
@@ -30,14 +30,14 @@ class Parser(object):
     def new(cls, filepath, data=None):
         # type: (str, Optional[Dict[str]]) -> Parser
         """
-        Create a new yaml file
+        Create a new yaml file.
 
         Args:
-            filepath (str): filepath of the yaml file
-            data (dict):
+            filepath: filepath of the yaml file
+            data:
 
         Returns:
-            Parser: Parser object that contain the new yaml file with its data
+            Parser object that contain the new yaml file with its data
 
         """
         import yaml
@@ -55,12 +55,9 @@ class Parser(object):
         return cls(filepath, data)
 
     def write(self, data=None):
-        # type: (Optional[dict]) -> NoReturn
+        # type: (Optional[dict]) -> None
         """
-        Write the data in the yaml file
-
-        Args:
-            data (dict):
+        Write the data in the yaml file.
 
         Raises:
             RuntimeError: if the file does not exist
@@ -80,7 +77,7 @@ class Parser(object):
 
     @filepath.setter
     def filepath(self, value):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         self.__file = value
 
     @property
@@ -90,20 +87,20 @@ class Parser(object):
 
     @data.setter
     def data(self, values):
-        # type: (dict) -> NoReturn
+        # type: (dict) -> None
         self.__data = values
 
     @classmethod
     def open(cls, filepath):
         # type: (str) -> Union[Parser, None]
         """
-        Generate a Parser object from the given yaml file
+        Generate a Parser object from the given yaml file.
 
         Args:
-            filepath (str): yaml file path to open
+            filepath: yaml file path to open
 
         Returns:
-            Parser: Parser object that contain the yaml file with its data
+            Parser object that contain the yaml file with its data
 
         Raises:
             IOError: if the file specified does not exist
