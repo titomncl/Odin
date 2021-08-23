@@ -11,6 +11,7 @@ from .common import concat
 from .core.yaml_parser import Parser
 from .core.project import Project
 from .core.sequence import Sequence
+from .core.filming_days import add_days
 
 
 class Controller(object):
@@ -314,16 +315,8 @@ class Controller(object):
         try:
             days = int(days)
             self.ui.manage_prj.film_widget.create_filming_days_dialog.green_palette()
-            rush_path = os.path.join(self.root, self.project_name, "IN/FILMING/RUSH").replace("\\", "/")
 
-            files = os.listdir(rush_path)
-
-            days_file = len([f for f in files if "DAY" in f])
-
-            for day in range(days):
-                day_offset = day + days_file + 1
-                day_path = rush_path + "/DAY" + str(day_offset).zfill(2)
-                os.mkdir(day_path)
+            add_days(self.root, self.project_name, days)
 
             log.info("Filming days created")
 
