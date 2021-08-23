@@ -1,5 +1,7 @@
 import os
 
+from copy import deepcopy
+
 try:
     from typing import List, Dict, Optional
 except ImportError:
@@ -64,9 +66,16 @@ class Asset(object):
 
         """
         _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
-        _data = _data[parent.name]["DATA"]["LIB"][asset_type][name]
 
-        return cls(parent, name, asset_type, _data)
+        lib = deepcopy(_data[parent.name]["DATA"]["LIB"])
+        if asset_type not in lib:
+            raise KeyError("{} is not a valid asset type."
+                           "Should be 'CHARA', 'PROPS', 'SETS' or 'FX' instead.".format(asset_type))
+        elif name not in lib[asset_type]:
+            raise KeyError("{} not in database.")
+        else:
+            _data = _data[parent.name]["DATA"]["LIB"][asset_type][name]
+            return cls(parent, name, asset_type, _data)
 
     @classmethod
     def new(cls, parent, name, asset_type):
