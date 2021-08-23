@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import List, Dict, NoReturn, Optional
+    from typing import List, Dict, Optional
 except ImportError:
     pass
 
@@ -27,14 +27,15 @@ class Shot(object):
 
     @staticmethod
     def list(parent):
-        # type: (Sequence) -> List[str]
+        # type: ("odin.source.core.sequence.Sequence") -> List[str]
         """
+        List the shots found in the given sequence.
 
         Args:
-            parent (Sequence): Sequence object
+            parent: Sequence object
 
         Returns:
-            list(str): List of the shots
+            List of the shots
 
         """
         path = path_from_tree(parent.parent.data, parent.name, parent.parent.root)["PATH"]
@@ -43,16 +44,16 @@ class Shot(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: (Sequence, str) -> Shot
+        # type: ("odin.source.core.sequence.Sequence", str) -> Shot
         """
-        Load an existing shot
+        Load an existing shot.
 
         Args:
-            parent (Sequence): Sequence that contain the shot
-            name (str): Name of the shot to load
+            parent: Sequence that contain the shot
+            name: Name of the shot to load
 
         Returns:
-            Shot: Shot object
+            Shot object
 
         """
         _data = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml")).data
@@ -62,16 +63,16 @@ class Shot(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: (Sequence, str) -> Shot
+        # type: ("odin.source.core.sequence.Sequence", str) -> Shot
         """
-        Create a new shot
+        Create a new shot.
 
         Args:
-            parent (Sequence): Sequence to put the shot in
-            name (str): Name of the shot
+            parent: Sequence to put the shot in
+            name: Name of the shot
 
         Returns:
-            Shot: Shot object
+            Shot object
 
         """
         _data = dict()

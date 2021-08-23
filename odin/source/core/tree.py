@@ -1,7 +1,7 @@
 import os
 
 try:
-    from typing import NoReturn, Dict, Union, Optional
+    from typing import Dict, Union, Optional
 except ImportError:
     pass
 
@@ -24,7 +24,7 @@ class Tree(object):
     """
 
     def __init__(self, parent, name):
-        # type: (Union[Tree, None], str) -> Tree
+        # type: (Union[Tree, None], str) -> None
         self._parent = parent
         self._name = name
         self._children = list()
@@ -56,15 +56,14 @@ class Tree(object):
     def create_from_template(self, template_path, path):
         # type: (str, str) -> Tree
         """
-
-        Create a tree object with a yaml template file
+        Create a tree object with a yaml template file.
 
         Args:
-            template_path (str): path of the yaml template
-            path (str): root path for the new tree
+            template_path: path of the yaml template
+            path: root path for the new tree
 
         Returns:
-            Tree: Tree object that contain the folders to create the tree
+            Tree object that contain the folders to create the tree
 
         """
         from .yaml_parser import Parser
@@ -77,13 +76,7 @@ class Tree(object):
         return root
 
     def create_tree(self, data, tree):
-        # type: (Dict[str], Tree) -> NoReturn
-        """
-        Args:
-            data (dict(str)):
-            tree (Tree):
-
-        """
+        # type: (Dict[str], Tree) -> None
         for key, value in data.items():
             child = tree.create_child(key)
             if value:
@@ -92,17 +85,6 @@ class Tree(object):
 
 def path_from_tree(data, word, path="", values=None):
     # type: (Dict[str], str, Optional[str], Optional[Dict[str]]) -> Dict[str]
-    """
-
-    Args:
-        data:
-        word:
-        path:
-        values:
-
-    Returns:
-
-    """
     _path = path
     _values = values or dict()
 
