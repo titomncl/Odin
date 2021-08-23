@@ -51,11 +51,11 @@ class Asset(object):
     def load(cls, parent, name, asset_type):
         # type: (Project, str, str) -> Asset
         """
-        Load an existing sequence
+        Load an existing asset
 
         Args:
-            parent (Project): Project that contain the sequence
-            name (str): Name of the sequence to load
+            parent (Project): Project that contain the asset
+            name (str): Name of the asset to load
             asset_type (str): Type of the asset (Chara, props, set, fx)
 
         Returns:

@@ -16,7 +16,7 @@ def tmp_dir(tmp_path_factory):
 def name():
     yield str(binascii.b2a_hex(os.urandom(2))).split("'")[1].upper()
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def asset_name():
     yield str(binascii.b2a_hex(os.urandom(2))).split("'")[1].upper()
 
@@ -35,8 +35,10 @@ def project(tmp_dir, name):
 def asset(project, asset_name):
     try:
         asset = Asset.load(project, asset_name, "CHARA")
-    except RuntimeError:
+    except KeyError:  # TODO change with RuntimeError
         asset = Asset.new(project, asset_name, "CHARA")
+
+    yield asset
 
 
 parameters = [
@@ -57,23 +59,24 @@ def test_asset_new(prj, asset_name, asset_type):
     assert asset_name in asset.list(prj, asset_type)
 
 
-def test_asset_load(asset, tmp_dir, name):
-    prj = Project.load(tmp_dir, name)
+def test_asset_load(project, asset, asset_name):
+    asset_ = Asset.load(project, asset_name, "CHARA")
 
-    prj_data = os.path.join(tmp_dir, name, "odin.yaml")
-
-    assert prj.name == project.name
-    assert prj.data == project.data
-    assert os.path.isfile(prj_data) is True
+    assert asset_.name == asset.name
 
 
-def test_project_load_error():
-    with pytest.raises(RuntimeError):
-        Project.load("bad_root", "bad_name")
+def test_asset_load_error_bad_type(project, asset, asset_name):
+    with pytest.raises(KeyError):  # TODO add proper message
+        Asset.load(project, asset_name, "bad_asset_type")
 
 
-def test_project_list(project, tmp_dir):
-    prj_list = project.list(tmp_dir)
+def test_asset_load_error_bad_name(project, asset):
+    with pytest.raises(KeyError):  # TODO add proper message
+        Asset.load(project, "bad_asset_name", "CHARA")
 
-    assert isinstance(prj_list, list)
-    assert project.name in prj_list
+
+def test_asset_list(project, asset):
+    asset_list = asset.list(project, "CHARA")
+
+    assert isinstance(asset_list, list)
+    assert asset.name in asset_list
