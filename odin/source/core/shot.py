@@ -15,7 +15,7 @@ from ..common import concat
 class Shot(object):
 
     def __init__(self, parent, name=None, data=None):
-        # type: (Sequence, Optional[str], Optional[Dict[str]]) -> Shot
+        # type: ("odin.source.core.sequence.Sequence", Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent
         self._name = name
         self._data = data

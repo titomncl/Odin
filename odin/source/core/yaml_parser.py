@@ -22,7 +22,7 @@ class Parser(object):
     """
 
     def __init__(self, filepath=None, data=None):
-        # type: (Optional[str], Optional[dict]) -> Parser
+        # type: (Optional[str], Optional[dict]) -> None
         self.__file = filepath or str()
         self.__data = data or dict()
 
