@@ -37,6 +37,8 @@ class Controller(object):
 
         self._init_connection()
 
+        self.check_update()
+
     def show(self):
         self.ui.show()
 
@@ -80,6 +82,24 @@ class Controller(object):
         except KeyError:
             pass
 
+    def check_update(self):
+        if "BETA" in self._config_parser.data:
+            self.ui.include_beta.setChecked(self._config_parser.data["BETA"])
+        else:
+            self._config_parser.data["BETA"] = self.ui.include_beta.isChecked()
+
+        if "UPDATE" in self._config_parser.data:
+            if self._config_parser.data["UPDATE"]:
+                self.ui.do_update()
+        else:
+            self.ui.do_update()
+
+        self._config_parser.write()
+
+    def update_beta_box(self):
+        self._config_parser.data["BETA"] = self.ui.include_beta.isChecked()
+        self._config_parser.write()
+
     def update_combobox(self):
         self.ui.create_or_set.prod_cbox.clear()
         self.ui.create_or_set.prod_cbox.addItems(self.projects)
@@ -87,6 +107,7 @@ class Controller(object):
     def _init_connection(self):
         self.ui.change_root_action.triggered.connect(self.change_root_path)
         self.ui.set_tools_path.triggered.connect(self.change_tools_path)
+        self.ui.include_beta.triggered.connect(self.update_beta_box)
 
         self.ui.create_project_btn.clicked.connect(self.create_project)
         self.ui.create_or_set.set_btn.clicked.connect(self.set_project)

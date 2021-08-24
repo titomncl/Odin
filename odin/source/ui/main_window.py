@@ -77,6 +77,11 @@ class MainWindow(Qw.QMainWindow):
         config.addSeparator()
         config.addAction(self.set_tools_path)
 
+        update = Qw.QMenu("Update", self)
+        self.menu_bar.addMenu(update)
+        update.addAction(self.check_new_update)
+        update.addAction(self.include_beta)
+
     def menu_actions(self):
         self.change_root_action = Qw.QAction("Change root..", self)
 
@@ -87,6 +92,11 @@ class MainWindow(Qw.QMainWindow):
         self.set_project_action.triggered.connect(self.change_project_action)
 
         self.set_tools_path = Qw.QAction("Set tools path...", self)
+
+        self.check_new_update = Qw.QAction("Check new update...", self)
+        self.check_new_update.triggered.connect(self.check_new_update_action)
+
+        self.include_beta = Qw.QAction("Include beta", self, checkable=True)
 
     def get_new_path(self, root):
         # type: (str) -> str
@@ -105,6 +115,24 @@ class MainWindow(Qw.QMainWindow):
         self.stacked_widget.setCurrentWidget(self.create_or_set)
         self.setMinimumSize(400, 250)
         self.resize(400, 250)
+
+    def check_new_update_action(self):
+        u = self.do_update()
+
+        if not u.updated:
+            msg_box = Qw.QMessageBox(self)
+            msg_box.setIcon(msg_box.Information)
+            msg_box.setWindowTitle("Updated")
+            msg_box.setText("Odin is up to date.")
+
+            msg_box.exec_()
+
+    def do_update(self):
+        from .updater import Updater
+
+        u = Updater(self.include_beta.isChecked(), self)
+
+        return u
 
     def closeEvent(self, close_event):
         # type: (Qg.QCloseEvent) -> NoReturn
