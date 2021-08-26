@@ -1,6 +1,6 @@
-from qtpy import QtWidgets as Qw
-from qtpy import QtGui as Qg
 from qtpy import QtCore as Qc
+from qtpy import QtGui as Qg
+from qtpy import QtWidgets as Qw
 
 
 class CreateDialog(Qw.QWidget):

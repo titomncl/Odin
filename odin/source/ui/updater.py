@@ -1,10 +1,11 @@
-import urllib.request
 import os
+import urllib.request
 
-from qtpy import QtWidgets as Qw
 from qtpy import QtCore as Qc
+from qtpy import QtWidgets as Qw
 
 from odin import __version__
+
 from ..core.update_version import new_update
 from ..core.yaml_parser import Parser
 

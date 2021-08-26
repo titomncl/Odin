@@ -1,7 +1,7 @@
-import requests
 import re
+from typing import List, Union
 
-from typing import Union, List
+import requests
 
 version_pattern = re.compile(r"^(?P<major>\d).(?P<minor>\d).(?P<micro>\d)b?(?P<beta>\d*)?$")
 

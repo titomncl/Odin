@@ -1,5 +1,5 @@
 try:
-    from typing import Optional, Union, Dict
+    from typing import Dict, Optional, Union
 except ImportError:
     pass
 
@@ -38,8 +38,9 @@ class Parser(object):
             Parser object that contain the new yaml file with its data
 
         """
-        import yaml
         import os
+
+        import yaml
         from CommonTools.os_ import make_dirs
 
         path, _ = os.path.split(filepath)

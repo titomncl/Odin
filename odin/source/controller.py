@@ -1,17 +1,16 @@
-import re
 import os
+import re
+from typing import List, NoReturn, Optional
 
-from qtpy.QtWidgets import QMainWindow, QApplication
+from qtpy.QtWidgets import QApplication, QMainWindow
 
-from typing import NoReturn, Optional, List
-
-from .globals import Logger as log
-from .core import launch_software
 from .common import concat
-from .core.yaml_parser import Parser
+from .core import launch_software
+from .core.filming_days import add_days
 from .core.project import Project
 from .core.sequence import Sequence
-from .core.filming_days import add_days
+from .core.yaml_parser import Parser
+from .globals import Logger as log
 
 
 class Controller(object):

@@ -1,9 +1,9 @@
-import subprocess
 import os
+import subprocess
 from typing import Dict
 
-from .yaml_parser import Parser
 from ..globals import Logger as log
+from .yaml_parser import Parser
 
 
 def get_launch_env(py_ver):

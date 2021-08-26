@@ -1,6 +1,6 @@
 import logging
-import sys
 import os
+import sys
 
 try:
     from typing import TextIO
@@ -9,7 +9,7 @@ except ImportError:
 
 from logging.handlers import TimedRotatingFileHandler
 
-from .common import make_dirs, concat
+from .common import concat, make_dirs
 
 
 def log(name):
