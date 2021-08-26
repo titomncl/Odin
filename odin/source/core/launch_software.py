@@ -1,11 +1,13 @@
 import subprocess
 import os
+from typing import Dict
 
 from .yaml_parser import Parser
 from ..globals import Logger as log
 
 
 def get_launch_env(py_ver):
+    # type: (str) -> Dict[str: str]
     launch_env = os.environ.copy()
 
     python_path = os.path.join(os.getenv("venv"), py_ver, "Lib/site-packages;")
@@ -18,7 +20,7 @@ def get_launch_env(py_ver):
 
 
 def launch_software(name, version):
-
+    # type: (str, str) -> None
     bat_file = os.getcwd().replace("\\", "/") + "/softwareList/" + name + ".bat"
 
     if os.path.isfile(bat_file):

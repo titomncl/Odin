@@ -28,8 +28,7 @@ class Shot(object):
     @staticmethod
     def list(parent):
         # type: ("odin.source.core.sequence.Sequence") -> List[str]
-        """
-        List the shots found in the given sequence.
+        """List the shots found in the given sequence.
 
         Args:
             parent: Sequence object
@@ -45,8 +44,7 @@ class Shot(object):
     @classmethod
     def load(cls, parent, name):
         # type: ("odin.source.core.sequence.Sequence", str) -> Shot
-        """
-        Load an existing shot.
+        """Load an existing shot.
 
         Args:
             parent: Sequence that contain the shot
@@ -64,8 +62,7 @@ class Shot(object):
     @classmethod
     def new(cls, parent, name):
         # type: ("odin.source.core.sequence.Sequence", str) -> Shot
-        """
-        Create a new shot.
+        """Create a new shot.
 
         Args:
             parent: Sequence to put the shot in

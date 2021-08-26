@@ -10,8 +10,7 @@ from ..common import concat
 
 
 class Tree(object):
-    """
-    Create an object Tree based on a given template.
+    """Create an object Tree based on a given template.
 
     Usage:
         t = Tree().create_from_template('template/file.yaml')\n
@@ -55,8 +54,7 @@ class Tree(object):
 
     def create_from_template(self, template_path, path):
         # type: (str, str) -> Tree
-        """
-        Create a tree object with a yaml template file.
+        """Create a tree object with a yaml template file.
 
         Args:
             template_path: path of the yaml template

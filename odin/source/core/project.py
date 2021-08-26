@@ -42,8 +42,7 @@ class Project(object):
     @staticmethod
     def list(root=None):
         # type: (Optional[str]) -> List[str]
-        """
-        List the projects found in the given root path.
+        """List the projects found in the given root path.
 
         Args:
             root: folder path that contain the projects
@@ -86,8 +85,7 @@ class Project(object):
     @classmethod
     def load(cls, root, name):
         # type: (str, str) -> Project
-        """
-        Load an existing project.
+        """Load an existing project.
 
         Args:
             root: Path where the project is
@@ -110,8 +108,7 @@ class Project(object):
     @classmethod
     def new(cls, root, name):
         # type: (str, str) -> Project
-        """
-        Create a new project.
+        """Create a new project.
 
         Args:
             root: Path to put the project in

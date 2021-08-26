@@ -35,8 +35,7 @@ class Asset(object):
     @staticmethod
     def list(parent, asset_type):
         # type: ("odin.source.core.project.Project", str) -> List[str]
-        """
-        List the assets found in the given project.
+        """List the assets found in the given project.
 
         Args:
             parent: Project object
@@ -53,8 +52,7 @@ class Asset(object):
     @classmethod
     def load(cls, parent, name, asset_type):
         # type: ("odin.source.core.project.Project", str, str) -> Asset
-        """
-        Load an existing asset.
+        """Load an existing asset.
 
         Args:
             parent: Project that contain the asset
@@ -80,8 +78,7 @@ class Asset(object):
     @classmethod
     def new(cls, parent, name, asset_type):
         # type: ("odin.source.core.project.Project", str, str) -> Asset
-        """
-        Create a new sequence.
+        """Create a new sequence.
 
         Args:
             parent: Project to put the sequence in

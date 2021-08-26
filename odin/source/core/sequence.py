@@ -37,8 +37,7 @@ class Sequence(object):
     @staticmethod
     def list(parent):
         # type: ("odin.source.core.project.Project") -> List[str]
-        """
-        List the sequences found in the given project.
+        """List the sequences found in the given project.
 
         Args:
             parent: Project object
@@ -54,8 +53,7 @@ class Sequence(object):
     @classmethod
     def load(cls, parent, name):
         # type: ("odin.source.core.project.Project", str) -> Sequence
-        """
-        Load an existing sequence.
+        """Load an existing sequence.
 
         Args:
             parent: Project that contain the sequence
@@ -73,8 +71,7 @@ class Sequence(object):
     @classmethod
     def new(cls, parent, name):
         # type: ("odin.source.core.project.Project", str) -> Sequence
-        """
-        Create a new sequence.
+        """Create a new sequence.
 
         Args:
             parent: Project to put the sequence in

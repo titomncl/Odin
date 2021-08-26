@@ -2,6 +2,11 @@ import logging
 import sys
 import os
 
+try:
+    from typing import TextIO
+except ImportError:
+    pass
+
 from logging.handlers import TimedRotatingFileHandler
 
 from .common import make_dirs, concat
@@ -9,12 +14,13 @@ from .common import make_dirs, concat
 
 def log(name):
     # type: (str) -> logging.Logger
-    """
+    """.
+
     Args:
-        name (str): name to the log
+        name: name to the log
 
     Returns:
-        logging.Logger: Logger object to interact with the logger
+        Logger object to interact with the logger
 
     """
     log_path = concat(os.path.expanduser('~').replace("\\", "/"), ".logs", name, separator="/")
@@ -45,16 +51,16 @@ def log(name):
 
 
 class StreamToLogger(object):
-    """
-    Fake file-like stream object that redirects writes to a logger instance.
-    """
+    """Fake file-like stream object that redirects writes to a logger instance."""
     def __init__(self, logger, stream=sys.stdout, log_level=logging.INFO):
+        # type: (logging.Logger, TextIO, int) -> None
         self.logger = logger
         self.stream = stream
         self.log_level = log_level
         self.linebuf = ''
 
     def write(self, buf):
+        # type: (str) -> None
         self.stream.write(buf)
         self.linebuf += buf
         if buf == '\n':
