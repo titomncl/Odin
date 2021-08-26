@@ -8,7 +8,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
-from . import project, trees_path
+from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
 
@@ -27,7 +27,7 @@ class Asset(object):
     """
 
     def __init__(self, parent, name=None, asset_type=None, data=None):
-        # type: (project.Project, Optional[str], Optional[str], Optional[Dict[str]]) -> None
+        # type: ("Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._asset_type = asset_type
@@ -45,7 +45,7 @@ class Asset(object):
 
     @staticmethod
     def list(parent, asset_type):
-        # type: (project.Project, str) -> List[str]
+        # type: ("Project", str) -> List[str]  # noqa: F821
         """List the assets found in the given project.
 
         Args:
@@ -62,7 +62,7 @@ class Asset(object):
 
     @classmethod
     def load(cls, parent, name, asset_type):
-        # type: (project.Project, str, str) -> Asset
+        # type: ("Project", str, str) -> Asset  # noqa: F821
         """Load an existing asset.
 
         Args:
@@ -89,7 +89,7 @@ class Asset(object):
 
     @classmethod
     def new(cls, parent, name, asset_type):
-        # type: (project.Project, str, str) -> Asset
+        # type: ("Project", str, str) -> Asset  # noqa: F821
         """Create a new sequence.
 
         Args:

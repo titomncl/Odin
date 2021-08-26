@@ -7,7 +7,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
-from . import sequence, trees_path
+from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
 
@@ -25,7 +25,7 @@ class Shot(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: (sequence.Sequence, Optional[str], Optional[Dict[str]]) -> None
+        # type: ("Sequence", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._data = data
@@ -37,7 +37,7 @@ class Shot(object):
 
     @staticmethod
     def list(parent):
-        # type: (sequence.Sequence) -> List[str]
+        # type: ("Sequence") -> List[str]  # noqa: F821
         """List the shots found in the given sequence.
 
         Args:
@@ -53,7 +53,7 @@ class Shot(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: (sequence.Sequence, str) -> Shot
+        # type: ("Sequence", str) -> Shot  # noqa: F821
         """Load an existing shot.
 
         Args:
@@ -71,7 +71,7 @@ class Shot(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: (sequence.Sequence, str) -> Shot
+        # type: ("Sequence", str) -> Shot  # noqa: F821
         """Create a new shot.
 
         Args:

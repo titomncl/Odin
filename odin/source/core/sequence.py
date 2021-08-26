@@ -7,7 +7,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
-from . import project, trees_path
+from . import trees_path
 from .shot import Shot
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
@@ -28,7 +28,7 @@ class Sequence(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: (project.Project, Optional[str], Optional[Dict[str]]) -> None
+        # type: ("Project", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self.parent = parent
         self._name = name
         self._data = data
@@ -48,7 +48,7 @@ class Sequence(object):
 
     @staticmethod
     def list(parent):
-        # type: (project.Project) -> List[str]
+        # type: ("Project") -> List[str]  # noqa: F821
         """List the sequences found in the given project.
 
         Args:
@@ -64,7 +64,7 @@ class Sequence(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: (project.Project, str) -> Sequence
+        # type: ("Project", str) -> Sequence  # noqa: F821
         """Load an existing sequence.
 
         Args:
@@ -82,7 +82,7 @@ class Sequence(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: (project.Project, str) -> Sequence
+        # type: ("Project", str) -> Sequence  # noqa: F821
         """Create a new sequence.
 
         Args:
