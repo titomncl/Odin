@@ -1,6 +1,8 @@
 <p align="center">
   <img src="https://img.shields.io/github/v/release/titomncl/odin?style=flat-square">
   <img src='https://readthedocs.org/projects/odin-project-manager/badge/?version=latest&style=flat-square' alt='Documentation Status' />
+  <img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square">
+  <img src="https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat-square&labelColor=ef8336">
   <img src="https://img.shields.io/github/license/titomncl/odin?style=flat-square">
   <img src="https://img.shields.io/github/downloads/titomncl/odin/total?style=flat-square">
   <img src="https://img.shields.io/github/languages/code-size/titomncl/odin?style=flat-square">
