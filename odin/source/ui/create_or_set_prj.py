@@ -56,14 +56,12 @@ class CreateSet(Qw.QWidget):
     def buttons_layout(self):
         h_layout = Qw.QHBoxLayout()
 
-        new_project_icon = Qa.icon('fa5s.plus-square',
-                                   options=[{"color": "#EF8229"}])
+        new_project_icon = Qa.icon("fa5s.plus-square", options=[{"color": "#EF8229"}])
         self.create_btn = Qw.QPushButton(new_project_icon, "CREATE\nPROJECT")
         self.create_btn.setIconSize(Qc.QSize(64, 64))
         self.create_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)
 
-        set_project_icon = Qa.icon('fa.folder-open',
-                                   options=[{"color": "#EF8229"}])
+        set_project_icon = Qa.icon("fa.folder-open", options=[{"color": "#EF8229"}])
         self.set_btn = Qw.QPushButton(set_project_icon, "SET PROJECT")
         self.set_btn.setIconSize(Qc.QSize(64, 64))
         self.set_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Expanding)

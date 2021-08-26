@@ -12,7 +12,7 @@ from odin.source.ui.palette import Palette
 from qtpy import QtWidgets
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Palette().set_app(app)
 

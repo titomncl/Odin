@@ -15,14 +15,15 @@ from ..common import concat
 class Shot(object):
     """Shot object.
 
-        Usage:
-            shot = Shot.new(Sequence, 'NAME')
-            shot = Shot.load(Sequence, 'NAME')
+    Usage:
+        shot = Shot.new(Sequence, 'NAME')
+        shot = Shot.load(Sequence, 'NAME')
 
-        Parameters:
-            name (str): name of the loaded shot
+    Parameters:
+        name (str): name of the loaded shot
 
-        """
+    """
+
     def __init__(self, parent, name=None, data=None):
         # type: ("odin.source.core.sequence.Sequence", Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent

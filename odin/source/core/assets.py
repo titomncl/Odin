@@ -26,6 +26,7 @@ class Asset(object):
         name (str): name of the loaded asset
 
     """
+
     def __init__(self, parent, name=None, asset_type=None, data=None):
         # type: ("odin.source.core.project.Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent
@@ -78,8 +79,9 @@ class Asset(object):
 
         lib = deepcopy(_data[parent.name]["DATA"]["LIB"])
         if asset_type not in lib:
-            raise KeyError("{} is not a valid asset type."
-                           "Should be 'CHARA', 'PROPS', 'SETS' or 'FX' instead.".format(asset_type))
+            raise KeyError(
+                "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX' instead.".format(asset_type)
+            )
         elif name not in lib[asset_type]:
             raise KeyError("{} not in database.")
         else:

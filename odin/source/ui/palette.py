@@ -9,6 +9,7 @@ PRIMARY = QColor(38, 49, 70)
 SECONDARY = QColor(70, 86, 113)
 ORANGE = QColor(239, 130, 41)
 
+
 class Palette(QPalette):
     def __init__(self, *args):
         QPalette.__init__(self, *args)

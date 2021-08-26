@@ -26,6 +26,7 @@ class Sequence(object):
         name (str): name of the loaded sequence
 
     """
+
     def __init__(self, parent, name=None, data=None):
         # type: ("odin.source.core.project.Project", Optional[str], Optional[Dict[str]]) -> None
         self.parent = parent
