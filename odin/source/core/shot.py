@@ -7,6 +7,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
+from . import sequence
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
@@ -25,7 +26,7 @@ class Shot(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("odin.source.core.sequence.Sequence", Optional[str], Optional[Dict[str]]) -> None
+        # type: (sequence.Sequence, Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent
         self._name = name
         self._data = data
@@ -37,7 +38,7 @@ class Shot(object):
 
     @staticmethod
     def list(parent):
-        # type: ("odin.source.core.sequence.Sequence") -> List[str]
+        # type: (sequence.Sequence) -> List[str]
         """List the shots found in the given sequence.
 
         Args:
@@ -53,7 +54,7 @@ class Shot(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("odin.source.core.sequence.Sequence", str) -> Shot
+        # type: (sequence.Sequence, str) -> Shot
         """Load an existing shot.
 
         Args:
@@ -71,7 +72,7 @@ class Shot(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("odin.source.core.sequence.Sequence", str) -> Shot
+        # type: (sequence.Sequence, str) -> Shot
         """Create a new shot.
 
         Args:
