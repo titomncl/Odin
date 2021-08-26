@@ -15,10 +15,7 @@ from .core.filming_days import add_days
 
 
 class Controller(object):
-    """
-    UI Controller.
-
-    """
+    """UI Controller."""
     def __init__(self, ui, parent=None):
         # type: (callable(QMainWindow), Optional[QApplication]) -> NoReturn
 
@@ -202,10 +199,12 @@ class Controller(object):
 
     @property
     def project(self):
+        # type: () -> Project
         return self._project
 
     @project.setter
     def project(self, value):
+        # type: (Project) -> None
         self._project = value
 
     @property
@@ -244,7 +243,7 @@ class Controller(object):
 
     @recent_project.setter
     def recent_project(self, value):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         self._config_parser.data["LAST_PROJECT"] = value
         self._config_parser.write()
 
@@ -255,7 +254,7 @@ class Controller(object):
 
     @tool_path.setter
     def tool_path(self, value):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         self._config_parser.data["TOOLS_PATH"] = value
         self._config_parser.write()
 
@@ -291,7 +290,7 @@ class Controller(object):
             self.fx_action(fx_name)
 
     def chara_action(self, chara_name):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         chara_is_correct = self.word_pattern.match(chara_name)
 
         if chara_is_correct:
@@ -301,7 +300,7 @@ class Controller(object):
             self.ui.manage_prj.lib_widget.create_chara_dialog.red_palette()
 
     def props_action(self, props_name):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         props_is_correct = self.word_pattern.match(props_name)
 
         if props_is_correct:
@@ -311,7 +310,7 @@ class Controller(object):
             self.ui.manage_prj.lib_widget.create_props_dialog.red_palette()
 
     def set_action(self, set_name):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         set_is_correct = self.word_pattern.match(set_name)
 
         if set_is_correct:
@@ -321,7 +320,7 @@ class Controller(object):
             self.ui.manage_prj.lib_widget.create_set_dialog.red_palette()
 
     def fx_action(self, fx_name):
-        # type: (str) -> NoReturn
+        # type: (str) -> None
         fx_is_correct = self.word_pattern.match(fx_name)
 
         if fx_is_correct:

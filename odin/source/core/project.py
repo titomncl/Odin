@@ -16,7 +16,20 @@ from ..common import concat
 
 
 class Project(object):
+    """Project object.
 
+    Usage:
+        project = Project.new('root/path', 'NAME')
+        project = Project.load('root/path', 'NAME')
+        project.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX
+        assets = project.get_assets("ASSET_TYPE"): List of created assets
+
+    Parameters:
+        name (str): name of the loaded project
+        root (str): path of the loaded project
+        data (str): dictionary containing data of the loaded project
+
+    """
     def __init__(self, root=None, name=None, data=None):
         # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> None
         self._root = root
@@ -42,8 +55,7 @@ class Project(object):
     @staticmethod
     def list(root=None):
         # type: (Optional[str]) -> List[str]
-        """
-        List the projects found in the given root path.
+        """List the projects found in the given root path.
 
         Args:
             root: folder path that contain the projects
@@ -86,8 +98,7 @@ class Project(object):
     @classmethod
     def load(cls, root, name):
         # type: (str, str) -> Project
-        """
-        Load an existing project.
+        """Load an existing project.
 
         Args:
             root: Path where the project is
@@ -110,8 +121,7 @@ class Project(object):
     @classmethod
     def new(cls, root, name):
         # type: (str, str) -> Project
-        """
-        Create a new project.
+        """Create a new project.
 
         Args:
             root: Path to put the project in
