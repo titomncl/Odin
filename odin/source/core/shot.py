@@ -7,8 +7,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
-from . import sequence
-from . import trees_path
+from . import sequence, trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
 
