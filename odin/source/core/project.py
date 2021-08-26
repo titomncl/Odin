@@ -16,7 +16,20 @@ from ..common import concat
 
 
 class Project(object):
+    """Project object.
 
+    Usage:
+        project = Project.new('root/path', 'NAME')
+        project = Project.load('root/path', 'NAME')
+        project.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX
+        assets = project.get_assets("ASSET_TYPE"): List of created assets
+
+    Parameters:
+        name (str): name of the loaded project
+        root (str): path of the loaded project
+        data (str): dictionary containing data of the loaded project
+
+    """
     def __init__(self, root=None, name=None, data=None):
         # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> None
         self._root = root

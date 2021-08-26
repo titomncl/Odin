@@ -15,6 +15,17 @@ from ..common import concat
 
 
 class Asset(object):
+    """Asset object.
+    Each asset has a type: CHARA, PROPS, SET or FX.
+
+    Usage:
+        asset = Asset.new(Project, 'asset_name', 'ASSET_TYPE. )
+        asset = Asset.load(Project, 'asset_name', 'ASSET_TYPE')
+
+    Parameters:
+        name (str): name of the loaded asset
+
+    """
     def __init__(self, parent, name=None, asset_type=None, data=None):
         # type: ("odin.source.core.project.Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None
         self._parent = parent

@@ -14,7 +14,18 @@ from ..common import concat
 
 
 class Sequence(object):
+    """Sequence object.
 
+    Usage:
+        sequence = Sequence.new(Project, 'NAME')
+        sequence = Sequence.load(Project, 'NAME')
+        sequence.new_shot("NAME")
+        assets = project.get_shots(): List of created shots
+
+    Parameters:
+        name (str): name of the loaded sequence
+
+    """
     def __init__(self, parent, name=None, data=None):
         # type: ("odin.source.core.project.Project", Optional[str], Optional[Dict[str]]) -> None
         self.parent = parent
