@@ -1,10 +1,5 @@
 import os
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
-
 from .yaml_parser import Parser
 
 

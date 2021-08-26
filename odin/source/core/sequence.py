@@ -7,6 +7,7 @@ except ImportError:
 
 from ..common import concat
 from ..globals import Logger as log
+from . import project
 from . import trees_path
 from .shot import Shot
 from .tree import Tree, path_from_tree
@@ -28,7 +29,7 @@ class Sequence(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("odin.source.core.project.Project", Optional[str], Optional[Dict[str]]) -> None
+        # type: (project.Project, Optional[str], Optional[Dict[str]]) -> None
         self.parent = parent
         self._name = name
         self._data = data
@@ -48,7 +49,7 @@ class Sequence(object):
 
     @staticmethod
     def list(parent):
-        # type: ("odin.source.core.project.Project") -> List[str]
+        # type: (project.Project) -> List[str]
         """List the sequences found in the given project.
 
         Args:
@@ -64,7 +65,7 @@ class Sequence(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("odin.source.core.project.Project", str) -> Sequence
+        # type: (project.Project, str) -> Sequence
         """Load an existing sequence.
 
         Args:
@@ -82,7 +83,7 @@ class Sequence(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("odin.source.core.project.Project", str) -> Sequence
+        # type: (project.Project, str) -> Sequence
         """Create a new sequence.
 
         Args:
