@@ -116,9 +116,10 @@ class Updater(Qw.QDialog):
         # type: (str) -> None
         self.progress_bar()
 
-        new_release_url = "https://github.com/titomncl/Odin/releases/download/" \
-                          + last_version + "/Odin_" + last_version + ".zip"
+        new_release_url = (
+            "https://github.com/titomncl/Odin/releases/download/" + last_version + "/Odin_" + last_version + ".zip"
+        )
 
-        download_path = os.path.join(os.path.expanduser("~"), "Downloads", 'Odin_' + last_version + '.zip')
+        download_path = os.path.join(os.path.expanduser("~"), "Downloads", "Odin_" + last_version + ".zip")
 
         urllib.request.urlretrieve(new_release_url, download_path, self.handle_progress)

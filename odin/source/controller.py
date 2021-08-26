@@ -16,6 +16,7 @@ from .core.filming_days import add_days
 
 class Controller(object):
     """UI Controller."""
+
     def __init__(self, ui, parent=None):
         # type: (callable(QMainWindow), Optional[QApplication]) -> NoReturn
 

@@ -22,7 +22,6 @@ def add_days(root, project_name, days):
         day_path = rush_path + "/DAY" + str(day_offset).zfill(2)
         os.mkdir(day_path)
 
-
     # update odin.yaml file
     files = os.listdir(rush_path)
 

@@ -40,16 +40,14 @@ class ManageProject(Qw.QWidget):
 
         btn_layout = Qw.QVBoxLayout()
 
-        lib_icon = Qa.icon('fa5s.archive',
-                           options=[{"color": "#EF8229"}])
+        lib_icon = Qa.icon("fa5s.archive", options=[{"color": "#EF8229"}])
 
         self.lib_btn = Qw.QPushButton(lib_icon, "Lib")
         self.lib_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.MinimumExpanding)
         self.lib_btn.setIconSize(Qc.QSize(32, 32))
         self.lib_btn.setCheckable(True)
 
-        film_icon = Qa.icon('fa5s.photo-video',
-                            options=[{"color": "#EF8229"}])
+        film_icon = Qa.icon("fa5s.photo-video", options=[{"color": "#EF8229"}])
 
         self.film_btn = Qw.QPushButton(film_icon, "Film")
         self.film_btn.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.MinimumExpanding)

@@ -23,7 +23,7 @@ def log(name):
         Logger object to interact with the logger
 
     """
-    log_path = concat(os.path.expanduser('~').replace("\\", "/"), ".logs", name, separator="/")
+    log_path = concat(os.path.expanduser("~").replace("\\", "/"), ".logs", name, separator="/")
     make_dirs(log_path)
 
     logger = logging.getLogger(name)
@@ -32,15 +32,16 @@ def log(name):
 
     date_format = "%Y-%m-%d %H:%M:%S"
 
-    file_formatter = logging.Formatter('%(asctime)s -- [%(levelname)s] -- %(message)s', datefmt=date_format)
-    file_handler = TimedRotatingFileHandler(filename="{}/{}.log".format(log_path, name),
-                                            when="midnight", backupCount=7, encoding="utf-8")
+    file_formatter = logging.Formatter("%(asctime)s -- [%(levelname)s] -- %(message)s", datefmt=date_format)
+    file_handler = TimedRotatingFileHandler(
+        filename="{}/{}.log".format(log_path, name), when="midnight", backupCount=7, encoding="utf-8"
+    )
     file_handler.setFormatter(file_formatter)
 
     logger.addHandler(file_handler)
 
     stdout_handler = logging.StreamHandler(sys.stdout)
-    console_formatter = logging.Formatter('%(asctime)s -- %(levelname)s -- %(message)s', datefmt=date_format)
+    console_formatter = logging.Formatter("%(asctime)s -- %(levelname)s -- %(message)s", datefmt=date_format)
     stdout_handler.setFormatter(console_formatter)
     stdout_handler.setLevel(logging.DEBUG)
     logger.addHandler(stdout_handler)
@@ -52,25 +53,26 @@ def log(name):
 
 class StreamToLogger(object):
     """Fake file-like stream object that redirects writes to a logger instance."""
+
     def __init__(self, logger, stream=sys.stdout, log_level=logging.INFO):
         # type: (logging.Logger, TextIO, int) -> None
         self.logger = logger
         self.stream = stream
         self.log_level = log_level
-        self.linebuf = ''
+        self.linebuf = ""
 
     def write(self, buf):
         # type: (str) -> None
         self.stream.write(buf)
         self.linebuf += buf
-        if buf == '\n':
+        if buf == "\n":
             self.flush()
 
     def flush(self):
         # Flush all handlers
         for line in self.linebuf.rstrip().splitlines():
             self.logger.log(self.log_level, line.rstrip())
-        self.linebuf = ''
+        self.linebuf = ""
         self.stream.flush()
         for handler in self.logger.handlers:
             handler.flush()

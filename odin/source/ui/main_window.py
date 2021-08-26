@@ -100,8 +100,7 @@ class MainWindow(Qw.QMainWindow):
 
     def get_new_path(self, root):
         # type: (str) -> str
-        path = Qw.QFileDialog.getExistingDirectory(self, directory=root,
-                                                   options=Qw.QFileDialog.ShowDirsOnly)
+        path = Qw.QFileDialog.getExistingDirectory(self, directory=root, options=Qw.QFileDialog.ShowDirsOnly)
 
         if path:
             return path

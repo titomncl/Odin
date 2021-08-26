@@ -30,6 +30,7 @@ class Project(object):
         data (str): dictionary containing data of the loaded project
 
     """
+
     def __init__(self, root=None, name=None, data=None):
         # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> None
         self._root = root
