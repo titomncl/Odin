@@ -1,13 +1,13 @@
-from qtpy import QtWidgets as Qw
-from qtpy import QtCore as Qc
-from qtpy import QtGui as Qg
-
 from typing import NoReturn, Optional
 
-from .create_or_set_prj import CreateSet
-from .create_dialog import CreateDialog
-from .manage_prj import ManageProject
+from qtpy import QtCore as Qc
+from qtpy import QtGui as Qg
+from qtpy import QtWidgets as Qw
+
 from ..globals import Logger as log
+from .create_dialog import CreateDialog
+from .create_or_set_prj import CreateSet
+from .manage_prj import ManageProject
 
 
 class MainWindow(Qw.QMainWindow):

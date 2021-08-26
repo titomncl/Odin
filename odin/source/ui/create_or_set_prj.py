@@ -1,8 +1,7 @@
-from qtpy import QtWidgets as Qw
+import qtawesome as Qa
 from qtpy import QtCore as Qc
 from qtpy import QtGui as Qg
-
-import qtawesome as Qa
+from qtpy import QtWidgets as Qw
 
 
 class CreateSet(Qw.QWidget):

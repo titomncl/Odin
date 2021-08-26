@@ -4,13 +4,12 @@
 
 import sys
 
-from odin.source.globals import Logger as log
-from odin.source.controller import Controller
-from odin.source.ui.main_window import MainWindow
-from odin.source.ui.palette import Palette
-
 from qtpy import QtWidgets
 
+from odin.source.controller import Controller
+from odin.source.globals import Logger as log
+from odin.source.ui.main_window import MainWindow
+from odin.source.ui.palette import Palette
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

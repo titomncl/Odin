@@ -1,12 +1,12 @@
 import os
 
 try:
-    from typing import Dict, Union, Optional
+    from typing import Dict, Optional, Union
 except ImportError:
     pass
 
-from ..globals import Logger as log
 from ..common import concat
+from ..globals import Logger as log
 
 
 class Tree(object):

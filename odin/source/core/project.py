@@ -2,17 +2,17 @@ import glob
 import os
 
 try:
-    from typing import List, Dict, Optional
+    from typing import Dict, List, Optional
 except ImportError:
     pass
 
+from ..common import concat
+from ..globals import Logger as log
 from . import trees_path
 from .assets import Asset
 from .sequence import Sequence
 from .tree import Tree
 from .yaml_parser import Parser
-from ..globals import Logger as log
-from ..common import concat
 
 
 class Project(object):
