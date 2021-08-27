@@ -90,6 +90,7 @@ class Controller(object):
                 self.ui.do_update()
         else:
             self.ui.do_update()
+            self._config_parser.data["UPDATE"] = True
 
         self._config_parser.write()
 
