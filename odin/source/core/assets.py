@@ -18,8 +18,8 @@ class Asset(object):
     Each asset has a type: CHARA, PROPS, SET or FX.
 
     Usage:
-        asset = Asset.new(Project, 'asset_name', 'ASSET_TYPE. )
-        asset = Asset.load(Project, 'asset_name', 'ASSET_TYPE')
+        asset = Asset.new(Project, 'asset_name', 'ASSET_TYPE')\n
+        asset = Asset.load(Project, 'asset_name', 'ASSET_TYPE')\n
 
     Parameters:
         name (str): name of the loaded asset

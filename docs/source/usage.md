@@ -13,21 +13,33 @@ When running Odin for the first time, a pop-up will ask you to specify a project
 .. note: You can cancel it, but another pop-up will ask you if you are sure to cancel.
 ```
 
-Now the project path is set, you can create as many projects as you want.
+Now the project path is specified, you can create as many projects as you want.
 
-You can specify a path to a directory that contain the scripts you want to use in the DCCs software.
-If you work in a production, it may be set by the Pipeline-TD.
+## Tools for DCCs
 
-> I recommend having a directory that contains repositories with the names of your DCCs.
+Odin is capable of loading an environment for each DCCs that support Python scripting.
+These scripts can be downloaded or created. If they are created, I recommend you to have a repository that follows the
+example bellow:
 
 *Example:*
 ```yaml
 - 📂 <dev-tools-folder>: the folder that contains the repositories
   - 📦 <project_name>: Root folder of the repository
     - 📂<project_name>: Package folder that contains your scripts
+      - __init__.py: Required file
+      - <your_file>.py: Python script that should follow PEP8, black and flake8 conformations
     - 📂docs: optional
     - 📄 .gitignore:
     - 📄 README.md: Documentation of your repository
+```
+
+If the scripts are downloaded, you must follow the example above to be sure the scripts are accessible in the DCCs.
+
+To specify the tools' path containing the repositories, you need to open Odin. 
+Go into the `Config` tab, click on `Set tools path...` and specify the path.
+
+```{eval-rst}
+.. tip:: If you work in a production, the configuration should be set by the Pipeline-TD.
 ```
 
 ```{eval-rst}

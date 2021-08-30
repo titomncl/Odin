@@ -17,10 +17,10 @@ class Sequence(object):
     """Sequence object.
 
     Usage:
-        sequence = Sequence.new(Project, 'NAME')
-        sequence = Sequence.load(Project, 'NAME')
-        sequence.new_shot("NAME")
-        assets = project.get_shots(): List of created shots
+        sequence = Sequence.new(Project, 'NAME')\n
+        sequence = Sequence.load(Project, 'NAME')\n
+        sequence.new_shot("NAME")\n
+        assets = project.get_shots(): List of created shots\n
 
     Parameters:
         name (str): name of the loaded sequence
