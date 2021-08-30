@@ -22,10 +22,10 @@ class Updater(Qw.QDialog):
         self.updated = False
 
         if self.tag:
+            self.updated = True
             if self.do_update():
                 self.update_soft(self.tag)
                 self.confirm_msg_box()
-                self.updated = True
 
     def do_update(self):
         do_update_msg_box = Qw.QMessageBox(self)
