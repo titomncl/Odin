@@ -45,25 +45,15 @@ Before creating your first project, Odin need some information:
 |---|
 
 
-Now the project path is set, you can create as many projects as you want.
+Now the project path is specified, you can create as many projects as you want.
 
-You can specify a path to a directory that contain the scripts you want to use in the DCCs software.
-If you work in a production, it may be set by the Pipeline-TD.
-
-> I recommend having a directory that contains repositories with the names of your DCCs.
-
-*Example:*
-```yaml
-- 📂 <dev-tools-folder>: the folder that contains the repositories
-  - 📦 <project_name>: Root folder of the repository
-    - 📂<project_name>: Package folder that contains your scripts
-    - 📂docs: optional
-    - 📄 .gitignore:
-    - 📄 README.md: Documentation of your repository
-```
 
 ### Update Odin
-If an update is available, a message box will shows up telling you a new version of Odin has been downloaded. 
+If an update is available, a message box will show up telling you if you want to download the new version of Odin.
+You can abort the update and say the soft you don't want to be reminded about future updates.
+
+You can tell Odin to check about new beta updates by checking the option in the `Update` tab.
+ 
 
 ### Change the configuration
 You can change the software launch path if it's absolutely necessary.
