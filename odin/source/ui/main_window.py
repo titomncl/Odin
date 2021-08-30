@@ -86,7 +86,6 @@ class MainWindow(Qw.QMainWindow):
         help.triggered.connect(self.open_doc)
         self.menu_bar.addAction(help)
 
-
     def menu_actions(self):
         self.change_root_action = Qw.QAction("Change root..", self)
 
