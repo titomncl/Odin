@@ -82,6 +82,11 @@ class MainWindow(Qw.QMainWindow):
         update.addAction(self.check_new_update)
         update.addAction(self.include_beta)
 
+        help = Qw.QAction("Help", self)
+        help.triggered.connect(self.open_doc)
+        self.menu_bar.addAction(help)
+
+
     def menu_actions(self):
         self.change_root_action = Qw.QAction("Change root..", self)
 
@@ -97,6 +102,13 @@ class MainWindow(Qw.QMainWindow):
         self.check_new_update.triggered.connect(self.check_new_update_action)
 
         self.include_beta = Qw.QAction("Include beta", self, checkable=True)
+
+    def open_doc(self):
+        import webbrowser
+
+        from ... import __version__
+
+        webbrowser.open("https://odin-project-manager.readthedocs.io/en/{}/".format(__version__))
 
     def get_new_path(self, root):
         # type: (str) -> str
