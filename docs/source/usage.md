@@ -15,6 +15,14 @@ When running Odin for the first time, a pop-up will ask you to specify a project
 
 Now the project path is specified, you can create as many projects as you want.
 
+## Update Odin
+If an update is available, a message box will show up telling you if you want to download the new version of Odin.
+You can abort the update and say the soft you don't want to be reminded about future updates.
+
+You can tell Odin to check about new beta updates by checking the option in the `Update` tab.
+
+> The preferences are in `odin/config/config_file.yaml` file created at the first use of Odin. 
+
 ## Tools for DCCs
 
 Odin is capable of loading an environment for each DCCs that support Python scripting.
