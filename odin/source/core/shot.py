@@ -16,8 +16,8 @@ class Shot(object):
     """Shot object.
 
     Usage:
-        shot = Shot.new(Sequence, 'NAME')
-        shot = Shot.load(Sequence, 'NAME')
+        shot = Shot.new(Sequence, 'NAME')\n
+        shot = Shot.load(Sequence, 'NAME')\n
 
     Parameters:
         name (str): name of the loaded shot

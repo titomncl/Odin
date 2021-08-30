@@ -19,10 +19,10 @@ class Project(object):
     """Project object.
 
     Usage:
-        project = Project.new('root/path', 'NAME')
-        project = Project.load('root/path', 'NAME')
-        project.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX
-        assets = project.get_assets("ASSET_TYPE"): List of created assets
+        project = Project.new('root/path', 'NAME')\n
+        project = Project.load('root/path', 'NAME')\n
+        project.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX\n
+        assets = project.get_assets("ASSET_TYPE"): List of created assets\n
 
     Parameters:
         name (str): name of the loaded project
@@ -32,7 +32,7 @@ class Project(object):
     """
 
     def __init__(self, root=None, name=None, data=None):
-        # type: (Optional[str],Optional[str], Optional[Dict[str]]) -> None
+        # type: (Optional[str], Optional[str], Optional[Dict[str]]) -> None
         self._root = root
         self._name = name
         self._data = data or dict()
