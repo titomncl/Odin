@@ -88,7 +88,7 @@ houdini:
 ## Tree overview
 
 ```yaml
-PROJECT_NAME:
+<PROJECT_NAME>:
   IN:
     PREPROD:
       STORYBOARD:
@@ -104,45 +104,46 @@ PROJECT_NAME:
         HDRI:
         MAKING_OF:
       RUSH:
-        DAY#:
+        PREVIZ:
+        <DAY##>:
   DATA:
     FILM:
       EDITING:
         VERSION:
-          <PROJECT_NAME>_EDIT_<VERSION>.ext
+          <PROJECT_NAME>_EDIT_<VERSION>.<ext>
         PUBLISH:
-          <PROJECT_NAME>_EDIT.ext
-      <S###>:
-        <P###>:
-          ANIMATION:
-            VERSION:
-              <S###P###>_ANIM_<VERSION>.ext
-            PUBLISH:
-              <S###P###>_ANIM.ext
-          LIGHTING:
-            VERSION:
-              <S###P###>_LIGHTING_<VERSION>.ext
-            PUBLISH:
-              <S###P###>_LIGHTING.ext
-          COMPOSITING:
-            CACHE:
-            VERSION:
-              <S###P###>_COMPO_<VERSION>.ext
-            PUBLISH:
-              <S###P###>_COMPO.ext
-          FX:
-            CACHE:
-              <S###P###>_FX_CACHE.vdb
-              <S###P###>_FX_CACHE.abc
-              <S###P###>_FX_CACHE.bgeo.sc
-            VERSION:
-              <S###P###>_FX_<VERSION>.ext
-            PUBLISH:
-              <S###P###>_FX.ext
-        PREVIZ:
-          SCENES:
-            VERSION:
-          SOURCEIMAGES:
+          <PROJECT_NAME>_EDIT.<ext>
+      SEQ:
+        <S###>:
+          <P###>:
+            ANIMATION:
+              VERSION:
+                <S###P###>_ANIM_<VERSION>.<ext>
+              PUBLISH:
+                <S###P###>_ANIM.<ext>
+            LIGHTING:
+              VERSION:
+                <S###P###>_LIGHTING_<VERSION>.<ext>
+              PUBLISH:
+                <S###P###>_LIGHTING.<ext>
+            COMPOSITING:
+              CACHE:
+              VERSION:
+                <S###P###>_COMPO_<VERSION>.<ext>
+              PUBLISH:
+                <S###P###>_COMPO.<ext>
+            FX:
+              CACHE:
+                <S###P###>_FX_CACHE.<ext>
+              VERSION:
+                <S###P###>_FX_<VERSION>.<ext>
+              PUBLISH:
+                <S###P###>_FX.<ext>
+          PREVIZ:
+            SCENES:
+              VERSION:
+                <S###P###>_PREVIZ.<ext>
+            MEDIA:
     LIB:
       PUBLISH:
         SET:
@@ -156,8 +157,7 @@ PROJECT_NAME:
               <SET_NAME>_<LAYER>_<COLORSPACE>.exr
         FX:
           <FX_NAME>:
-            <FX_NAME>.vdb
-            <FX_NAME>.abc
+            <FX_NAME>.<ext>
         CHARA:
           <CHARA_NAME>:
             MOD:
@@ -185,62 +185,50 @@ PROJECT_NAME:
           MOD:
             SCENE:
               VERSION:
-                <SET_NAME>_SET_<VERSION>.hip
+                <SET_NAME>_SET_<VERSION>.<ext>
               PUBLISH:
-                <SET_NAME>_SET.hip
+                <SET_NAME>_SET.<ext>
           SHD:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <SET_NAME>_<LAYER>_<COLORSPACE>.exr
+                  <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
               PUBLISH:
-                <SET_NAME>_<LAYER>_<COLORSPACE>.exr
+                <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
             SCENE:
               VERSION:
-                <SET_NAME>_SHD_<VERSION>.spp
-                <SET_NAME>_SHD_<VERSION>.sbs
-                <SET_NAME>_SHD_<VERSION>.mra
+                <SET_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
-                <SET_NAME>_SHD.spp
-                <SET_NAME>_SHD.sbs
-                <SET_NAME>_SHD.mra
+                <SET_NAME>_SHD.<ext>
       FX:
         <FX_NAME>:
           CACHEFILES:
-            <FX_NAME>.vdb
-            <FX_NAME>.abc
-            <FX_NAME>.bgeo.sc
+            <FX_NAME>.<ext>
           SCENES:
             VERSION:
-              <FX_NAME>_FX_<VERSION>.hip
+              <FX_NAME>_FX_<VERSION>.<ext>
             PUBLISH:
-              <FX_NAME>_FX.hip
+              <FX_NAME>_FX.<ext>
       CHARA:
         <CHARA_NAME>:
           MOD:
             SCENE:
               VERSION:
-                <CHARA_NAME>_MOD_<VERSION>.ma
-                <CHARA_NAME>_MOD_<VERSION>.ztl
+                <CHARA_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
-                <CHARA_NAME>_MOD.ma
-                <CHARA_NAME>_MOD.ztl
+                <CHARA_NAME>_MOD.<ext>
           SHD:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <CHARA_NAME>_<LAYER>_<COLORSPACE>.exr
+                  <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
               PUBLISH:
-                <CHARA_NAME>_<LAYER>_<COLORSPACE>.exr
+                <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
             SCENE:
               VERSION:
-                <CHARA_NAME>_SHD_<VERSION>.spp
-                <CHARA_NAME>_SHD_<VERSION>.sbs
-                <CHARA_NAME>_SHD_<VERSION>.mra
+                <CHARA_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
-                <CHARA_NAME>_SHD.spp
-                <CHARA_NAME>_SHD.sbs
-                <CHARA_NAME>_SHD.mra
+                <CHARA_NAME>_SHD.<ext>
           RIG:
             SCENE:
               VERSION:
@@ -252,50 +240,49 @@ PROJECT_NAME:
           MOD:
             SCENE:
               VERSION:
-                <PROPS_NAME>_MOD_<VERSION>.ma
-                <PROPS_NAME>_MOD_<VERSION>.ztl
+                <PROPS_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
-                <PROPS_NAME>_MOD.ma
-                <PROPS_NAME>_MOD.ztl
-            SHD:
-              TEXTURES:
-                VERSION:
-                  <VERSION>:
-                    <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
-                PUBLISH:
-                  <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
-              SCENE:
-                VERSION:
-                  <PROPS_NAME>_SHD_<VERSION>.spp
-                  <PROPS_NAME>_SHD_<VERSION>.sbs
-                  <PROPS_NAME>_SHD_<VERSION>.mra
-                PUBLISH:
-                  <PROPS_NAME>_SHD.spp
-                  <PROPS_NAME>_SHD.sbs
-                  <PROPS_NAME>_SHD.mra
-            RIG:
-              SCENE:
-                VERSION:
-                  <PROPS_NAME>_RIG_<VERSION>.ma
-                PUBLISH:
-                  <PROPS_NAME>_RIG.ma
+                <PROPS_NAME>_MOD.<ext>
+          SHD:
+            TEXTURES:
+              VERSION:
+                <VERSION>:
+                  <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
+              PUBLISH:
+                <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
+            SCENE:
+              VERSION:
+                <PROPS_NAME>_SHD_<VERSION>.<ext>
+              PUBLISH:
+                <PROPS_NAME>_SHD.<ext>
+          RIG:
+            SCENE:
+              VERSION:
+                <PROPS_NAME>_RIG_<VERSION>.ma
+              PUBLISH:
+                <PROPS_NAME>_RIG.ma
   OUT:
-    <S###>:
-      <P###>:
-        ANIMATION:
-          <S###P###>_ANIM.abc
-        LIGHTING:
-          <S###P###>_LIGHTING.exr
-        COMPOSITING:
-          <S###P###>_COMPO.exr
-        FX:
-          <S###P###>_FX.vdb
-          <S###P###>_FX.abc
+    SEQ:
+      <S###>:
+        <P###>:
+          ANIMATION:
+            <S###P###>_ANIM.abc
+          LIGHTING:
+            <S###P###>_LIGHTING.exr
+          COMPOSITING:
+            <S###P###>_COMPO.exr
+          FX:
+            <S###P###>_FX.<ext>
+    AUDIO:
+      VERSION:
+        <PROJECT_NAME>_AUDIO_<VERSION>.<ext>
+      PUBLISH:
+        <PROJECT_NAME>_AUDIO.<ext>
     EDITING:
       VERSION:
-        <PROJECT_NAME>_EDIT_<VERSION>.mp4
+        <PROJECT_NAME>_EDIT_<VERSION>.<ext>
       PUBLISH:
-        <PROJECT_NAME>_EDIT.mp4
+        <PROJECT_NAME>_EDIT.<ext>
     DAILIES:
     COMMUNICATION:
       PACKAGE_1:
