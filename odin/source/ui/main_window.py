@@ -8,6 +8,7 @@ from ..globals import Logger as log
 from .create_dialog import CreateDialog
 from .create_or_set_prj import CreateSet
 from .manage_prj import ManageProject
+from .updater import Updater
 
 
 class MainWindow(Qw.QMainWindow):
@@ -82,6 +83,10 @@ class MainWindow(Qw.QMainWindow):
         update.addAction(self.check_new_update)
         update.addAction(self.include_beta)
 
+        help = Qw.QAction("Help", self)
+        help.triggered.connect(self.open_doc)
+        self.menu_bar.addAction(help)
+
     def menu_actions(self):
         self.change_root_action = Qw.QAction("Change root..", self)
 
@@ -97,6 +102,13 @@ class MainWindow(Qw.QMainWindow):
         self.check_new_update.triggered.connect(self.check_new_update_action)
 
         self.include_beta = Qw.QAction("Include beta", self, checkable=True)
+
+    def open_doc(self):
+        import webbrowser
+
+        from ... import __version__
+
+        webbrowser.open("https://odin-project-manager.readthedocs.io/en/{}/".format(__version__))
 
     def get_new_path(self, root):
         # type: (str) -> str
@@ -116,7 +128,8 @@ class MainWindow(Qw.QMainWindow):
         self.resize(400, 250)
 
     def check_new_update_action(self):
-        u = self.do_update()
+
+        u = Updater(self.include_beta.isChecked(), self)
 
         if not u.updated:
             msg_box = Qw.QMessageBox(self)
@@ -125,13 +138,6 @@ class MainWindow(Qw.QMainWindow):
             msg_box.setText("Odin is up to date.")
 
             msg_box.exec_()
-
-    def do_update(self):
-        from .updater import Updater
-
-        u = Updater(self.include_beta.isChecked(), self)
-
-        return u
 
     def closeEvent(self, close_event):
         # type: (Qg.QCloseEvent) -> NoReturn

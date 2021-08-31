@@ -11,6 +11,7 @@ from .core.project import Project
 from .core.sequence import Sequence
 from .core.yaml_parser import Parser
 from .globals import Logger as log
+from .ui.updater import Updater
 
 
 class Controller(object):
@@ -85,14 +86,16 @@ class Controller(object):
         else:
             self._config_parser.data["BETA"] = self.ui.include_beta.isChecked()
 
+        self._config_parser.write()
+
         if "UPDATE" in self._config_parser.data:
             if self._config_parser.data["UPDATE"]:
-                self.ui.do_update()
+                Updater(self.ui.include_beta.isChecked(), self.ui)
         else:
-            self.ui.do_update()
-            self._config_parser.data["UPDATE"] = True
+            Updater(self.ui.include_beta.isChecked(), self.ui)
 
-        self._config_parser.write()
+            self._config_parser.data["UPDATE"] = True
+            self._config_parser.write()
 
     def update_beta_box(self):
         self._config_parser.data["BETA"] = self.ui.include_beta.isChecked()

@@ -52,6 +52,7 @@ PROJECT_NAME:
           PREVIZ:
             SCENES:
               VERSION:
+                <S###P###>_PREVIZ.<ext>
             MEDIA:
     LIB:
       PUBLISH:
@@ -94,16 +95,16 @@ PROJECT_NAME:
           MOD:
             SCENE:
               VERSION:
-                <SET_NAME>_SET_<VERSION>.hip
+                <SET_NAME>_SET_<VERSION>.<ext>
               PUBLISH:
-                <SET_NAME>_SET.hip
+                <SET_NAME>_SET.<ext>
           SHD:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <SET_NAME>_<LAYER>_<COLORSPACE>.exr
+                  <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
               PUBLISH:
-                <SET_NAME>_<LAYER>_<COLORSPACE>.exr
+                <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
             SCENE:
               VERSION:
                 <SET_NAME>_SHD_<VERSION>.<ext>
@@ -112,12 +113,12 @@ PROJECT_NAME:
       FX:
         <FX_NAME>:
           CACHEFILES:
-            <FX_NAME>.ext
+            <FX_NAME>.<ext>
           SCENES:
             VERSION:
-              <FX_NAME>_FX_<VERSION>.hip
+              <FX_NAME>_FX_<VERSION>.<ext>
             PUBLISH:
-              <FX_NAME>_FX.hip
+              <FX_NAME>_FX.<ext>
       CHARA:
         <CHARA_NAME>:
           MOD:
@@ -130,9 +131,9 @@ PROJECT_NAME:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <CHARA_NAME>_<LAYER>_<COLORSPACE>.exr
+                  <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
               PUBLISH:
-                <CHARA_NAME>_<LAYER>_<COLORSPACE>.exr
+                <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
             SCENE:
               VERSION:
                 <CHARA_NAME>_SHD_<VERSION>.<ext>
@@ -156,9 +157,9 @@ PROJECT_NAME:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
+                  <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
               PUBLISH:
-                <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
+                <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
             SCENE:
               VERSION:
                 <PROPS_NAME>_SHD_<VERSION>.<ext>
