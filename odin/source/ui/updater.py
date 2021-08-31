@@ -47,6 +47,10 @@ class Updater(Qw.QDialog):
             self.update_reminder()
             return False
         elif do_update_msg_box.clickedButton() == later_btn:
+            config = Parser.open("./config/config_file.yaml")
+            config.data["UPDATE"] = True
+            config.write()
+
             return False
 
     def confirm_msg_box(self):
@@ -84,10 +88,9 @@ class Updater(Qw.QDialog):
 
         if reminder.clickedButton() == cancel_btn:
             config.data["UPDATE"] = False
+            config.write()
         elif reminder.clickedButton() == action_btn:
             config.data["UPDATE"] = True
-
-        config.write()
 
     def progress_bar(self):
         self.p_bar = Qw.QProgressBar()

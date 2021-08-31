@@ -8,6 +8,7 @@ from ..globals import Logger as log
 from .create_dialog import CreateDialog
 from .create_or_set_prj import CreateSet
 from .manage_prj import ManageProject
+from .updater import Updater
 
 
 class MainWindow(Qw.QMainWindow):
@@ -127,7 +128,8 @@ class MainWindow(Qw.QMainWindow):
         self.resize(400, 250)
 
     def check_new_update_action(self):
-        u = self.do_update()
+
+        u = Updater(self.include_beta.isChecked(), self)
 
         if not u.updated:
             msg_box = Qw.QMessageBox(self)
@@ -136,13 +138,6 @@ class MainWindow(Qw.QMainWindow):
             msg_box.setText("Odin is up to date.")
 
             msg_box.exec_()
-
-    def do_update(self):
-        from .updater import Updater
-
-        u = Updater(self.include_beta.isChecked(), self)
-
-        return u
 
     def closeEvent(self, close_event):
         # type: (Qg.QCloseEvent) -> NoReturn
