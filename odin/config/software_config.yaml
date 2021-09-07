@@ -5,17 +5,17 @@ guerilla:
   cwd: C:\Program Files\Guerilla Render
   exe: C:\Program Files\Guerilla Render\guerilla.exe
 houdini:
-  cwd: C:\Program Files\Side Effects Software\Houdini 18.5.596
-  exe: C:\Program Files\Side Effects Software\Houdini 18.5.596\bin\houdini.exe
+  cwd: C:\Program Files\Side Effects Software\Houdini 18.5.563
+  exe: C:\Program Files\Side Effects Software\Houdini 18.5.563\bin\houdini.exe
 mari:
-  cwd: C:\Program Files\Mari4.6v3
-  exe: C:\Program Files\Mari4.6v3\Bundle\bin\Mari4.6v3.exe
+  cwd: C:\Program Files\Mari4.7v2
+  exe: C:\Program Files\Mari4.7v2\Bundle\bin\Mari4.7v2.exe
 maya:
-  cwd: C:\Program Files\Autodesk\Maya2019
-  exe: C:\Program Files\Autodesk\Maya2019\bin\maya.exe
+  cwd: C:\Program Files\Autodesk\Maya2020
+  exe: C:\Program Files\Autodesk\Maya2020\bin\maya.exe
 nuke:
-  cwd: C:\Program Files\Nuke12.2v4
-  exe: C:\Program Files\Nuke12.2v4\Nuke12.2.exe
+  cwd: C:\Program Files\Nuke13.0v2
+  exe: C:\Program Files\Nuke13.0v2\Nuke13.0.exe
 painter:
   cwd: C:\Program Files\Allegorithmic\Substance Painter
   exe: C:\Program Files\Allegorithmic\Substance Painter\Substance Painter.exe
@@ -26,5 +26,5 @@ resolve:
   cwd: C:\Program Files\Blackmagic Design\DaVinci Resolve
   exe: C:\Program Files\Blackmagic Design\DaVinci Resolve\Resolve.exe
 zbrush:
-  cwd: C:\Program Files\Pixologic\ZBrush 2020.1.1 FL
-  exe: C:\Program Files\Pixologic\ZBrush 2020.1.1 FL\ZBrush.exe
+  cwd: C:\Program Files\Pixologic\ZBrush 2021
+  exe: C:\Program Files\Pixologic\ZBrush 2021\ZBrush.exe
