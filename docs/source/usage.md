@@ -2,9 +2,9 @@
 
 ## First use
 
-Before creating your first project, Odin need some information:
- - Path directory containing your projects
- - (Optional) Directory containing your scripts
+Before creating your first project, Odin needs some information:
+ - A path to the directory that will contain your projects
+ - (Optional) A directory that contain the scripts for the DCCs
 
 
 When running Odin for the first time, a pop-up will ask you to specify a project path.
@@ -16,8 +16,8 @@ When running Odin for the first time, a pop-up will ask you to specify a project
 Now the project path is specified, you can create as many projects as you want.
 
 ## Update Odin
-If an update is available, a message box will show up telling you if you want to download the new version of Odin.
-You can abort the update and say the soft you don't want to be reminded about future updates.
+If an update is available, a message box will show up asking you if you want to download the new version of Odin.
+You can abort the update and say the software you don't want to be reminded about future updates.
 
 You can tell Odin to check about new beta updates by checking the option in the `Update` tab.
 
@@ -26,8 +26,8 @@ You can tell Odin to check about new beta updates by checking the option in the 
 ## Tools for DCCs
 
 Odin is capable of loading an environment for each DCCs that support Python scripting.
-These scripts can be downloaded or created. If they are created, I recommend you to have a repository that follows the
-example bellow:
+These scripts can be downloaded or created. For both of these situations, I recommend you to have a repository that 
+follows the example bellow:
 
 *Example:*
 ```yaml
@@ -41,13 +41,11 @@ example bellow:
     - 📄 README.md: Documentation of your repository
 ```
 
-If the scripts are downloaded, you must follow the example above to be sure the scripts are accessible in the DCCs.
-
 To specify the tools' path containing the repositories, you need to open Odin. 
-Go into the `Config` tab, click on `Set tools path...` and specify the path.
+Go into the `Config` tab, click on `Set tools path...` and specify the folder that contains your tools.
 
 ```{eval-rst}
-.. tip:: If you work in a production, the configuration should be set by the Pipeline-TD.
+.. tip:: If you work in a production, the configuration should be set by the dev department.
 ```
 
 ```{eval-rst}
@@ -56,17 +54,36 @@ Go into the `Config` tab, click on `Set tools path...` and specify the path.
 
 ## Change configuration
 
-You can change the software launch path if it's absolutely necessary.
+Odin provide a configuration file containing the path of each software it can launch.
+
+Here is the list:
+
+* Maya 2019
+* ZBrush 2020.1.1 FL
+* Houdini 18.5.596
+* Substance Designer & Painter (Allegorithmic)
+* Mari 4.6v3
+* Photoshop 2021
+* NukeX 12.2v4
+* Guerilla Render
+* Resolve
+
+Some software has its version in the path. You can change it to follow the version you have on your computer by editing
+the `software_config.yaml` file.
 
 ```{eval-rst}
 .. warning:: Be aware that any modification can result to unusable software launching feature 
 ```
 
+To do so:
 * Go inside the Odin folder
-* Inside the 'config' folder, open the file `software_config.yaml` with a text editor
-* Replace the cwd and exe path:
-> The cwd is the path folder that contain all the files needed for the software to work properly.
-> The exe is the executable file path of the software.
+* In `odin/config`, open the file `software_config.yaml` with a text editor (Notepad++ preferably)
+* Replace the cwd and exe path by seeing the example bellow
+
+```{eval-rst}
+.. tip:: The cwd is the path folder that contain all the files needed for the software to work properly.
+        The exe is the executable file path of the software. 
+```
 
 *Base:*
 ```yaml
