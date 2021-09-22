@@ -12,16 +12,18 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
+
+sys.path.insert(0, os.path.abspath("../../"))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Odin'
-copyright = '2021, Thomas NICOLE'
-author = 'Thomas NICOLE'
+project = "Odin"
+copyright = "2021, Thomas NICOLE"
+author = "Thomas NICOLE"
 
 # The full version, including alpha/beta/rc tags
 from odin import __version__
+
 version = release = __version__
 
 # -- General configuration ---------------------------------------------------
@@ -30,28 +32,24 @@ version = release = __version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_parser',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.coverage',
-    'sphinx.ext.extlinks',
-    'sphinx_autodoc_typehints',
-    'seed_intersphinx_mapping',
+    "myst_parser",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.coverage",
+    "sphinx.ext.extlinks",
+    "sphinx_autodoc_typehints",
+    "seed_intersphinx_mapping",
 ]
 
 autodoc_typehints = "description"
 
-extlinks = {'release': ('https://github.com/titomncl/Odin/releases/' + release, '')}
+extlinks = {"release": ("https://github.com/titomncl/Odin/releases/" + release, "")}
 
 
-
-source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown'
-}
+source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -68,11 +66,11 @@ html_theme_options = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'furo'
+html_theme = "furo"
 
-html_favicon = os.path.abspath('../../odin/resources/icons/odin.ico')
+html_favicon = os.path.abspath("../../odin/resources/icons/odin.ico")
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]

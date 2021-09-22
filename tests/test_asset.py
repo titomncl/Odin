@@ -1,8 +1,9 @@
-import pytest
-import os
 import binascii
+import os
 
-from Odin import Project, Asset
+import pytest
+
+from Odin import Asset, Project
 
 
 @pytest.fixture(scope="module")
@@ -15,6 +16,7 @@ def tmp_dir(tmp_path_factory):
 @pytest.fixture(scope="session")
 def name():
     yield str(binascii.b2a_hex(os.urandom(2))).split("'")[1].upper()
+
 
 @pytest.fixture(scope="session")
 def asset_name():

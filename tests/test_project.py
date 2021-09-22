@@ -1,6 +1,7 @@
-import pytest
-import os
 import binascii
+import os
+
+import pytest
 
 from Odin import Project
 
