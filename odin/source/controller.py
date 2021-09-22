@@ -186,14 +186,14 @@ class Controller(object):
         self.recent_project = self.project_name
 
         os.environ["ROOT_PATH"] = self.root
-        os.environ["PROJECT_ENV"] = os.path.join(self.root, self.project_name)
+        os.environ["PROJECT_ENV"] = os.path.join(self.root, self.project_name).replace("\\", "/")
 
         venv = os.path.abspath("venv").replace("\\", "/")
 
         if not os.path.exists(venv):
             venv = os.path.abspath("../venv").replace("\\", "/")
 
-        log.info("Project set: " + self.root + self.project_name)
+        log.info("Project set: " + os.environ["PROJECT_ENV"])
 
         os.environ["DEV_ENV"] = self.tool_path
         os.environ["venv"] = venv

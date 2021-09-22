@@ -1,6 +1,7 @@
 import os
 
 import pytest
+
 from Odin.odin.source.core.yaml_parser import Parser
 
 

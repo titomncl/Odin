@@ -3,6 +3,8 @@ from typing import List, Union
 
 import requests
 
+from ..globals import Logger as log
+
 version_pattern = re.compile(r"^(?P<major>\d).(?P<minor>\d).(?P<micro>\d)b?(?P<beta>\d*)?$")
 
 
@@ -10,28 +12,32 @@ def new_update(version, is_beta):
     # type: (str, bool) -> Union[None, str]
     url = "https://api.github.com/repos/titomncl/odin/tags"
 
-    r = requests.request(method="GET", url=url)
+    try:
+        r = requests.request(method="GET", url=url)
 
-    tags = r.json()
+        tags = r.json()
 
-    actual_version = version_pattern.match(version).groupdict()
+        actual_version = version_pattern.match(version).groupdict()
 
-    for tag in tags:
-        last_version = version_pattern.match(tag["name"])
+        for tag in tags:
+            last_version = version_pattern.match(tag["name"])
 
-        if last_version:
-            last_version = last_version.groupdict()
+            if last_version:
+                last_version = last_version.groupdict()
 
-            actual_v = [int(actual_version["major"]), int(actual_version["minor"]), int(actual_version["micro"])]
-            if actual_version["beta"]:
-                actual_v.append(int(actual_version["beta"]))
+                actual_v = [int(actual_version["major"]), int(actual_version["minor"]), int(actual_version["micro"])]
+                if actual_version["beta"]:
+                    actual_v.append(int(actual_version["beta"]))
 
-            last_v = [int(last_version["major"]), int(last_version["minor"]), int(last_version["micro"])]
-            if last_version["beta"]:
-                last_v.append(int(last_version["beta"]))
+                last_v = [int(last_version["major"]), int(last_version["minor"]), int(last_version["micro"])]
+                if last_version["beta"]:
+                    last_v.append(int(last_version["beta"]))
 
-            if version_verification(actual_v, last_v, is_beta):
-                return tag["name"]
+                if version_verification(actual_v, last_v, is_beta):
+                    return tag["name"]
+
+    except requests.ConnectionError:
+        log.warning("The connection can't be established. Verify that you are connected to internet.")
 
 
 def version_verification(actual, new, is_beta):
