@@ -1,10 +1,13 @@
 import glob
 import os
+import sys
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3, ):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from typing import Dict, List, Optional
 
 from ..common import concat
 from ..globals import Logger as log

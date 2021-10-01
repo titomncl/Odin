@@ -1,7 +1,11 @@
-try:
-    from typing import Dict, Optional, Union
-except ImportError:
-    pass
+import sys
+
+if sys.version_info > (3, ):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from typing import Dict, Optional, Union
 
 from ..globals import Logger as log
 

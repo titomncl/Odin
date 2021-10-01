@@ -1,10 +1,15 @@
 import os
+import sys
 from copy import deepcopy
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3,):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Project
+        from typing import Dict, List, Optional
+
 
 from ..common import concat
 from ..globals import Logger as log
@@ -27,7 +32,7 @@ class Asset(object):
     """
 
     def __init__(self, parent, name=None, asset_type=None, data=None):
-        # type: ("Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        # type: (Project, Optional[str], Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._asset_type = asset_type
@@ -45,7 +50,7 @@ class Asset(object):
 
     @staticmethod
     def list(parent, asset_type):
-        # type: ("Project", str) -> List[str]  # noqa: F821
+        # type: (Project, str) -> List[str]  # noqa: F821
         """List the assets found in the given project.
 
         Args:
@@ -62,7 +67,7 @@ class Asset(object):
 
     @classmethod
     def load(cls, parent, name, asset_type):
-        # type: ("Project", str, str) -> Asset  # noqa: F821
+        # type: (Project, str, str) -> Asset  # noqa: F821
         """Load an existing asset.
 
         Args:
@@ -89,7 +94,7 @@ class Asset(object):
 
     @classmethod
     def new(cls, parent, name, asset_type):
-        # type: ("Project", str, str) -> Asset  # noqa: F821
+        # type: (Project, str, str) -> Asset  # noqa: F821
         """Create a new sequence.
 
         Args:

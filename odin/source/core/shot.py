@@ -1,9 +1,15 @@
 import os
+import sys
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3, ):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Sequence
+
+        from typing import Dict, List, Optional
+
 
 from ..common import concat
 from ..globals import Logger as log
@@ -25,7 +31,7 @@ class Shot(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("Sequence", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        # type: (Sequence, Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._data = data
@@ -37,7 +43,7 @@ class Shot(object):
 
     @staticmethod
     def list(parent):
-        # type: ("Sequence") -> List[str]  # noqa: F821
+        # type: (Sequence) -> List[str]  # noqa: F821
         """List the shots found in the given sequence.
 
         Args:
@@ -53,7 +59,7 @@ class Shot(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("Sequence", str) -> Shot  # noqa: F821
+        # type: (Sequence, str) -> Shot  # noqa: F821
         """Load an existing shot.
 
         Args:
@@ -71,7 +77,7 @@ class Shot(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("Sequence", str) -> Shot  # noqa: F821
+        # type: (Sequence, str) -> Shot  # noqa: F821
         """Create a new shot.
 
         Args:

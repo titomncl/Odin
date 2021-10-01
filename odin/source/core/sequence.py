@@ -1,9 +1,14 @@
 import os
+import sys
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3,):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Project
+        from typing import Dict, List, Optional
+
 
 from ..common import concat
 from ..globals import Logger as log
@@ -28,8 +33,8 @@ class Sequence(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("Project", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
-        self.parent = parent
+        # type: (Project, Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        self._parent = parent
         self._name = name
         self._data = data
 
@@ -48,7 +53,7 @@ class Sequence(object):
 
     @staticmethod
     def list(parent):
-        # type: ("Project") -> List[str]  # noqa: F821
+        # type: (Project) -> List[str]  # noqa: F821
         """List the sequences found in the given project.
 
         Args:
@@ -64,7 +69,7 @@ class Sequence(object):
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("Project", str) -> Sequence  # noqa: F821
+        # type: (Project, str) -> Sequence  # noqa: F821
         """Load an existing sequence.
 
         Args:
@@ -82,7 +87,7 @@ class Sequence(object):
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("Project", str) -> Sequence  # noqa: F821
+        # type: (Project, str) -> Sequence  # noqa: F821
         """Create a new sequence.
 
         Args:
