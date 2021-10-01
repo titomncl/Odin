@@ -2,7 +2,7 @@ import glob
 import os
 import sys
 
-if sys.version_info > (3, ):
+if sys.version_info > (3,):
 
     import typing
 

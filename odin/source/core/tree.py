@@ -1,8 +1,7 @@
 import os
 import sys
 
-
-if sys.version_info > (3, ):
+if sys.version_info > (3,):
     import typing
 
     if typing.TYPE_CHECKING:
