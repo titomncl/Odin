@@ -10,6 +10,7 @@ if sys.version_info > (3, ):
 
 from ..common import concat
 from ..globals import Logger as log
+from ..globals import Keys
 
 
 class Tree(object):
@@ -94,12 +95,12 @@ def path_from_tree(data, word, path="", values=None):
             _path = os.path.join(path, key)
             try:
                 if word in value:
-                    if "PUBLISH" in _path:
-                        _values["PUBLISH"] = os.path.join(_path, word)
-                    elif "OUT" in _path:
-                        _values["OUT"] = os.path.join(_path, word)
+                    if Keys.PUBLISH in _path:
+                        _values[Keys.PUBLISH] = os.path.join(_path, word).replace("\\", "/")
+                    elif Keys.OUT in _path:
+                        _values[Keys.OUT] = os.path.join(_path, word).replace("\\", "/")
                     else:
-                        _values["PATH"] = os.path.join(_path, word)
+                        _values[Keys.PATH] = os.path.join(_path, word).replace("\\", "/")
             except KeyError:
                 pass
 

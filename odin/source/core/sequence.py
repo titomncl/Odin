@@ -11,7 +11,7 @@ if sys.version_info > (3,):
 
 
 from ..common import concat
-from ..globals import Logger as log
+from ..globals import Logger as log, Keys
 from . import trees_path
 from .shot import Shot
 from .tree import Tree, path_from_tree
@@ -63,7 +63,7 @@ class Sequence(object):
             List of the sequences
 
         """
-        path = path_from_tree(parent.data, "SEQ", parent.root)["PATH"]
+        path = path_from_tree(parent.data, Keys.SEQ, parent.project_path)[Keys.PATH]
         seq = next(os.walk(path))[1]
         return seq
 
@@ -120,15 +120,15 @@ class Sequence(object):
             prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
 
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
-            seq_out_data = prj_parser.data[parent.name]["OUT"]
+            seq_out_data = prj_parser.data[parent.name][Keys.OUT]
 
-            if not seq_data["SEQ"]:
-                seq_data["SEQ"] = dict()
-            if not seq_out_data["SEQ"]:
-                seq_out_data["SEQ"] = dict()
+            if not seq_data[Keys.SEQ]:
+                seq_data[Keys.SEQ] = dict()
+            if not seq_out_data[Keys.SEQ]:
+                seq_out_data[Keys.SEQ] = dict()
 
-            seq_data["SEQ"].update(_data)
-            seq_out_data["SEQ"].update(_data_out)
+            seq_data[Keys.SEQ].update(_data)
+            seq_out_data[Keys.SEQ].update(_data_out)
 
             prj_parser.write()
 

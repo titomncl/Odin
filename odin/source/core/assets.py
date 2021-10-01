@@ -13,6 +13,7 @@ if sys.version_info > (3,):
 
 from ..common import concat
 from ..globals import Logger as log
+from ..globals import Keys
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
@@ -61,7 +62,7 @@ class Asset(object):
             List of the assets
 
         """
-        path = path_from_tree(parent.data, asset_type, parent.root)["PATH"]
+        path = path_from_tree(parent.data, asset_type, parent.project_path)[Keys.PATH]
         assets = next(os.walk(path))[1]
         return assets
 
@@ -111,22 +112,22 @@ class Asset(object):
 
         root_values = path_from_tree(parent.data, asset_type, parent.root)
 
-        if asset_type in ["CHARA", "PROPS"]:
+        if asset_type in [Keys.CHARA, Keys.PROPS]:
             _data[name] = Parser.open(trees_path.asset_tree()).data
             _data_publish[name] = Parser.open(trees_path.asset_publish_tree()).data
-        elif asset_type == "SET":
+        elif asset_type == Keys.SET:
             _data[name] = Parser.open(trees_path.set_tree()).data
             _data_publish[name] = Parser.open(trees_path.set_publish_tree()).data
-        elif asset_type == "FX":
+        elif asset_type == Keys.FX:
             _data[name] = Parser.open(trees_path.fx_tree()).data
             _data_publish[name] = None
 
-        path = root_values["PATH"]
+        path = root_values[Keys.PATH]
         tree = Tree(None, path)
         tree.create_tree(_data, tree)
         tree.create_on_disk()
 
-        publish_path = root_values["PUBLISH"]
+        publish_path = root_values[Keys.PUBLISH]
         publish_tree = Tree(None, publish_path)
         publish_tree.create_tree(_data_publish, publish_tree)
         publish_tree.create_on_disk()
@@ -134,7 +135,7 @@ class Asset(object):
         prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
 
         asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
-        asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"]["PUBLISH"]
+        asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"][Keys.PUBLISH]
 
         if not asset_data[asset_type]:
             asset_data[asset_type] = dict()
