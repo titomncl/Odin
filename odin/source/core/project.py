@@ -36,7 +36,7 @@ class Project(object):
 
     def __init__(self, root=None, name=None, data=None):
         # type: (Optional[str], Optional[str], Optional[Dict[str]]) -> None
-        self._root = root
+        self._prj_path = root
         self._name = name
         self._data = data or dict()
         self._assets = None
@@ -47,14 +47,14 @@ class Project(object):
         return self._name
 
     @property
-    def root(self):
+    def project_path(self):
         # type: () -> str
-        return self._root
+        return self._prj_path
 
     @property
     def data(self):
         # type: () -> Dict[str]
-        return Parser.open(os.path.join(self.root, self.name, "odin.yaml")).data
+        return Parser.open(os.path.join(self.project_path, self.name, "odin.yaml")).data
 
     @staticmethod
     def list(root=None):

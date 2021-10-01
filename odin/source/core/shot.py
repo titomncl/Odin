@@ -12,7 +12,7 @@ if sys.version_info > (3, ):
 
 
 from ..common import concat
-from ..globals import Logger as log
+from ..globals import Logger as log, Keys
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser
@@ -53,7 +53,7 @@ class Shot(object):
             List of the shots
 
         """
-        path = path_from_tree(parent.parent.data, parent.name, parent.parent.root)["PATH"]
+        path = path_from_tree(parent.parent.data, parent.name, parent.parent.project_path)[Keys.PATH]
         seq = next(os.walk(path))[1]
         return seq
 
@@ -70,8 +70,8 @@ class Shot(object):
             Shot object
 
         """
-        _data = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml")).data
-        _data = _data[parent.parent.name]["DATA"]["FILM"]["SEQ"][parent.name][name]
+        _data = Parser.open(os.path.join(parent.parent.project_path, parent.parent.name, "odin.yaml")).data
+        _data = _data[parent.parent.name]["DATA"]["FILM"][Keys.SEQ][parent.name][name]
 
         return cls(parent, name, _data)
 
@@ -91,9 +91,9 @@ class Shot(object):
         _data = dict()
         _data_out = dict()
 
-        root_values = path_from_tree(parent.parent.data, parent.name, parent.parent.root)
-        path = root_values["PATH"]
-        out_path = root_values["OUT"]
+        root_values = path_from_tree(parent.parent.data, parent.name, parent.parent.project_path)
+        path = root_values[Keys.PATH]
+        out_path = root_values[Keys.OUT]
 
         _data[name] = Parser.open(trees_path.shot_tree()).data
         _data_out[name] = Parser.open(trees_path.shot_out_tree()).data
@@ -106,7 +106,7 @@ class Shot(object):
         out_tree.create_tree(_data_out, out_tree)
         out_tree.create_on_disk()
 
-        prj_parser = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml"))
+        prj_parser = Parser.open(os.path.join(parent.parent.project_path, parent.parent.name, "odin.yaml"))
 
         shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"][Keys.SEQ]
         shot_out_data = prj_parser.data[parent.parent.name][Keys.OUT][Keys.SEQ]

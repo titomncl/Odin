@@ -35,7 +35,7 @@ def test_project_new(tmp_dir, name):
     prj_data = os.path.join(tmp_dir, name, "odin.yaml")
 
     assert prj.name == name
-    assert prj.root == tmp_dir
+    assert prj.project_path == tmp_dir
     assert os.path.isfile(prj_data) is True
 
 

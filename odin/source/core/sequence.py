@@ -80,8 +80,8 @@ class Sequence(object):
             Sequence object
 
         """
-        _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
-        _data = _data[parent.name]["DATA"]["FILM"]["SEQ"][name]
+        _data = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml")).data
+        _data = _data[parent.name]["DATA"]["FILM"][Keys.SEQ][name]
 
         return cls(parent, name, _data)
 
@@ -101,9 +101,9 @@ class Sequence(object):
         _data = dict()
         _data_out = dict()
 
-        root_values = path_from_tree(parent.data, "SEQ", parent.root)
-        path = root_values["PATH"]
-        out_path = root_values["OUT"]
+        root_values = path_from_tree(parent.data, Keys.SEQ, parent.project_path)
+        path = root_values[Keys.PATH]
+        out_path = root_values[Keys.OUT]
 
         if path:
             _data[name] = Parser.open(trees_path.seq_tree()).data
@@ -117,7 +117,7 @@ class Sequence(object):
             out_tree.create_tree(_data_out, out_tree)
             out_tree.create_on_disk()
 
-            prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
+            prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
             seq_out_data = prj_parser.data[parent.name][Keys.OUT]

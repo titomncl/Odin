@@ -80,7 +80,7 @@ class Asset(object):
             Asset object
 
         """
-        _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
+        _data = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml")).data
 
         lib = deepcopy(_data[parent.name]["DATA"]["LIB"])
         if asset_type not in lib:
@@ -110,7 +110,7 @@ class Asset(object):
         _data = dict()
         _data_publish = dict()
 
-        root_values = path_from_tree(parent.data, asset_type, parent.root)
+        root_values = path_from_tree(parent.data, asset_type, parent.project_path)
 
         if asset_type in [Keys.CHARA, Keys.PROPS]:
             _data[name] = Parser.open(trees_path.asset_tree()).data
@@ -132,7 +132,7 @@ class Asset(object):
         publish_tree.create_tree(_data_publish, publish_tree)
         publish_tree.create_on_disk()
 
-        prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
+        prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
         asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
         asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"][Keys.PUBLISH]
