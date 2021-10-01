@@ -41,6 +41,16 @@ class Shot(object):
         # type: () -> str
         return self._name
 
+    @property
+    def parent(self):
+        # type: () -> Sequence
+        return self._parent
+
+    @property
+    def shot_paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.parent.data, self.parent.name, self.parent.parent.project_path)
+
     @staticmethod
     def list(parent):
         # type: (Sequence) -> List[str]  # noqa: F821

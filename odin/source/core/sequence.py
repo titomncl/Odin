@@ -43,6 +43,16 @@ class Sequence(object):
         # type: () -> str
         return self._name
 
+    @property
+    def parent(self):
+        # type: () -> Project
+        return self._parent
+
+    @property
+    def seq_paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.data, Keys.SEQ, self.parent.project_path)
+
     def get_shots(self):
         # type: () -> List[str]
         return Shot.list(self)

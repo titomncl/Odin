@@ -45,9 +45,19 @@ class Asset(object):
         return self._name
 
     @property
+    def parent(self):
+        # type: () -> Project
+        return self._parent
+
+    @property
     def asset_type(self):
         # type: () -> str
         return self._asset_type
+
+    @property
+    def asset_paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.data, self.asset_type, self.parent.project_path)
 
     @staticmethod
     def list(parent, asset_type):
@@ -85,7 +95,7 @@ class Asset(object):
         lib = deepcopy(_data[parent.name]["DATA"]["LIB"])
         if asset_type not in lib:
             raise KeyError(
-                "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX' instead.".format(asset_type)
+                "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX'.".format(asset_type)
             )
         elif name not in lib[asset_type]:
             raise KeyError("{} not in database.")
