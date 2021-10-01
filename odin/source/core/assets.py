@@ -10,10 +10,9 @@ if sys.version_info > (3,):
         from Odin import Project
         from typing import Dict, List, Optional
 
-
 from ..common import concat
-from ..globals import Logger as log
 from ..globals import Keys
+from ..globals import Logger as log
 from . import trees_path
 from .tree import Tree, path_from_tree
 from .yaml_parser import Parser

@@ -8,8 +8,8 @@ if sys.version_info > (3,):
         from typing import Dict, Optional, Union
 
 from ..common import concat
-from ..globals import Logger as log
 from ..globals import Keys
+from ..globals import Logger as log
 
 
 class Tree(object):
