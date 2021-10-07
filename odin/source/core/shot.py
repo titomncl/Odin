@@ -105,6 +105,8 @@ class Shot(object):
         path = root_values[Keys.PATH]
         out_path = root_values[Keys.OUT]
 
+        name = parent.name + name
+
         _data[name] = Parser.open(trees_path.shot_tree()).data
         _data_out[name] = Parser.open(trees_path.shot_out_tree()).data
 
