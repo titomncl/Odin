@@ -49,7 +49,7 @@ class Sequence(object):
         return self._parent
 
     @property
-    def seq_paths(self):
+    def paths(self):
         # type: () -> dict
         return path_from_tree(self.parent.data, Keys.SEQ, self.parent.project_path)
 

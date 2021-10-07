@@ -54,7 +54,7 @@ class Asset(object):
         return self._asset_type
 
     @property
-    def asset_paths(self):
+    def paths(self):
         # type: () -> dict
         return path_from_tree(self.parent.data, self.asset_type, self.parent.project_path)
 

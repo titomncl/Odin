@@ -47,7 +47,7 @@ class Shot(object):
         return self._parent
 
     @property
-    def shot_paths(self):
+    def paths(self):
         # type: () -> dict
         return path_from_tree(self.parent.parent.data, self.parent.name, self.parent.parent.project_path)
 
