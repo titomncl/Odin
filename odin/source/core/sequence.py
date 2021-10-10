@@ -1,11 +1,16 @@
 import os
+import sys
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3,):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Project
+        from typing import Dict, List, Optional
 
 from ..common import concat
+from ..globals import Keys
 from ..globals import Logger as log
 from . import trees_path
 from .shot import Shot
@@ -28,8 +33,8 @@ class Sequence(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("Project", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
-        self.parent = parent
+        # type: (Project, Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        self._parent = parent
         self._name = name
         self._data = data
 
@@ -37,6 +42,16 @@ class Sequence(object):
     def name(self):
         # type: () -> str
         return self._name
+
+    @property
+    def parent(self):
+        # type: () -> Project
+        return self._parent
+
+    @property
+    def paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.data, Keys.SEQ, self.parent.project_path)
 
     def get_shots(self):
         # type: () -> List[str]
@@ -48,7 +63,7 @@ class Sequence(object):
 
     @staticmethod
     def list(parent):
-        # type: ("Project") -> List[str]  # noqa: F821
+        # type: (Project) -> List[str]  # noqa: F821
         """List the sequences found in the given project.
 
         Args:
@@ -58,13 +73,13 @@ class Sequence(object):
             List of the sequences
 
         """
-        path = path_from_tree(parent.data, "SEQ", parent.root)["PATH"]
+        path = path_from_tree(parent.data, Keys.SEQ, parent.project_path)[Keys.PATH]
         seq = next(os.walk(path))[1]
         return seq
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("Project", str) -> Sequence  # noqa: F821
+        # type: (Project, str) -> Sequence  # noqa: F821
         """Load an existing sequence.
 
         Args:
@@ -75,14 +90,14 @@ class Sequence(object):
             Sequence object
 
         """
-        _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
-        _data = _data[parent.name]["DATA"]["FILM"]["SEQ"][name]
+        _data = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml")).data
+        _data = _data[parent.name]["DATA"]["FILM"][Keys.SEQ][name]
 
         return cls(parent, name, _data)
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("Project", str) -> Sequence  # noqa: F821
+        # type: (Project, str) -> Sequence  # noqa: F821
         """Create a new sequence.
 
         Args:
@@ -96,9 +111,9 @@ class Sequence(object):
         _data = dict()
         _data_out = dict()
 
-        root_values = path_from_tree(parent.data, "SEQ", parent.root)
-        path = root_values["PATH"]
-        out_path = root_values["OUT"]
+        root_values = path_from_tree(parent.data, Keys.SEQ, parent.project_path)
+        path = root_values[Keys.PATH]
+        out_path = root_values[Keys.PUBLISH]
 
         if path:
             _data[name] = Parser.open(trees_path.seq_tree()).data
@@ -112,18 +127,18 @@ class Sequence(object):
             out_tree.create_tree(_data_out, out_tree)
             out_tree.create_on_disk()
 
-            prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
+            prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
-            seq_out_data = prj_parser.data[parent.name]["OUT"]
+            seq_out_data = prj_parser.data[parent.name][Keys.PUBLISH]
 
-            if not seq_data["SEQ"]:
-                seq_data["SEQ"] = dict()
-            if not seq_out_data["SEQ"]:
-                seq_out_data["SEQ"] = dict()
+            if not seq_data[Keys.SEQ]:
+                seq_data[Keys.SEQ] = dict()
+            if not seq_out_data[Keys.SEQ]:
+                seq_out_data[Keys.SEQ] = dict()
 
-            seq_data["SEQ"].update(_data)
-            seq_out_data["SEQ"].update(_data_out)
+            seq_data[Keys.SEQ].update(_data)
+            seq_out_data[Keys.SEQ].update(_data_out)
 
             prj_parser.write()
 

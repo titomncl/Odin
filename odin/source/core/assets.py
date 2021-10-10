@@ -1,12 +1,17 @@
 import os
+import sys
 from copy import deepcopy
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3,):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Project
+        from typing import Dict, List, Optional
 
 from ..common import concat
+from ..globals import Keys
 from ..globals import Logger as log
 from . import trees_path
 from .tree import Tree, path_from_tree
@@ -27,7 +32,7 @@ class Asset(object):
     """
 
     def __init__(self, parent, name=None, asset_type=None, data=None):
-        # type: ("Project", Optional[str], Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        # type: (Project, Optional[str], Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._asset_type = asset_type
@@ -39,13 +44,23 @@ class Asset(object):
         return self._name
 
     @property
+    def parent(self):
+        # type: () -> Project
+        return self._parent
+
+    @property
     def asset_type(self):
         # type: () -> str
         return self._asset_type
 
+    @property
+    def paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.data, self.asset_type, self.parent.project_path)
+
     @staticmethod
     def list(parent, asset_type):
-        # type: ("Project", str) -> List[str]  # noqa: F821
+        # type: (Project, str) -> List[str]  # noqa: F821
         """List the assets found in the given project.
 
         Args:
@@ -56,13 +71,13 @@ class Asset(object):
             List of the assets
 
         """
-        path = path_from_tree(parent.data, asset_type, parent.root)["PATH"]
+        path = path_from_tree(parent.data, asset_type, parent.project_path)[Keys.PATH]
         assets = next(os.walk(path))[1]
         return assets
 
     @classmethod
     def load(cls, parent, name, asset_type):
-        # type: ("Project", str, str) -> Asset  # noqa: F821
+        # type: (Project, str, str) -> Asset  # noqa: F821
         """Load an existing asset.
 
         Args:
@@ -74,12 +89,12 @@ class Asset(object):
             Asset object
 
         """
-        _data = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml")).data
+        _data = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml")).data
 
         lib = deepcopy(_data[parent.name]["DATA"]["LIB"])
         if asset_type not in lib:
             raise KeyError(
-                "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX' instead.".format(asset_type)
+                "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX'.".format(asset_type)
             )
         elif name not in lib[asset_type]:
             raise KeyError("{} not in database.")
@@ -89,7 +104,7 @@ class Asset(object):
 
     @classmethod
     def new(cls, parent, name, asset_type):
-        # type: ("Project", str, str) -> Asset  # noqa: F821
+        # type: (Project, str, str) -> Asset  # noqa: F821
         """Create a new sequence.
 
         Args:
@@ -104,32 +119,32 @@ class Asset(object):
         _data = dict()
         _data_publish = dict()
 
-        root_values = path_from_tree(parent.data, asset_type, parent.root)
+        root_values = path_from_tree(parent.data, asset_type, parent.project_path)
 
-        if asset_type in ["CHARA", "PROPS"]:
+        if asset_type in [Keys.CHARA, Keys.PROPS]:
             _data[name] = Parser.open(trees_path.asset_tree()).data
             _data_publish[name] = Parser.open(trees_path.asset_publish_tree()).data
-        elif asset_type == "SET":
+        elif asset_type == Keys.SET:
             _data[name] = Parser.open(trees_path.set_tree()).data
             _data_publish[name] = Parser.open(trees_path.set_publish_tree()).data
-        elif asset_type == "FX":
+        elif asset_type == Keys.FX:
             _data[name] = Parser.open(trees_path.fx_tree()).data
             _data_publish[name] = None
 
-        path = root_values["PATH"]
+        path = root_values[Keys.PATH]
         tree = Tree(None, path)
         tree.create_tree(_data, tree)
         tree.create_on_disk()
 
-        publish_path = root_values["PUBLISH"]
+        publish_path = root_values[Keys.PUBLISH]
         publish_tree = Tree(None, publish_path)
         publish_tree.create_tree(_data_publish, publish_tree)
         publish_tree.create_on_disk()
 
-        prj_parser = Parser.open(os.path.join(parent.root, parent.name, "odin.yaml"))
+        prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
         asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
-        asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"]["PUBLISH"]
+        asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"][Keys.PUBLISH]
 
         if not asset_data[asset_type]:
             asset_data[asset_type] = dict()

@@ -1,11 +1,17 @@
 import os
+import sys
 
-try:
-    from typing import Dict, List, Optional
-except ImportError:
-    pass
+if sys.version_info > (3,):
+
+    import typing
+
+    if typing.TYPE_CHECKING:
+        from Odin import Sequence
+
+        from typing import Dict, List, Optional
 
 from ..common import concat
+from ..globals import Keys
 from ..globals import Logger as log
 from . import trees_path
 from .tree import Tree, path_from_tree
@@ -25,7 +31,7 @@ class Shot(object):
     """
 
     def __init__(self, parent, name=None, data=None):
-        # type: ("Sequence", Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
+        # type: (Sequence, Optional[str], Optional[Dict[str]]) -> None  # noqa: F821
         self._parent = parent
         self._name = name
         self._data = data
@@ -35,9 +41,19 @@ class Shot(object):
         # type: () -> str
         return self._name
 
+    @property
+    def parent(self):
+        # type: () -> Sequence
+        return self._parent
+
+    @property
+    def paths(self):
+        # type: () -> dict
+        return path_from_tree(self.parent.parent.data, self.parent.name, self.parent.parent.project_path)
+
     @staticmethod
     def list(parent):
-        # type: ("Sequence") -> List[str]  # noqa: F821
+        # type: (Sequence) -> List[str]  # noqa: F821
         """List the shots found in the given sequence.
 
         Args:
@@ -47,13 +63,13 @@ class Shot(object):
             List of the shots
 
         """
-        path = path_from_tree(parent.parent.data, parent.name, parent.parent.root)["PATH"]
+        path = path_from_tree(parent.parent.data, parent.name, parent.parent.project_path)[Keys.PATH]
         seq = next(os.walk(path))[1]
         return seq
 
     @classmethod
     def load(cls, parent, name):
-        # type: ("Sequence", str) -> Shot  # noqa: F821
+        # type: (Sequence, str) -> Shot  # noqa: F821
         """Load an existing shot.
 
         Args:
@@ -64,14 +80,14 @@ class Shot(object):
             Shot object
 
         """
-        _data = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml")).data
-        _data = _data[parent.parent.name]["DATA"]["FILM"]["SEQ"][parent.name][name]
+        _data = Parser.open(os.path.join(parent.parent.project_path, parent.parent.name, "odin.yaml")).data
+        _data = _data[parent.parent.name]["DATA"]["FILM"][Keys.SEQ][parent.name][name]
 
         return cls(parent, name, _data)
 
     @classmethod
     def new(cls, parent, name):
-        # type: ("Sequence", str) -> Shot  # noqa: F821
+        # type: (Sequence, str) -> Shot  # noqa: F821
         """Create a new shot.
 
         Args:
@@ -85,9 +101,11 @@ class Shot(object):
         _data = dict()
         _data_out = dict()
 
-        root_values = path_from_tree(parent.parent.data, parent.name, parent.parent.root)
-        path = root_values["PATH"]
-        out_path = root_values["OUT"]
+        root_values = path_from_tree(parent.parent.data, parent.name, parent.parent.project_path)
+        path = root_values[Keys.PATH]
+        out_path = root_values[Keys.PUBLISH]
+
+        name = parent.name + name
 
         _data[name] = Parser.open(trees_path.shot_tree()).data
         _data_out[name] = Parser.open(trees_path.shot_out_tree()).data
@@ -100,10 +118,10 @@ class Shot(object):
         out_tree.create_tree(_data_out, out_tree)
         out_tree.create_on_disk()
 
-        prj_parser = Parser.open(os.path.join(parent.parent.root, parent.parent.name, "odin.yaml"))
+        prj_parser = Parser.open(os.path.join(parent.parent.project_path, parent.parent.name, "odin.yaml"))
 
-        shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"]["SEQ"]
-        shot_out_data = prj_parser.data[parent.parent.name]["OUT"]["SEQ"]
+        shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"][Keys.SEQ]
+        shot_out_data = prj_parser.data[parent.parent.name][Keys.PUBLISH][Keys.SEQ]
 
         if not shot_data[parent.name]:
             shot_data[parent.name] = dict()
