@@ -128,10 +128,11 @@ class Sequence(object):
             out_tree.create_on_disk()
 
             prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
-
+            print(131)
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
-            seq_out_data = prj_parser.data[parent.name][Keys.PUBLISH]
-
+            print(prj_parser.data[parent.name])
+            seq_out_data = prj_parser.data[parent.name][Keys.OUT]
+            print(134)
             if not seq_data[Keys.SEQ]:
                 seq_data[Keys.SEQ] = dict()
             if not seq_out_data[Keys.SEQ]:
