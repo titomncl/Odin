@@ -103,7 +103,7 @@ class Shot(object):
 
         root_values = path_from_tree(parent.parent.data, parent.name, parent.parent.project_path)
         path = root_values[Keys.PATH]
-        out_path = root_values[Keys.OUT]
+        out_path = root_values[Keys.PUBLISH]
 
         name = parent.name + name
 
@@ -121,7 +121,7 @@ class Shot(object):
         prj_parser = Parser.open(os.path.join(parent.parent.project_path, parent.parent.name, "odin.yaml"))
 
         shot_data = prj_parser.data[parent.parent.name]["DATA"]["FILM"][Keys.SEQ]
-        shot_out_data = prj_parser.data[parent.parent.name][Keys.OUT][Keys.SEQ]
+        shot_out_data = prj_parser.data[parent.parent.name][Keys.PUBLISH][Keys.SEQ]
 
         if not shot_data[parent.name]:
             shot_data[parent.name] = dict()

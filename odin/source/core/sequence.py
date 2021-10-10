@@ -113,7 +113,7 @@ class Sequence(object):
 
         root_values = path_from_tree(parent.data, Keys.SEQ, parent.project_path)
         path = root_values[Keys.PATH]
-        out_path = root_values[Keys.OUT]
+        out_path = root_values[Keys.PUBLISH]
 
         if path:
             _data[name] = Parser.open(trees_path.seq_tree()).data
@@ -130,7 +130,7 @@ class Sequence(object):
             prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
             seq_data = prj_parser.data[parent.name]["DATA"]["FILM"]
-            seq_out_data = prj_parser.data[parent.name][Keys.OUT]
+            seq_out_data = prj_parser.data[parent.name][Keys.PUBLISH]
 
             if not seq_data[Keys.SEQ]:
                 seq_data[Keys.SEQ] = dict()
