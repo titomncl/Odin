@@ -25,12 +25,17 @@ PROJECT_NAME:
           <PROJECT_NAME>_EDIT.<ext>
       SEQ:
         <S###>:
-          <P###>:
+          <S###P###>:
             ANIMATION:
               VERSION:
-                <S###P###>_ANIM_<VERSION>.<ext>
+                <S###P###>_ANIMATION_<VERSION>.<ext>
               PUBLISH:
-                <S###P###>_ANIM.<ext>
+                <S###P###>_ANIMATION.<ext>
+            LAYOUT:
+              VERSION:
+                <S###P###>_LAYOUT_<VERSION>.<ext>
+              PUBLISH:
+                <S###P###>_LAYOUT.<ext>
             LIGHTING:
               VERSION:
                 <S###P###>_LIGHTING_<VERSION>.<ext>
@@ -39,9 +44,9 @@ PROJECT_NAME:
             COMPOSITING:
               CACHE:
               VERSION:
-                <S###P###>_COMPO_<VERSION>.<ext>
+                <S###P###>_COMPOSITING_<VERSION>.<ext>
               PUBLISH:
-                <S###P###>_COMPO.<ext>
+                <S###P###>_COMPOSITING.<ext>
             FX:
               CACHE:
                 <S###P###>_FX_CACHE.<ext>
@@ -174,13 +179,15 @@ PROJECT_NAME:
   OUT:
     SEQ:
       <S###>:
-        <P###>:
+        <S###P###>:
           ANIMATION:
-            <S###P###>_ANIM.abc
+            <S###P###>_ANIMATION.abc
+          LAYOUT:
+            <S###P###>_LAYOUT.mp4
           LIGHTING:
             <S###P###>_LIGHTING.exr
           COMPOSITING:
-            <S###P###>_COMPO.exr
+            <S###P###>_COMPOSITING.exr
           FX:
             <S###P###>_FX.<ext>
     AUDIO:
