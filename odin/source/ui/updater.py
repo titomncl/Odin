@@ -26,6 +26,7 @@ class Updater(Qw.QDialog):
             if self.do_update():
                 self.update_soft(self.tag)
                 self.confirm_msg_box()
+                parent.close()
 
     def do_update(self):
         do_update_msg_box = Qw.QMessageBox(self)
