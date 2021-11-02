@@ -20,9 +20,9 @@ PROJECT_NAME:
     FILM:
       EDITING:
         VERSION:
-          <PROJECT_NAME>_EDIT_<VERSION>.<ext>
+          <PROJECT_NAME>_EDITING_<VERSION>.<ext>
         PUBLISH:
-          <PROJECT_NAME>_EDIT.<ext>
+          <PROJECT_NAME>_EDITING.<ext>
       SEQ:
         <S###>:
           <S###P###>:
@@ -65,11 +65,13 @@ PROJECT_NAME:
           <SET_NAME>:
             MOD:
               HD:
-                <SET_NAME>_HD.obj
+                <SET_NAME>_MOD_HD.abc
               LD:
-                <SET_NAME>_LD.obj
+                <SET_NAME>_MOD_LD.abc
             SHD:
-              <SET_NAME>_<LAYER>_<COLORSPACE>.exr
+              <SET_NAME>_<LAYER>.<UDIM>.exr
+            LKD:
+              <SET_NAME>_LKD.<ext>
         FX:
           <FX_NAME>:
             <FX_NAME>.<ext>
@@ -77,44 +79,54 @@ PROJECT_NAME:
           <CHARA_NAME>:
             MOD:
               HD:
-                <CHARA_NAME>_HD.obj
+                <CHARA_NAME>_MOD_HD.abc
               LD:
-                <CHARA_NAME>_LD.obj
+                <CHARA_NAME>_MOD_LD.abc
             SHD:
-              <CHARA_NAME>_<LAYER>_<COLORSPACE.exr
+              <CHARA_NAME>_<LAYER>.<UDIM>.exr
             RIG:
               <CHARA_NAME>_RIG.ma
+            LKD:
+              <CHARA_NAME>_LKD.<ext>
         PROPS:
           <PROPS_NAME>:
             MOD:
               HD:
-                <PROPS_NAME>_HD.obj
+                <PROPS_NAME>_MOD_HD.abc
               LD:
-                <PROPS_NAME>_LD.obj
+                <PROPS_NAME>_MOD_LD.abc
             SHD:
-              <PROPS_NAME>_<LAYER>_<COLORSPACE>.exr
+              <PROPS_NAME>_<LAYER>.<UDIM>.exr
             RIG:
               <PROPS_NAME>_RIG.ma
+            LKD:
+              <PROPS_NAME>_LKD.<ext>
       SET:
         <SET_NAME>:
           MOD:
-            SCENE:
+            SCENES:
               VERSION:
-                <SET_NAME>_SET_<VERSION>.<ext>
+                <SET_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
-                <SET_NAME>_SET.<ext>
+                <SET_NAME>_MOD.<ext>
           SHD:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
+                  <SET_NAME>_<LAYER>.<UDIM>.<ext>
               PUBLISH:
-                <SET_NAME>_<LAYER>_<COLORSPACE>.<ext>
-            SCENE:
+                <SET_NAME>_<LAYER>.<UDIM>.<ext>
+            SCENES:
               VERSION:
                 <SET_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
                 <SET_NAME>_SHD.<ext>
+          LKD:
+            SCENES:
+              VERSION:
+                <SET_NAME>_LKD_<VERSION>.<ext>
+              PUBLISH:
+                <SET_NAME>_LKD.<ext>
       FX:
         <FX_NAME>:
           CACHEFILES:
@@ -127,7 +139,7 @@ PROJECT_NAME:
       CHARA:
         <CHARA_NAME>:
           MOD:
-            SCENE:
+            SCENES:
               VERSION:
                 <CHARA_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
@@ -136,24 +148,36 @@ PROJECT_NAME:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
+                  <CHARA_NAME>_<LAYER>.<UDIM>.<ext>
               PUBLISH:
-                <CHARA_NAME>_<LAYER>_<COLORSPACE>.<ext>
-            SCENE:
+                <CHARA_NAME>_<LAYER>.<UDIM>.<ext>
+            SCENES:
               VERSION:
                 <CHARA_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
                 <CHARA_NAME>_SHD.<ext>
           RIG:
-            SCENE:
+            SCENES:
               VERSION:
                 <CHARA_NAME>_RIG_<VERSION>.ma
               PUBLISH:
                 <CHARA_NAME>_RIG.ma
+          LKD:
+            SCENES:
+              VERSION:
+                <CHARA_NAME>_LKD_<VERSION>.<ext>
+              PUBLISH:
+                <CHARA_NAME>_LKD.<ext>
       PROPS:
         <PROPS_NAME>:
+          LKD:
+            SCENES:
+              VERSION:
+                <PROPS_NAME>_LKD_<VERSION>.<ext>
+              PUBLISH:
+                <PROPS_NAME>_LKD.<ext>
           MOD:
-            SCENE:
+            SCENES:
               VERSION:
                 <PROPS_NAME>_MOD_<VERSION>.<ext>
               PUBLISH:
@@ -162,16 +186,16 @@ PROJECT_NAME:
             TEXTURES:
               VERSION:
                 <VERSION>:
-                  <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
+                  <PROPS_NAME>_<LAYER>.<UDIM>.<ext>
               PUBLISH:
-                <PROPS_NAME>_<LAYER>_<COLORSPACE>.<ext>
-            SCENE:
+                <PROPS_NAME>_<LAYER>.<UDIM>.<ext>
+            SCENES:
               VERSION:
                 <PROPS_NAME>_SHD_<VERSION>.<ext>
               PUBLISH:
                 <PROPS_NAME>_SHD.<ext>
           RIG:
-            SCENE:
+            SCENES:
               VERSION:
                 <PROPS_NAME>_RIG_<VERSION>.ma
               PUBLISH:
