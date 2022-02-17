@@ -1,4 +1,5 @@
 import os
+import re
 
 try:
     from typing import Any, Dict
@@ -43,3 +44,16 @@ def make_dirs(path):
         return True
     else:
         return False
+
+
+def camelize(text):
+    text_split = re.split('[_ -]', text)
+
+    camelize_text = ""
+    for text_part in text_split:
+        text_part = text_part.lower()
+        if camelize_text:
+            text_part = text_part.capitalize()
+        camelize_text += text_part
+
+    return camelize_text
