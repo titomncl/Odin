@@ -4,7 +4,7 @@ from typing import List, NoReturn, Optional
 
 from qtpy.QtWidgets import QApplication, QMainWindow
 
-from .common import concat
+from .common import concat, camelize
 from .core import launch_software
 from .core.filming_days import add_days
 from .core.project import Project
@@ -152,7 +152,15 @@ class Controller(object):
     def create_project(self):
         project_name = self.ui.create_project_dialog.text_field
 
-        if project_name not in self.projects and project_name != "" and len(project_name) < 5:
+        project_name_match = re.match(r"^([A-Za-z0-9]+)$", project_name)
+
+        if project_name_match:
+            project_name = project_name_match.groups()[-1]
+        else:
+            project_name = camelize(project_name)
+
+        if project_name not in self.projects and project_name != "":
+
             self.ui.create_project_dialog.green_palette()
             Project.new(self.root, project_name)
         else:
