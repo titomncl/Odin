@@ -73,9 +73,12 @@ class Sequence(object):
             List of the sequences
 
         """
-        path = path_from_tree(parent.data, Keys.SEQ, parent.project_path)[Keys.PATH]
-        seq = next(os.walk(path))[1]
-        return seq
+        try:
+            path = path_from_tree(parent.data, Keys.SEQ, parent.project_path)[Keys.PATH]
+            seq = next(os.walk(path))[1]
+            return seq
+        except KeyError:
+            log.info("No sequence in the project")
 
     @classmethod
     def load(cls, parent, name):
