@@ -184,7 +184,8 @@ class Controller(object):
             self.ui.stacked_widget.setCurrentWidget(self.ui.manage_prj)
 
             self.ui.manage_prj.film_widget.create_shot_dialog.cbox.clear()
-            self.ui.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.sequences)
+            if self.sequences:
+                self.ui.manage_prj.film_widget.create_shot_dialog.cbox.addItems(self.sequences)
 
             self.ui.setMinimumSize(400, 350)
             self.ui.resize(400, 350)
