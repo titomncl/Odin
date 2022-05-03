@@ -16,6 +16,31 @@ PROJECT_NAME:
       RUSH:
         PREVIZ:
         <DAY##>:
+    LIB:
+      SET:
+        <SET_NAME>:
+          SCENE:
+          MOD:
+          TEXTURES:
+          CACHE:
+      FX:
+        <FX_NAME>:
+          SCENE:
+          MOD:
+          TEXTURES:
+          CACHE:
+      CHARA:
+        <CHARA_NAME>:
+          SCENE:
+          MOD:
+          TEXTURES:
+          CACHE:
+      PROPS:
+        <PROPS_NAME>:
+          SCENE:
+          MOD:
+          TEXTURES:
+          CACHE:
   DATA:
     FILM:
       EDITING:

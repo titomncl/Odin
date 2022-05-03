@@ -4,6 +4,11 @@ IN:
     DESIGN:
     SCENARIO:
     REFS:
+  LIB:
+    SET:
+    FX:
+    CHARA:
+    PROPS:
   FILMING:
     CONFO:
       EXR:

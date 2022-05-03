@@ -1,4 +1,5 @@
 ASSET_TREE = "asset.yaml"
+ASSET_IN = "asset_in.yaml"
 ASSET_PUBLISH_TREE = "asset_publish.yaml"
 SET_TREE = "set.yaml"
 SET_PUBLISH_TREE = "set_publish.yaml"
