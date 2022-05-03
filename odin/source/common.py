@@ -50,11 +50,19 @@ def camelize(text):
     # type: (str) -> str
     text_split = re.split('[_ -]', text)
 
-    camelize_text = ""
-    for text_part in text_split:
-        text_part = text_part.lower()
-        if camelize_text:
-            text_part = text_part.capitalize()
-        camelize_text += text_part
+    camelize_text = list(map(str.title, text_split))
+    camelize_text[0] = camelize_text[0].lower()
 
-    return camelize_text
+    return "".join(camelize_text)
+
+
+def decamelize(text):
+    # type: (str) -> str
+    decamelize_text = ""
+
+    for letter in text:
+        if letter.isupper():
+            decamelize_text += "_"
+        decamelize_text += letter.lower()
+
+    return decamelize_text
