@@ -47,6 +47,7 @@ def make_dirs(path):
 
 
 def camelize(text):
+    # type: (str) -> str
     text_split = re.split('[_ -]', text)
 
     camelize_text = ""

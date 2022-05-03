@@ -191,7 +191,7 @@ class Controller(object):
             self.ui.resize(400, 350)
 
     def set_var_env(self):
-        # type: () -> NoReturn
+        # type: () -> None
         self.recent_project = self.project_name
 
         os.environ["ROOT_PATH"] = self.root
