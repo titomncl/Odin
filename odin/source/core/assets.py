@@ -118,6 +118,7 @@ class Asset(object):
         """
         _data = dict()
         _data_publish = dict()
+        _data_in = dict()
 
         root_values = path_from_tree(parent.data, asset_type, parent.project_path)
 
@@ -131,6 +132,8 @@ class Asset(object):
             _data[name] = Parser.open(trees_path.fx_tree()).data
             _data_publish[name] = None
 
+        _data_in[name] = Parser.open(trees_path.asset_in_tree()).data
+
         path = root_values[Keys.PATH]
         tree = Tree(None, path)
         tree.create_tree(_data, tree)
@@ -141,18 +144,27 @@ class Asset(object):
         publish_tree.create_tree(_data_publish, publish_tree)
         publish_tree.create_on_disk()
 
+        in_path = root_values[Keys.IN]
+        in_tree = Tree(None, in_path)
+        in_tree.create_tree(_data_in, in_tree)
+        in_tree.create_on_disk()
+
         prj_parser = Parser.open(os.path.join(parent.project_path, parent.name, "odin.yaml"))
 
         asset_data = prj_parser.data[parent.name]["DATA"]["LIB"]
         asset_publish_data = prj_parser.data[parent.name]["DATA"]["LIB"][Keys.PUBLISH]
+        asset_in_data = prj_parser.data[parent.name][Keys.IN]["LIB"]
 
         if not asset_data[asset_type]:
             asset_data[asset_type] = dict()
         if not asset_publish_data[asset_type]:
             asset_publish_data[asset_type] = dict()
+        if not asset_in_data[asset_type]:
+            asset_in_data[asset_type] = dict()
 
         asset_data[asset_type].update(_data)
         asset_publish_data[asset_type].update(_data_publish)
+        asset_in_data[asset_type].update(_data_in)
 
         prj_parser.write()
 
