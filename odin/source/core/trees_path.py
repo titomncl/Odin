@@ -15,6 +15,11 @@ def asset_publish_tree():
     return os.path.join(PATH, trees.ASSET_PUBLISH_TREE)
 
 
+def asset_in_tree():
+    # typeL () -> str
+    return os.path.join(PATH, trees.ASSET_TREE)
+
+
 def set_tree():
     # type: () -> str
     return os.path.join(PATH, trees.SET_TREE)

@@ -13,4 +13,5 @@ class Keys:
     PUBLISH = "PUBLISH"
 
     SEQ = "SEQ"
+    IN = "IN"
     OUT = "OUT"
