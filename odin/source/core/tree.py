@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 if sys.version_info > (3,):
@@ -9,7 +10,6 @@ if sys.version_info > (3,):
 
 from ..common import concat
 from ..globals import Keys
-from ..globals import Logger as log
 
 
 class Tree(object):
@@ -47,10 +47,13 @@ class Tree(object):
             return self._name
 
     def create_on_disk(self):
-        if not os.path.exists(self.full_name) and self._parent:
+        # type: () -> None
+        """Create tree on disk.
+        """
+        try:
             os.mkdir(self.full_name)
-        else:
-            log.warning(concat(self.full_name, ": Folder exists"))
+        except OSError:
+            pass
 
         for child in self._children:
             child.create_on_disk()
