@@ -38,11 +38,11 @@ def make_dirs(path):
         True if `path` is created, False if `path` exists
 
     """
-    if path and not os.path.exists(path):
+    try:
         os.makedirs(path)
 
         return True
-    else:
+    except OSError:
         return False
 
 
