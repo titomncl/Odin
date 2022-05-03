@@ -91,15 +91,15 @@ def path_from_tree(data, word, path="", values=None):
 
     for key, value in data.items():
         if value:
-            _path = os.path.join(path, key)
+            _path = os.path.normpath(os.path.join(path, key)).replace("\\", "/")
             try:
                 if word in value:
-                    if Keys.PUBLISH in _path or Keys.OUT in _path:
-                        _values[Keys.PUBLISH] = os.path.join(_path, word).replace("\\", "/")
+                    if re.search(r"/(?:PUBLISH|OUT)", _path):
+                        _values[Keys.PUBLISH] = os.path.normpath(os.path.join(_path, word)).replace("\\", "/")
+                    elif re.search(r"/IN", _path):
+                        _values[Keys.IN] = os.path.normpath(os.path.join(_path, word)).replace("\\", "/")
                     else:
-                        _values[Keys.PATH] = os.path.join(_path, word).replace("\\", "/")
-                    # elif Keys.OUT in _path:
-                    #     _values[Keys.OUT] = os.path.join(_path, word).replace("\\", "/")
+                        _values[Keys.PATH] = os.path.normpath(os.path.join(_path, word)).replace("\\", "/")
             except KeyError:
                 pass
 
