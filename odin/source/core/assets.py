@@ -97,7 +97,7 @@ class Asset(object):
                 "{} is not a valid asset type." "Should be 'CHARA', 'PROPS', 'SETS' or 'FX'.".format(asset_type)
             )
         elif name not in lib[asset_type]:
-            raise KeyError("{} not in database.")
+            raise KeyError("{} not in database.".format(name))
         else:
             _data = _data[parent.name]["DATA"]["LIB"][asset_type][name]
             return cls(parent, name, asset_type, _data)
