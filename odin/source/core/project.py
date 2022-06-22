@@ -87,6 +87,10 @@ class Project(object):
         # type: (str) -> List[str]
         return Asset.list(self, asset_type)
 
+    def get_asset(self, name):
+        # type: (str) -> Asset
+        return Asset.load(self, name)
+
     def new_asset(self, name, asset_type):
         # type: (str, str) -> Asset
         return Asset.new(self, name, asset_type)
@@ -94,6 +98,10 @@ class Project(object):
     def get_sequences(self):
         # type: () -> List[str]
         return Sequence.list(self)
+
+    def get_sequence(self, name):
+        # type: (str) -> Sequence
+        return Sequence.load(self, name)
 
     def new_sequence(self, name):
         # type: (str) -> Sequence
