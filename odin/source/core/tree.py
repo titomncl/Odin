@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+from copy import deepcopy
 
 if sys.version_info > (3,):
     import typing
@@ -109,3 +110,15 @@ def path_from_tree(data, word, path="", values=None):
             _values = path_from_tree(value, word, _path, _values)
 
     return _values
+
+
+def tree_from_path(data, path, project_path):
+    path_split = path.split(project_path)[-1]
+    kword_path = path_split.split("/")
+    kword_path.pop(0)
+
+    _data = deepcopy(data)
+    for key in kword_path:
+        _data = _data[key]
+
+    return _data
