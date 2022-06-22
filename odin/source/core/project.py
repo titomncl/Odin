@@ -22,10 +22,10 @@ class Project(object):
     """Project object.
 
     Usage:
-        project = Project.new('root/path', 'NAME')\n
-        project = Project.load('root/path', 'NAME')\n
-        project.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX\n
-        assets = project.get_assets("ASSET_TYPE"): List of created assets\n
+        prj = Project.new('root/path', 'NAME')\n
+        prj = Project.load('root/path', 'NAME')\n
+        prj.new_asset("asset_name", "ASSET_TYPE"): CHARA, PROPS, SET or FX\n
+        assets = prj.get_assets("ASSET_TYPE"): List of created assets\n
 
     Parameters:
         name (str): name of the loaded project
