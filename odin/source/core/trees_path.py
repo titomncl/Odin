@@ -20,6 +20,10 @@ def asset_in_tree():
     return os.path.join(PATH, trees.ASSET_TREE)
 
 
+def task_tree():
+    # type: () -> str
+    return os.path.join(PATH, trees.TASK_TREE)
+
 def set_tree():
     # type: () -> str
     return os.path.join(PATH, trees.SET_TREE)
