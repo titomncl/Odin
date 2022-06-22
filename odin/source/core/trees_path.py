@@ -16,7 +16,7 @@ def asset_publish_tree():
 
 
 def asset_in_tree():
-    # typeL () -> str
+    # type: () -> str
     return os.path.join(PATH, trees.ASSET_TREE)
 
 
