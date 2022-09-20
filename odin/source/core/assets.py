@@ -1,6 +1,7 @@
 import os
 import typing
 
+
 if typing.TYPE_CHECKING:
     from Odin import Project
     from typing import Dict, List, Optional
@@ -8,6 +9,7 @@ if typing.TYPE_CHECKING:
 from ..common import concat
 from ..globals import Keys
 from ..globals import Logger as log
+from .tasks import Task
 from .tree import Tree, path_from_tree, tree_from_path
 from .yaml_parser import Parser
 
@@ -44,7 +46,7 @@ class Asset(object):
 
     @property
     def data(self):
-        self._data = tree_from_path(self.parent.data, self.paths[Keys.PATH], self.parent.project_path)
+        self._data[self.name] = tree_from_path(self.parent.data, self.paths[Keys.PATH], self.parent.project_path)
         return self._data
 
     @property
@@ -55,8 +57,12 @@ class Asset(object):
     @property
     def paths(self):
         # type: () -> dict
-        return path_from_tree(self.parent.data, self.name, self.parent.project_path)
+        return path_from_tree(self.parent.data, self.asset_type, self.parent.project_path)
 
+    @property
+    def available_tasks(self):
+        return Task.ASSET_TASKS
+    
     def get_asset_type(self):
         """This method should not exist, but for now I don't have choice."""
         path = self.paths[Keys.PATH]
