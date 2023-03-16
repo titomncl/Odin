@@ -24,7 +24,10 @@ def launch_software(name, version):
     bat_file = os.getcwd().replace("\\", "/") + "/softwareList/" + name + ".bat"
 
     if os.path.isfile(bat_file):
-        soft_config = Parser().open("./config/software_config.yaml").data[name]
+        if "DEVMODE" in os.environ.keys():
+            soft_config = Parser().open("./config/software_config_dev.yaml").data[name]
+        else:
+            soft_config = Parser().open("./config/software_config.yaml").data[name]
 
         cwd = soft_config["cwd"]
         exe = soft_config["exe"]

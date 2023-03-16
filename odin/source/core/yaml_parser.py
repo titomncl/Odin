@@ -116,3 +116,5 @@ class Parser(object):
         except IOError as e:
             log.warning(e)
             return None
+
+    # def find(self, key, filter):

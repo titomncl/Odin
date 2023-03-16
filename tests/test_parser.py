@@ -27,6 +27,7 @@ def parser(yaml_file):
     yield p
 
 
+
 def test_parser_new(yaml_file):
     p = Parser.new(yaml_file, dict())
 

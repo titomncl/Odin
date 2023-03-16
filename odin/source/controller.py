@@ -22,9 +22,13 @@ class Controller(object):
 
         self._project = None
 
-        self._config_parser = Parser.open("./config/config_file.yaml")
-        if not self._config_parser:
-            self._config_parser = Parser.new("./config/config_file.yaml")
+        if "DEVMODE" in os.environ.keys():
+            self._config_parser = Parser.open("./config/config_file_dev.yaml")
+        else:
+            self._config_parser = Parser.open("./config/config_file.yaml")
+
+            if not self._config_parser:
+                self._config_parser = Parser.new("./config/config_file.yaml")
 
         self.ui = ui(self, parent)
 
